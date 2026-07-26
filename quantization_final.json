@@ -1,0 +1,122 @@
+[
+ {
+  "row": 10,
+  "n_shell": 34,
+  "floor": -11.0,
+  "true_maxcut": 12,
+  "gap": 1.0,
+  "frac_on_grid": 0.7058823529411765,
+  "max_dist_grid": 0.021398434258505666,
+  "coset_dev": 0.027245344365676494,
+  "zero_modes": 1,
+  "verdict": "no"
+ },
+ {
+  "row": 11,
+  "n_shell": 23,
+  "floor": -15.0,
+  "true_maxcut": 15,
+  "gap": 0.0,
+  "frac_on_grid": 1.0,
+  "max_dist_grid": 9.864046384255016e-08,
+  "coset_dev": 5.455622690788643e-08,
+  "zero_modes": 0,
+  "verdict": "QUANTIZED"
+ },
+ {
+  "row": 12,
+  "n_shell": 14,
+  "floor": -12.5,
+  "true_maxcut": 14,
+  "gap": 1.5,
+  "frac_on_grid": 0.0,
+  "max_dist_grid": 0.5440731099833825,
+  "coset_dev": 0.03024368703842839,
+  "zero_modes": 1,
+  "verdict": "no"
+ },
+ {
+  "row": 13,
+  "n_shell": 25,
+  "floor": -9.5,
+  "true_maxcut": 11,
+  "gap": 1.5,
+  "frac_on_grid": 1.0,
+  "max_dist_grid": 3.9152438901132445e-08,
+  "coset_dev": 3.76856126305114e-08,
+  "zero_modes": 0,
+  "verdict": "QUANTIZED"
+ },
+ {
+  "row": 14,
+  "n_shell": 15,
+  "floor": -12.0,
+  "true_maxcut": 12,
+  "gap": 0.0,
+  "frac_on_grid": 0.0,
+  "max_dist_grid": 0.6914715535383769,
+  "coset_dev": 0.44198143705745185,
+  "zero_modes": 3,
+  "verdict": "no"
+ },
+ {
+  "row": 15,
+  "n_shell": 8,
+  "floor": -12.0,
+  "true_maxcut": 12,
+  "gap": 0.0,
+  "frac_on_grid": 1.0,
+  "max_dist_grid": 4.119562081008157e-08,
+  "coset_dev": 3.28959268713902e-08,
+  "zero_modes": 0,
+  "verdict": "QUANTIZED"
+ },
+ {
+  "row": 16,
+  "n_shell": 4,
+  "floor": -10.0,
+  "true_maxcut": 10,
+  "gap": 0.0,
+  "frac_on_grid": 0.0,
+  "max_dist_grid": 0.5552080130097216,
+  "coset_dev": 0.0002889832873029796,
+  "zero_modes": 1,
+  "verdict": "no"
+ },
+ {
+  "row": 17,
+  "n_shell": 58,
+  "floor": -10.0,
+  "true_maxcut": 11,
+  "gap": 1.0,
+  "frac_on_grid": 1.0,
+  "max_dist_grid": 1.031883148443768e-07,
+  "coset_dev": 6.228996358987914e-08,
+  "zero_modes": 0,
+  "verdict": "QUANTIZED"
+ },
+ {
+  "row": 18,
+  "n_shell": 17,
+  "floor": -12.0,
+  "true_maxcut": 12,
+  "gap": 0.0,
+  "frac_on_grid": 0.0,
+  "max_dist_grid": 0.5553603279267926,
+  "coset_dev": 0.49999996394093493,
+  "zero_modes": 1,
+  "verdict": "no"
+ },
+ {
+  "row": 19,
+  "n_shell": 4,
+  "floor": -13.5,
+  "true_maxcut": 14,
+  "gap": 0.5,
+  "frac_on_grid": 0.0,
+  "max_dist_grid": 0.5843193298177769,
+  "coset_dev": 0.4092744448257656,
+  "zero_modes": 2,
+  "verdict": "no"
+ }
+]

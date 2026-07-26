@@ -1,0 +1,11 @@
+row,shell,p1 floor,max cut,max dist from pi/4 grid ,flat dirs,verdict
+10,34,-11,12,2.1e-02,1,no
+11,23,-15,15,9.9e-08,0,QUANTIZED
+12,14,-12.5,14,5.4e-01,1,no
+13,25,-9.5,11,3.9e-08,0,QUANTIZED
+14,15,-12,12,6.9e-01,3,no
+15,8,-12,12,4.1e-08,0,QUANTIZED
+16,4,-10,10,5.6e-01,1,no
+17,58,-10,11,1.0e-07,0,QUANTIZED
+18,17,-12,12,5.6e-01,2,no
+19,4,-13.5,14,5.8e-01,1,no
