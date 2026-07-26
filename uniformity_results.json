@@ -1,1 +1,216 @@
-[]
+[
+ {
+  "row": 10,
+  "N": 34,
+  "kind": "continuum (flat valley)",
+  "zero_modes": 1,
+  "equidistant": false,
+  "nn_values": [
+   2.2214,
+   2.2215,
+   2.7207
+  ],
+  "nn_sq_units": [
+   8.0,
+   8.0,
+   12.0
+  ],
+  "pair_int_residual": 0.0029687095522419327,
+  "target_at_floor": true,
+  "target_radius_over_pi": 0.8660254041009272,
+  "target_stable": false
+ },
+ {
+  "row": 11,
+  "N": 23,
+  "kind": "isolated points",
+  "zero_modes": 0,
+  "equidistant": true,
+  "nn_values": [
+   2.2214
+  ],
+  "nn_sq_units": [
+   8.0
+  ],
+  "pair_int_residual": 5.771299669277141e-07,
+  "target_at_floor": true,
+  "target_radius_over_pi": 0.9354143478535558,
+  "target_stable": false
+ },
+ {
+  "row": 12,
+  "N": 14,
+  "kind": "continuum (flat valley)",
+  "zero_modes": 1,
+  "equidistant": false,
+  "nn_values": [
+   0.0108,
+   1.9241,
+   2.2214,
+   3.1416
+  ],
+  "nn_sq_units": [
+   0.0,
+   6.002,
+   8.0,
+   16.0
+  ],
+  "pair_int_residual": 0.003238401903963961,
+  "target_at_floor": true,
+  "target_radius_over_pi": 0.8478177305360921,
+  "target_stable": false
+ },
+ {
+  "row": 13,
+  "N": 25,
+  "kind": "isolated points",
+  "zero_modes": 0,
+  "equidistant": true,
+  "nn_values": [
+   2.2214
+  ],
+  "nn_sq_units": [
+   8.0
+  ],
+  "pair_int_residual": 5.279741337460564e-07,
+  "target_at_floor": true,
+  "target_radius_over_pi": 0.866025403784224,
+  "target_stable": false
+ },
+ {
+  "row": 14,
+  "N": 15,
+  "kind": "continuum (flat valley)",
+  "zero_modes": 3,
+  "equidistant": false,
+  "nn_values": [
+   0.0116,
+   1.6445,
+   2.2214,
+   2.2215,
+   2.7637,
+   2.7638,
+   3.1416
+  ],
+  "nn_sq_units": [
+   0.0,
+   4.384,
+   8.0,
+   8.0,
+   12.382,
+   12.383,
+   16.0
+  ],
+  "pair_int_residual": 0.38476266229163514,
+  "target_at_floor": true,
+  "target_radius_over_pi": 0.83275636424205,
+  "target_stable": false
+ },
+ {
+  "row": 15,
+  "N": 8,
+  "kind": "isolated points",
+  "zero_modes": 0,
+  "equidistant": false,
+  "nn_values": [
+   3.1416,
+   3.8476
+  ],
+  "nn_sq_units": [
+   16.0,
+   23.999
+  ],
+  "pair_int_residual": 4.925206624761813e-07,
+  "target_at_floor": true,
+  "target_radius_over_pi": 0.9354143466308481,
+  "target_stable": false
+ },
+ {
+  "row": 16,
+  "N": 4,
+  "kind": "continuum (flat valley)",
+  "zero_modes": 1,
+  "equidistant": false,
+  "nn_values": [
+   1.9238,
+   2.2214,
+   3.8476
+  ],
+  "nn_sq_units": [
+   6.0,
+   8.0,
+   23.999
+  ],
+  "pair_int_residual": 2.015429618751341e-07,
+  "target_at_floor": true,
+  "target_radius_over_pi": 0.8477912500887839,
+  "target_stable": false
+ },
+ {
+  "row": 17,
+  "N": 58,
+  "kind": "isolated points",
+  "zero_modes": 0,
+  "equidistant": false,
+  "nn_values": [
+   1.5708,
+   2.2214
+  ],
+  "nn_sq_units": [
+   4.0,
+   8.0
+  ],
+  "pair_int_residual": 1.1434529199050303e-06,
+  "target_at_floor": true,
+  "target_radius_over_pi": 0.8660254034139806,
+  "target_stable": true
+ },
+ {
+  "row": 18,
+  "N": 17,
+  "kind": "continuum (flat valley)",
+  "zero_modes": 1,
+  "equidistant": false,
+  "nn_values": [
+   2.2215,
+   2.4836,
+   2.4837,
+   3.1416,
+   3.1928,
+   3.2336,
+   3.4716
+  ],
+  "nn_sq_units": [
+   8.0,
+   10.0,
+   10.0,
+   16.0,
+   16.526,
+   16.951,
+   19.538
+  ],
+  "pair_int_residual": 0.49983954418741305,
+  "target_at_floor": true,
+  "target_radius_over_pi": 0.8478025086565101,
+  "target_stable": true
+ },
+ {
+  "row": 19,
+  "N": 4,
+  "kind": "continuum (flat valley)",
+  "zero_modes": 2,
+  "equidistant": false,
+  "nn_values": [
+   3.1417,
+   3.5805
+  ],
+  "nn_sq_units": [
+   16.001,
+   20.783
+  ],
+  "pair_int_residual": 0.4701112532615497,
+  "target_at_floor": true,
+  "target_radius_over_pi": 0.8365126477591575,
+  "target_stable": false
+ }
+]
