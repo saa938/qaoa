@@ -1,0 +1,46 @@
+[
+ {
+  "folder": "AshayGlobalMinimums_0",
+  "row": 10,
+  "n": 8,
+  "m": 15,
+  "n_minima": 3665,
+  "D_expected": 23,
+  "D_actual": 23,
+  "ian_best_energy": -10.999999999439973,
+  "edge_order_matches_canonical": false
+ },
+ {
+  "folder": "AshayGlobalMinimums_1",
+  "row": 11,
+  "n": 8,
+  "m": 21,
+  "n_minima": 949,
+  "D_expected": 29,
+  "D_actual": 29,
+  "ian_best_energy": -14.999999999670887,
+  "edge_order_matches_canonical": false
+ },
+ {
+  "folder": "AshayGlobalMinimums_2",
+  "row": 12,
+  "n": 8,
+  "m": 17,
+  "n_minima": 2110,
+  "D_expected": 25,
+  "D_actual": 25,
+  "ian_best_energy": -12.499999998980737,
+  "edge_order_matches_canonical": false
+ },
+ {
+  "folder": "AshayGlobalMinimums_3",
+  "row": 13,
+  "n": 8,
+  "m": 13,
+  "n_minima": 2122,
+  "D_expected": 21,
+  "D_actual": 21,
+  "ian_best_energy": -9.499999999609358,
+  "edge_order_matches_canonical": false
+ }
+]

@@ -1,0 +1,50 @@
+[
+ {
+  "folder": "AshayGlobalMinimums_0",
+  "row": 10,
+  "n": 8,
+  "m": 15,
+  "n_minima": 3665,
+  "ian_best_energy": -10.999999999439973,
+  "max_abs_err_vs_his_floor": 8.822338237735039e-08,
+  "my_floor_300_restarts": -11.0,
+  "floor_matches_ian": true,
+  "n_of_his_below_my_floor": 0
+ },
+ {
+  "folder": "AshayGlobalMinimums_1",
+  "row": 11,
+  "n": 8,
+  "m": 21,
+  "n_minima": 949,
+  "ian_best_energy": -14.999999999670887,
+  "max_abs_err_vs_his_floor": 1.439891637033952e-07,
+  "my_floor_300_restarts": -15.0,
+  "floor_matches_ian": true,
+  "n_of_his_below_my_floor": 0
+ },
+ {
+  "folder": "AshayGlobalMinimums_2",
+  "row": 12,
+  "n": 8,
+  "m": 17,
+  "n_minima": 2110,
+  "ian_best_energy": -12.499999998980737,
+  "max_abs_err_vs_his_floor": 7.69088774887905e-08,
+  "my_floor_300_restarts": -12.5,
+  "floor_matches_ian": true,
+  "n_of_his_below_my_floor": 0
+ },
+ {
+  "folder": "AshayGlobalMinimums_3",
+  "row": 13,
+  "n": 8,
+  "m": 13,
+  "n_minima": 2122,
+  "ian_best_energy": -9.499999999609358,
+  "max_abs_err_vs_his_floor": 5.5811192112287245e-08,
+  "my_floor_300_restarts": -9.5,
+  "floor_matches_ian": true,
+  "n_of_his_below_my_floor": 0
+ }
+]

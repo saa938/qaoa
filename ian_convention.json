@@ -1,0 +1,30 @@
+[
+ {
+  "folder": "AshayGlobalMinimums_0",
+  "row": 10,
+  "identity_max_err": 8.822338237735039e-08,
+  "ian_to_canon_max_err": 5.000000009949913,
+  "canon_to_ian_max_err": 2.499999252846992
+ },
+ {
+  "folder": "AshayGlobalMinimums_1",
+  "row": 11,
+  "identity_max_err": 1.439891637033952e-07,
+  "ian_to_canon_max_err": 6.000020744976059,
+  "canon_to_ian_max_err": 5.500078050798299
+ },
+ {
+  "folder": "AshayGlobalMinimums_2",
+  "row": 12,
+  "identity_max_err": 7.69088774887905e-08,
+  "ian_to_canon_max_err": 4.500004556591925,
+  "canon_to_ian_max_err": 4.500025869961394
+ },
+ {
+  "folder": "AshayGlobalMinimums_3",
+  "row": 13,
+  "identity_max_err": 5.5811192112287245e-08,
+  "ian_to_canon_max_err": 3.000083093634225,
+  "canon_to_ian_max_err": 3.0001046961954714
+ }
+]
