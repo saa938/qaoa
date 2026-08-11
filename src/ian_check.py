@@ -6,13 +6,15 @@ import ast
 import glob
 import json
 import os
+from pathlib import Path
 import numpy as np
 import pandas as pd
 import networkx as nx
 
-CSV = "MaxCutMAQAOAData.csv"
-DATA = "AshayMAQAOAData"
-OUT = "ian_check.json"
+ROOT = Path(__file__).resolve().parent.parent
+CSV = ROOT / "data" / "MaxCutMAQAOAData.csv"
+DATA = ROOT / "data" / "AshayMAQAOAData"
+OUT = ROOT / "results" / "ian_check.json"
 
 def load_ian():
     out = []

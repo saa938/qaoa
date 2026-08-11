@@ -7,12 +7,16 @@ import glob
 import json
 import os
 import sys
+from pathlib import Path
 import numpy as np
 import pandas as pd
 import networkx as nx
 import maqaoa_core as M
 
-CSV = "MaxCutMAQAOAData.csv"
+ROOT = Path(__file__).resolve().parent.parent
+CSV = ROOT / "data" / "MaxCutMAQAOAData.csv"
+RESULTS_DIR = ROOT / "results"
+SHELLS = RESULTS_DIR / "shells"
 ON_GRID = 1e-6      # distance below which an angle counts as on the grid
 COSET_TOL = 1e-4    # componentwise tolerance for the coset test
 ZERO_EV = 1e-2      # |eigenvalue| below this counts as a flat direction
@@ -35,7 +39,7 @@ def zero_modes(grad, x, D, h=1e-5):
 
 
 def main():
-    paths = sorted(glob.glob("shell_row*.npz"),
+    paths = sorted(glob.glob(str(SHELLS / "shell_row*.npz")),
                    key=lambda s: int(s.split("row")[1].split(".")[0]))
     if not paths:
         print("ERROR: no shell_row*.npz files found in", os.getcwd())
@@ -118,7 +122,7 @@ def main():
     print("these two sets are identical"
           if iso == q else "WARNING: these two sets differ")
 
-    json.dump(rows, open("quantization_final.json", "w"), indent=1)
+    json.dump(rows, open(RESULTS_DIR / "quantization_final.json", "w"), indent=1)
     print("\nwrote quantization_final.json")
 
 

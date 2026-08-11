@@ -6,11 +6,14 @@ Answer: they are actually minima
 
 import json
 import os
+from pathlib import Path
 import numpy as np
 import maqaoa_core as M
 
-DATA = "AshayMAQAOAData"
-OUT = "ian_cross.json"
+ROOT = Path(__file__).resolve().parent.parent
+DATA = ROOT / "data" / "AshayMAQAOAData"
+OUT = ROOT / "results" / "ian_cross.json"
+SHELLS = ROOT / "results" / "shells"
 ROWS = [10, 11, 12, 13]
 FOLDER = {10: "AshayGlobalMinimums_0", 11: "AshayGlobalMinimums_1",
           12: "AshayGlobalMinimums_2", 13: "AshayGlobalMinimums_3"}
@@ -34,7 +37,7 @@ def main():
     rows = []
     print("%4s %4s %11s %11s %11s %11s %9s %6s %7s" % ("row", "pts", "E_err", "grad", "r_mine", "r_ian", "min_eig", "flat", "his<=me"))
     for row in ROWS:
-        d = np.load("shell_row%d.npz" % row, allow_pickle=True)
+        d = np.load(SHELLS / ("shell_row%d.npz" % row), allow_pickle=True)
         shell = d["shell"]
         floor = float(d["floor"])
         edges = [tuple(int(a) for a in e) for e in d["edges"]]

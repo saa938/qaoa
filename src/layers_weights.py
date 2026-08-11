@@ -4,6 +4,7 @@ Does the shell radius grow when layers are added or when the edges get weights?
 
 import ast
 import json
+from pathlib import Path
 import numpy as np
 import pandas as pd
 from scipy.optimize import minimize
@@ -11,8 +12,9 @@ import maqaoa_core as M
 import maqaoa_weighted as W
 import radius_search as R
 
-CSV = "MaxCutMAQAOAData.csv"
-OUT = "layers_weights.json"
+ROOT = Path(__file__).resolve().parent.parent
+CSV = ROOT / "data" / "MaxCutMAQAOAData.csv"
+OUT = ROOT / "results" / "layers_weights.json"
 ROWS = [10, 13, 17, 19]
 N_WEIGHT_TRIALS = 5
 W_LO, W_HI = 0.5, 2.0

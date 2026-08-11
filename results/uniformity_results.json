@@ -17,7 +17,7 @@
   ],
   "pair_int_residual": 0.0029687095522419327,
   "target_at_floor": true,
-  "target_radius_over_pi": 0.8660254041009272,
+  "target_radius_over_pi": 0.8660254041009274,
   "target_stable": false
  },
  {
@@ -162,7 +162,7 @@
   ],
   "pair_int_residual": 1.1434529199050303e-06,
   "target_at_floor": true,
-  "target_radius_over_pi": 0.8660254034139806,
+  "target_radius_over_pi": 0.8660254034139807,
   "target_stable": true
  },
  {

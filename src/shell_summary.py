@@ -3,14 +3,17 @@ One figure for Ian pulling the shell results together.
 """
 
 import json
+from pathlib import Path
 import numpy as np
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import maqaoa_core as M
 
-DATA = "../ashaydata/AshayMAQAOAData"
-OUT = "shell_summary.png"
+ROOT = Path(__file__).resolve().parent.parent
+RESULTS_DIR = ROOT / "results"
+DATA = ROOT / "data" / "AshayMAQAOAData"
+OUT = ROOT / "figures" / "shell_summary.png"
 FOLDER = {10: "AshayGlobalMinimums_0", 11: "AshayGlobalMinimums_1",
           12: "AshayGlobalMinimums_2", 13: "AshayGlobalMinimums_3"}
 
@@ -38,7 +41,7 @@ def panel_edges(a, shell):
 def panel_harvest(a, shell):
     byrow = {s["row"]: s for s in shell}
     for row, col in [(11, "tab:red"), (12, "tab:purple")]:
-        d = np.load(DATA + "/" + FOLDER[row] + "/er_graph_minima.npz", allow_pickle=True)
+        d = np.load(DATA / FOLDER[row] / "er_graph_minima.npz", allow_pickle=True)
         rr = radii(M.wrap_pi(d["minima"]))
         a.hist(rr, bins=50, alpha=0.45, color=col,
                label="Ian row %d (n=%d)" % (row, len(rr)))
@@ -75,9 +78,9 @@ def panel_degeneracy(a, deg):
     a.set_title("Largest positive fraction only halves the set, never picks one")
 
 def main():
-    shell = json.load(open("shell_radius.json"))
-    deg = json.load(open("shell_degeneracy.json"))
-    lw = json.load(open("layers_weights.json"))
+    shell = json.load(open(RESULTS_DIR / "shell_radius.json"))
+    deg = json.load(open(RESULTS_DIR / "shell_degeneracy.json"))
+    lw = json.load(open(RESULTS_DIR / "layers_weights.json"))
 
     fig, ax = plt.subplots(2, 2, figsize=(13, 9))
     panel_edges(ax[0, 0], shell)

@@ -5,14 +5,17 @@ optimizer many times on the plain landscape?
 
 import ast
 import json
+from pathlib import Path
 import numpy as np
 import pandas as pd
 import networkx as nx
 from scipy.optimize import minimize
 import maqaoa_core as M
 
-CSV = "MaxCutMAQAOAData.csv"
-OUT = "floor_cheap.json"
+ROOT = Path(__file__).resolve().parent.parent
+CSV = ROOT / "data" / "MaxCutMAQAOAData.csv"
+OUT = ROOT / "results" / "floor_cheap.json"
+SHELLS = ROOT / "results" / "shells"
 
 # Exact MaxCut by enumerating all 2^n bitstrings.
 # This is the simple and obvious but bad way to check.
@@ -109,7 +112,7 @@ def main():
         n = int(df.loc[row, "Number of Nodes"])
         terms, E, m = make_edge_terms(n, edges, p=1)
         D = m + n
-        floor = float(np.load("shell_row%d.npz" % row)["floor"])
+        floor = float(np.load(SHELLS / ("shell_row%d.npz" % row))["floor"])
         mc = brute_maxcut(n, E)
         loc_err = test_locality(terms, E, m, n, D, trials=4, seed=row)
         bound = sum(min_edge_term(terms, E, m, n, D, i, restarts=8, seed=row * 100 + i)

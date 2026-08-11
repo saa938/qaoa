@@ -28,9 +28,13 @@ lowest_norm_survey.py) and measure:
 
 import json
 import glob
+from pathlib import Path
 import numpy as np
 import maqaoa_core as M
 
+ROOT = Path(__file__).resolve().parent.parent
+RESULTS_DIR = ROOT / "results"
+SHELLS = RESULTS_DIR / "shells"
 ZERO_EV = 1e-2 # eigenvalue magnitude below this counts as a flat direction
 QUARTER = np.pi / 4
 
@@ -126,10 +130,10 @@ def analyze(path):
 
 def main():
     out = []
-    for path in sorted(glob.glob("shell_row*.npz"),
+    for path in sorted(glob.glob(str(SHELLS / "shell_row*.npz")),
                        key=lambda s: int(s.split("row")[1].split(".")[0])):
         out.append(analyze(path))
-    json.dump(out, open("uniformity_results.json", "w"), indent=1)
+    json.dump(out, open(RESULTS_DIR / "uniformity_results.json", "w"), indent=1)
 
     print("\n" + "=" * 88)
     print("EQUIDISTRIBUTION SUMMARY")

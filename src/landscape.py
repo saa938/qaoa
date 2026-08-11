@@ -1,5 +1,6 @@
 # This one has different formatting because I did it on a different computer
 
+from pathlib import Path
 import numpy as np
 import pandas as pd
 import ast
@@ -10,6 +11,10 @@ from scipy.linalg import expm
 from networkx.algorithms.isomorphism import GraphMatcher
 from qiskit import QuantumCircuit
 from qiskit.quantum_info import SparsePauliOp, Statevector
+
+ROOT = Path(__file__).resolve().parent.parent
+DATA_DIR = ROOT / "data"
+FIGURES_DIR = ROOT / "figures"
 
 # Compute the cost Hamiltonian for a given graph.
 def cost_hamiltonian(n, G):
@@ -286,7 +291,7 @@ def make_plots(spectra, curve, ts, walk_t, walk_b, origin_d, cent_d, reps):
   plt.ylabel("count")
   plt.title("Bimodal curvature: troughs (~0) vs bowls (~2)")
   plt.tight_layout()
-  plt.savefig("p_bimodal.png")
+  plt.savefig(FIGURES_DIR / "p_bimodal.png")
 
   plt.figure(figsize=(6, 4))
   sr = np.array(curve)
@@ -295,7 +300,7 @@ def make_plots(spectra, curve, ts, walk_t, walk_b, origin_d, cent_d, reps):
   plt.ylabel("distinct points found")
   plt.title("Count never saturates -> continuum")
   plt.tight_layout()
-  plt.savefig("p_saturation.png")
+  plt.savefig(FIGURES_DIR / "p_saturation.png")
 
   plt.figure(figsize=(6, 4))
   plt.plot(ts, walk_t, 'o-', color='seagreen', label='trough')
@@ -305,7 +310,7 @@ def make_plots(spectra, curve, ts, walk_t, walk_b, origin_d, cent_d, reps):
   plt.legend()
   plt.title("Trough stays flat; bowl rises")
   plt.tight_layout()
-  plt.savefig("p_walk.png")
+  plt.savefig(FIGURES_DIR / "p_walk.png")
 
   plt.figure(figsize=(6, 4))
   plt.hist(reps[:, 7], bins=30, range=(0, np.pi), color='goldenrod', edgecolor='k', lw=.3)
@@ -313,7 +318,7 @@ def make_plots(spectra, curve, ts, walk_t, walk_b, origin_d, cent_d, reps):
   plt.ylabel("count")
   plt.title("One coordinate spread across the full [0,pi) period")
   plt.tight_layout()
-  plt.savefig("p_uniform.png")
+  plt.savefig(FIGURES_DIR / "p_uniform.png")
 
 # Main function to run the analysis.
 def main():
@@ -357,7 +362,7 @@ def main():
 
   make_plots(spectra, curve, ts, walk_t, walk_b, origin_d, cent_d, reps)
 
-  # gnn_error_projection("MaxCutMAQAOAData.csv")
+  # gnn_error_projection(DATA_DIR / "MaxCutMAQAOAData.csv")
 
 
 if __name__ == "__main__":

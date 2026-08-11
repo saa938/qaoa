@@ -8,12 +8,16 @@ This is also used in sphere_uniformity.py to provide the cached lowest-norm shel
 import ast
 import json
 import time
+import os
+from pathlib import Path
 import numpy as np
 import pandas as pd
 import maqaoa_core as M
 
-CSV = "MaxCutMAQAOAData.csv"
-import os
+ROOT = Path(__file__).resolve().parent.parent
+CSV = ROOT / "data" / "MaxCutMAQAOAData.csv"
+SHELLS = ROOT / "results" / "shells"
+SURVEY_OUT = ROOT / "results" / "survey_results.json"
 RESTARTS_FLOOR = int(os.environ.get("RF", 100)) # restarts to establish floor
 RESTARTS_HARVEST = int(os.environ.get("RH", 500)) # plain restarts to harvest minima
 LAM = 0.5 # penalty strength on ||x||^2
@@ -121,7 +125,7 @@ def analyze_graph(idx, edges, n, verbose=True):
 
     # Cache the point sets so the uniformity analysis does not have to redo
     # the expensive harvest.
-    np.savez(f"shell_row{idx}.npz", shell=shell, distinct=distinct,
+    np.savez(SHELLS / f"shell_row{idx}.npz", shell=shell, distinct=distinct,
              radii=radii, floor=floor, edges=np.array(edges, dtype=int))
 
     out = dict(
@@ -171,8 +175,8 @@ def main():
 
     # results accumulate across chunked invocations
     results = []
-    if os.path.exists("survey_results.json"):
-        results = json.load(open("survey_results.json"))
+    if os.path.exists(SURVEY_OUT):
+        results = json.load(open(SURVEY_OUT))
     done = {r["row"] for r in results}
 
     for idx, row in er.iterrows():
@@ -184,7 +188,7 @@ def main():
         if res:
             results.append(res)
         results.sort(key=lambda r: r["row"])
-        with open("survey_results.json", "w") as f:
+        with open(SURVEY_OUT, "w") as f:
             json.dump(results, f, indent=1)
 
     print("\n" + "=" * 96)

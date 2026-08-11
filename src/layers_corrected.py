@@ -16,13 +16,16 @@ import sys
 import os
 import json
 import time
+from pathlib import Path
 import numpy as np
 import pandas as pd
 import networkx as nx
 from scipy.optimize import minimize
 import maqaoa_core as M
 
-CSV = "MaxCutMAQAOAData.csv"
+ROOT = Path(__file__).resolve().parent.parent
+CSV = ROOT / "data" / "MaxCutMAQAOAData.csv"
+RESULTS_DIR = ROOT / "results"
 TOL_E = 1e-6        # energy tolerance for "at the floor"
 TOL_D = 1e-2        # torus distance below which two minima are the same point
 GRIDS = [2, 4, 8, 16]
@@ -175,7 +178,7 @@ def run(row, p, restarts):
                r2_pi4=(r_min / (np.pi / 4)) ** 2, zero_modes=zm,
                grid_absolute={str(k): grid_abs[k] for k in GRIDS},
                grid_relative={str(k): grid_rel[k] for k in GRIDS}, secs=secs)
-    path = "layers_corrected.json"
+    path = RESULTS_DIR / "layers_corrected.json"
     allr = json.load(open(path)) if os.path.exists(path) else []
     allr = [a for a in allr if not (a["row"] == row and a["p"] == p)] + [rec]
     json.dump(sorted(allr, key=lambda z: (z["row"], z["p"])), open(path, "w"), indent=1)

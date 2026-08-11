@@ -3,10 +3,13 @@ Just noticed the floor was always a multiple of 0.5, just wanted to test it out
 """
 import sys
 import json
+from pathlib import Path
 import numpy as np
 import networkx as nx
 from scipy.optimize import minimize
 from maqaoa_core import make_energy
+
+ROOT = Path(__file__).resolve().parent.parent
 
 
 # distance to the nearest multiple of 1/2
@@ -25,7 +28,7 @@ def brute_maxcut(n, edges):
 
 RESTARTS = int(sys.argv[1]) if len(sys.argv) > 1 else 60
 NGRAPH = int(sys.argv[2]) if len(sys.argv) > 2 else 30
-OUTPUT = sys.argv[3] if len(sys.argv) > 3 else "results.json"
+OUTPUT = ROOT / "results" / (sys.argv[3] if len(sys.argv) > 3 else "results.json")
 
 rng0 = np.random.default_rng(11)
 

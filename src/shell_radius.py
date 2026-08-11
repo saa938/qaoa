@@ -4,14 +4,18 @@ How small can the radius get while staying exactly on the floor?
 
 import ast
 import json
+from pathlib import Path
 import numpy as np
 import pandas as pd
 from scipy.optimize import minimize, NonlinearConstraint
 import maqaoa_core as M
 import radius_search as R
 
-CSV = "MaxCutMAQAOAData.csv"
-OUT = "shell_radius.json"
+ROOT = Path(__file__).resolve().parent.parent
+CSV = ROOT / "data" / "MaxCutMAQAOAData.csv"
+RESULTS_DIR = ROOT / "results"
+OUT = RESULTS_DIR / "shell_radius.json"
+SHELLS = RESULTS_DIR / "shells"
 TOL_E = 1e-7
 N_SLIDE = 25 # sliding is an SLSQP solve each, so only spend it on the best candidates
 
@@ -60,7 +64,7 @@ def load_row(df, row):
 
 def main():
     df = pd.read_csv(CSV)
-    floors = {d["row"]: d["floor"] for d in json.load(open("floor_cheap.json"))}
+    floors = {d["row"]: d["floor"] for d in json.load(open(RESULTS_DIR / "floor_cheap.json"))}
     rows = []
     print("%4s %4s %4s %8s %6s %10s %10s %9s %10s %6s"
           % ("row", "m", "D", "floor", "n_got", "r_raw", "r_slid", "gain",
@@ -100,7 +104,7 @@ def main():
               % (row, r["m"], D, floor, r["n_harvested"], r["r_min_before_slide"],
                  r["r_min_after_slide"], r["slide_gain"], r["in_quarter_pi_sq"],
                  r["n_nonzero_coords"]))
-        np.savez("shellmin_row%d.npz" % row, x=x, refined=np.array(refined),
+        np.savez(SHELLS / ("shellmin_row%d.npz" % row), x=x, refined=np.array(refined),
                  radii=r_ref, floor=floor, edges=np.array(edges))
     json.dump(rows, open(OUT, "w"), indent=1)
 

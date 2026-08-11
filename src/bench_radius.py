@@ -9,13 +9,16 @@ import json
 import os
 import sys
 import time
+from pathlib import Path
 import numpy as np
 import pandas as pd
 import maqaoa_core as M
 import radius_search as R
 
-CSV = "MaxCutMAQAOAData.csv"
-OUT = "bench_radius.json"
+ROOT = Path(__file__).resolve().parent.parent
+CSV = ROOT / "data" / "MaxCutMAQAOAData.csv"
+OUT = ROOT / "results" / "bench_radius.json"
+SHELLS = ROOT / "results" / "shells"
 
 CONFIGS = [
     ("const", 0.0),
@@ -34,7 +37,7 @@ def load_row(row):
     edges = ast.literal_eval(df.loc[row, "Edges"])
     n = int(df.loc[row, "Number of Nodes"])
     energy, _, grad, D = M.make_energy(n, edges, p=1)
-    z = np.load("shell_row%d.npz" % row)
+    z = np.load(SHELLS / ("shell_row%d.npz" % row))
     floor = float(z["floor"])
     r_shell = min(R.radius(x) for x in z["shell"])
     return edges, n, energy, grad, D, floor, r_shell

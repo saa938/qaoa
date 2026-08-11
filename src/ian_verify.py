@@ -5,11 +5,13 @@ Do his global minima land on my floor, and does anything of his beat it?
 import glob
 import json
 import os
+from pathlib import Path
 import numpy as np
 import maqaoa_core as M
 
-DATA = "AshayMAQAOAData"
-OUT = "ian_verify.json"
+ROOT = Path(__file__).resolve().parent.parent
+DATA = ROOT / "data" / "AshayMAQAOAData"
+OUT = ROOT / "results" / "ian_verify.json"
 ROW_OF = {"AshayGlobalMinimums_0": 10, "AshayGlobalMinimums_1": 11,
           "AshayGlobalMinimums_2": 12, "AshayGlobalMinimums_3": 13}
 

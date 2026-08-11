@@ -6,11 +6,12 @@ Check 4: Shift each coordinate by pi and confirm the energy is unchanged.
 """
 
 import ast
+from pathlib import Path
 import numpy as np
 import pandas as pd
 import maqaoa_core as M
 
-CSV = "MaxCutMAQAOAData.csv"
+CSV = Path(__file__).resolve().parent.parent / "data" / "MaxCutMAQAOAData.csv"
 
 def check_csv_energies(): # Check 1
     print("=" * 72)

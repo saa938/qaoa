@@ -5,14 +5,18 @@ the same radius with the same largest positive fraction?
 
 import ast
 import json
+from pathlib import Path
 import numpy as np
 import pandas as pd
 from scipy.optimize import minimize
 import maqaoa_core as M
 import radius_search as R
 
-CSV = "MaxCutMAQAOAData.csv"
-OUT = "shell_degeneracy.json"
+ROOT = Path(__file__).resolve().parent.parent
+CSV = ROOT / "data" / "MaxCutMAQAOAData.csv"
+RESULTS_DIR = ROOT / "results"
+OUT = RESULTS_DIR / "shell_degeneracy.json"
+SHELLS = RESULTS_DIR / "shells"
 TOL_D = 1e-2
 BAND = 1e-4 # radius window counted as "at the shell"
 
@@ -59,7 +63,7 @@ def harvest_in_ball(energy, grad, D, floor, Rcap, restarts, seed, a=1.5):
 
 def main():
     df = pd.read_csv(CSV)
-    shells = {d["row"]: d for d in json.load(open("shell_radius.json"))}
+    shells = {d["row"]: d for d in json.load(open(RESULTS_DIR / "shell_radius.json"))}
     rows = []
     print("%4s %4s %6s %10s %10s %10s %8s"
           % ("row", "m", "n_aut", "radius", "at_shell", "max_frac", "tied"))
@@ -75,7 +79,7 @@ def main():
         # seed with the known shell point plus a fresh capped harvest
         got = harvest_in_ball(energy, grad, D, floor, Rstar + 1e-3,
                               restarts=120, seed=1000 + row)
-        P = np.array([np.load("shellmin_row%d.npz" % row)["x"]] + list(got))
+        P = np.array([np.load(SHELLS / ("shellmin_row%d.npz" % row))["x"]] + list(got))
 
         # close under the automorphisms and the sign flip, both of which preserve the
         # radius, so without this the count is just however many images the optimizer
@@ -93,7 +97,7 @@ def main():
             r["max_pos_fraction"] = round(fmax, 6)
             r["n_tied_at_max_fraction"] = int((fr > fmax - 1e-6).sum())
             r["distinct_fractions"] = sorted({round(float(v), 6) for v in fr})
-            np.savez("shellset_row%d.npz" % row, shell=shell, fracs=fr,
+            np.savez(SHELLS / ("shellset_row%d.npz" % row), shell=shell, fracs=fr,
                      radius=Rstar, floor=floor)
         rows.append(r)
         print("%4d %4d %6d %10.6f %10d %10.6f %8s"

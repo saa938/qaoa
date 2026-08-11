@@ -3,6 +3,7 @@ I noticed the floor was always a half-integer.  Is that true?
 And if so, is it because the floor points are quantized to the pi/4 grid?  This script checks that.
 """
 import ast
+from pathlib import Path
 import numpy as np
 import pandas as pd
 import matplotlib
@@ -11,6 +12,12 @@ import matplotlib.pyplot as plt
 from scipy.optimize import minimize
 from analytic_fast import P1
 
+ROOT = Path(__file__).resolve().parent.parent
+DATA_DIR = ROOT / "data"
+RESULTS_DIR = ROOT / "results"
+SHELLS = RESULTS_DIR / "shells"
+FIGURES_DIR = ROOT / "figures"
+
 RESTARTS = 40
 
 
@@ -18,7 +25,7 @@ def frac_half(v):
     return np.abs(v * 2 - np.round(v * 2)) / 2
 
 
-df = pd.read_csv("MaxCutMAQAOAData.csv")
+df = pd.read_csv(DATA_DIR / "MaxCutMAQAOAData.csv")
 rec = []
 edgevals = []
 
@@ -35,7 +42,7 @@ for row in range(10, 20):
         x = np.asarray(x, float)
         return np.array([P.energy(x + sh[i]) - P.energy(x - sh[i]) for i in range(D)])
 
-    floor = float(np.load("shell_row%d.npz" % row)["floor"])
+    floor = float(np.load(SHELLS / ("shell_row%d.npz" % row))["floor"])
     rng = np.random.default_rng(4000 + row)
     for _ in range(RESTARTS):
         xr, _, _ = P.rotosolve(rng.uniform(0, np.pi, D), sweeps=300)
@@ -46,7 +53,7 @@ for row in range(10, 20):
                     "dist_half": float(frac_half(v))})
 
     # per-edge <ZZ> at the certified floor points
-    for x in np.load("shell_row%d.npz" % row)["shell"][:40]:
+    for x in np.load(SHELLS / ("shell_row%d.npz" % row))["shell"][:40]:
         A, B, C = P.coeffs(x[:P.m])
         b = 2.0 * x[P.m:]
         c, s = np.cos(b), np.sin(b)
@@ -55,7 +62,7 @@ for row in range(10, 20):
     print("row %d done" % row, flush=True)
 
 d = pd.DataFrame(rec)
-d.to_csv("floor_quantization.csv", index=False)
+d.to_csv(RESULTS_DIR / "floor_quantization.csv", index=False)
 ev = np.concatenate(edgevals)
 
 fl = d.loc[d.is_floor == 1, "dist_half"].values
@@ -95,7 +102,7 @@ for row in range(10, 20):
     edges = list(pd.unique(pd.Series([tuple(sorted(e)) for e in
                  ast.literal_eval(df.loc[row, "Edges"])])))
     m = len(edges)
-    fldr = float(np.load("shell_row%d.npz" % row)["floor"])
+    fldr = float(np.load(SHELLS / ("shell_row%d.npz" % row))["floor"])
     mc = -(fldr - gap_rows[row])
     xs.append(mc / m)
     ys.append(gap_rows[row])
@@ -108,5 +115,5 @@ ax[2].set_ylabel("gap = floor + MaxCut")
 ax[2].set_title("Gap is not explained by cut fraction")
 
 plt.tight_layout()
-plt.savefig("floor_quantization.png", dpi=150)
+plt.savefig(FIGURES_DIR / "floor_quantization.png", dpi=150)
 print("wrote floor_quantization.csv and floor_quantization.png")
