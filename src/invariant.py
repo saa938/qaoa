@@ -1,10 +1,10 @@
 """
-Can a ladder of automorphism-invariant functionals pick out one point of the
+Can a filter of automorphism-invariant functionals pick out one point of the
 minimum-radius shell?
 
 Reads the shell weighted_radius.py cached in results/shells/, groups it into
 symmetry groups, then applies the invariants in order and keeps the argmax set at
-each step.  Reports how many points survive and whether they form a single orbit.
+each step.  Reports how many points survive and whether they form a single group.
 """
 
 import ast
@@ -27,7 +27,7 @@ WRAD = RESULTS_DIR / "weighted_radius.json"
 
 ROWS = [10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
 RESTARTS = 600 # only used when a row has no cached shell
-LADDER_TOL = 1e-7
+FILTER_TOL = 1e-7
 CANON = 5 # digits a canonical representative is rounded to before hashing
 BUDGET = 600000 # sign patterns we are willing to enumerate per row
 
@@ -61,7 +61,7 @@ def groups(shell, images):
     return list(uniq.values())
 
 # Apply functionals in order, keeping the argmax set at each step.
-def ladder(shell, funcs, tol=LADDER_TOL):
+def filter(shell, funcs, tol=FILTER_TOL):
     idx = np.arange(len(shell))
     used = []
     for name, f in funcs:
@@ -122,21 +122,21 @@ def run(df, row, known, flags):
     autos, images = M.symmetry_group(eo, p=1)
     orb = groups(shell, images)
     sizes = sorted({len(o) for o in orb})
-    idx, used = ladder(shell, functionals(eo, n, m))
-    one_orbit = len({tuple(np.round(M.canonicalize(shell[i], images), CANON))
+    idx, used = filter(shell, functionals(eo, n, m))
+    one_group = len({tuple(np.round(M.canonicalize(shell[i], images), CANON))
                      for i in idx}) == 1
     e_sel = float(energy(shell[idx[0]]))
 
     print("row %2d: shell %3d (%s, %s), |Aut| %2d, groups %3d (sizes %s)"
           % (row, len(shell), "exact" if exact else "lower bound", source,
              len(autos), len(orb), sizes), flush=True)
-    print("        invariant ladder survivors %d, single orbit %s, E %.10f, %.0f s"
-          % (len(idx), one_orbit, e_sel, time.time() - t0), flush=True)
+    print("        invariant filter survivors %d, single group %s, E %.10f, %.0f s"
+          % (len(idx), one_group, e_sel, time.time() - t0), flush=True)
     print("        functionals that cut: %s" % (", ".join(used) or "none"), flush=True)
     return {"row": row, "n": n, "m": m, "D": D, "floor": floor, "r_min": r_min,
             "shell": len(shell), "exact": exact, "source": source,
-            "n_auto": len(autos), "groups": len(orb), "orbit_sizes": sizes,
-            "ladder": int(len(idx)), "one_orbit": bool(one_orbit),
+            "n_auto": len(autos), "groups": len(orb), "group_sizes": sizes,
+            "filter": int(len(idx)), "one_group": bool(one_group),
             "cutters": used, "energy_at_pick": e_sel}
 
 def main():
@@ -152,10 +152,10 @@ def main():
             res.append(r)
         json.dump(res, open(OUT, "w"), indent=1) # checkpoint after every row
 
-    print("\n%4s %7s %7s %8s %8s %9s" % ("row", "shell", "|Aut|", "groups", "ladder", "1 orbit"))
+    print("\n%4s %7s %7s %8s %8s %9s" % ("row", "shell", "|Aut|", "groups", "filter", "1 group"))
     for d in res:
         print("%4d %7d %7d %8d %8d %9s"
-              % (d["row"], d["shell"], d["n_auto"], d["groups"], d["ladder"], d["one_orbit"]))
+              % (d["row"], d["shell"], d["n_auto"], d["groups"], d["filter"], d["one_group"]))
 
 if __name__ == "__main__":
     main()

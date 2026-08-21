@@ -11,12 +11,12 @@
   "source": "cached",
   "n_auto": 2,
   "groups": 48,
-  "orbit_sizes": [
+  "group_sizes": [
    2,
    4
   ],
-  "ladder": 1,
-  "one_orbit": true,
+  "filter": 1,
+  "one_group": true,
   "cutters": [
    "sum_gamma",
    "deg_gamma"
@@ -35,14 +35,14 @@
   "source": "cached",
   "n_auto": 12,
   "groups": 24,
-  "orbit_sizes": [
+  "group_sizes": [
    2,
    4,
    6,
    12
   ],
-  "ladder": 1,
-  "one_orbit": true,
+  "filter": 1,
+  "one_group": true,
   "cutters": [
    "sum_gamma"
   ],
@@ -60,11 +60,11 @@
   "source": "cached",
   "n_auto": 2,
   "groups": 32,
-  "orbit_sizes": [
+  "group_sizes": [
    2
   ],
-  "ladder": 1,
-  "one_orbit": true,
+  "filter": 1,
+  "one_group": true,
   "cutters": [
    "sum_gamma"
   ],
@@ -82,11 +82,11 @@
   "source": "cached",
   "n_auto": 1,
   "groups": 32,
-  "orbit_sizes": [
+  "group_sizes": [
    2
   ],
-  "ladder": 1,
-  "one_orbit": true,
+  "filter": 1,
+  "one_group": true,
   "cutters": [
    "sum_gamma"
   ],
@@ -104,12 +104,12 @@
   "source": "cached",
   "n_auto": 1,
   "groups": 33,
-  "orbit_sizes": [
+  "group_sizes": [
    1,
    2
   ],
-  "ladder": 1,
-  "one_orbit": true,
+  "filter": 1,
+  "one_group": true,
   "cutters": [
    "sum_gamma"
   ],
@@ -127,12 +127,12 @@
   "source": "cached",
   "n_auto": 4,
   "groups": 40,
-  "orbit_sizes": [
+  "group_sizes": [
    4,
    8
   ],
-  "ladder": 2,
-  "one_orbit": true,
+  "filter": 2,
+  "one_group": true,
   "cutters": [
    "sum_gamma"
   ],
@@ -150,11 +150,11 @@
   "source": "cached",
   "n_auto": 1,
   "groups": 64,
-  "orbit_sizes": [
+  "group_sizes": [
    2
   ],
-  "ladder": 1,
-  "one_orbit": true,
+  "filter": 1,
+  "one_group": true,
   "cutters": [
    "sum_gamma",
    "deg_gamma"
@@ -173,11 +173,11 @@
   "source": "cached",
   "n_auto": 2,
   "groups": 64,
-  "orbit_sizes": [
+  "group_sizes": [
    2
   ],
-  "ladder": 1,
-  "one_orbit": true,
+  "filter": 1,
+  "one_group": true,
   "cutters": [
    "sum_gamma",
    "deg_gamma"
@@ -196,12 +196,12 @@
   "source": "cached",
   "n_auto": 8,
   "groups": 44,
-  "orbit_sizes": [
+  "group_sizes": [
    8,
    16
   ],
-  "ladder": 4,
-  "one_orbit": true,
+  "filter": 4,
+  "one_group": true,
   "cutters": [
    "sum_gamma",
    "deg_beta"
@@ -220,12 +220,12 @@
   "source": "cached",
   "n_auto": 12,
   "groups": 108,
-  "orbit_sizes": [
+  "group_sizes": [
    1,
    2
   ],
-  "ladder": 1,
-  "one_orbit": true,
+  "filter": 1,
+  "one_group": true,
   "cutters": [
    "sum_gamma"
   ],

@@ -1,0 +1,106 @@
+[
+ {
+  "graph": 10,
+  "shell": 128,
+  "floor": -11.0,
+  "limit_whole": 64,
+  "limit_split": 2,
+  "filter": 2,
+  "groups": 2,
+  "one_group": false,
+  "best": [
+   "sum_gamma"
+  ]
+ },
+ {
+  "graph": 11,
+  "shell": 128,
+  "floor": -15.0,
+  "limit_whole": 16,
+  "limit_split": 1,
+  "filter": 1,
+  "groups": 1,
+  "one_group": true,
+  "best": [
+   "sum_gamma"
+  ]
+ },
+ {
+  "graph": 12,
+  "shell": 64,
+  "floor": -12.5,
+  "limit_whole": 8,
+  "limit_split": 1,
+  "filter": 1,
+  "groups": 1,
+  "one_group": true,
+  "best": [
+   "sum_gamma"
+  ]
+ },
+ {
+  "graph": 13,
+  "shell": 64,
+  "floor": -9.5,
+  "limit_whole": 32,
+  "limit_split": 1,
+  "filter": 1,
+  "groups": 1,
+  "one_group": true,
+  "best": [
+   "sum_gamma"
+  ]
+ },
+ {
+  "graph": 15,
+  "shell": 256,
+  "floor": -12.0,
+  "limit_whole": 32,
+  "limit_split": 2,
+  "filter": 2,
+  "groups": 1,
+  "one_group": true,
+  "best": [
+   "sum_gamma"
+  ]
+ },
+ {
+  "graph": 16,
+  "shell": 128,
+  "floor": -10.0,
+  "limit_whole": 32,
+  "limit_split": 2,
+  "filter": 2,
+  "groups": 2,
+  "one_group": false,
+  "best": [
+   "sum_gamma"
+  ]
+ },
+ {
+  "graph": 17,
+  "shell": 128,
+  "floor": -10.0,
+  "limit_whole": 64,
+  "limit_split": 2,
+  "filter": 2,
+  "groups": 2,
+  "one_group": false,
+  "best": [
+   "sum_gamma"
+  ]
+ },
+ {
+  "graph": 18,
+  "shell": 512,
+  "floor": -12.0,
+  "limit_whole": 64,
+  "limit_split": 8,
+  "filter": 8,
+  "groups": 2,
+  "one_group": false,
+  "best": [
+   "sum_gamma"
+  ]
+ }
+]
