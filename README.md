@@ -123,3 +123,13 @@ Scripts can be run from any working directory, e.g. either of:
 **Only three of the twelve functionals ever fire:** sum_gamma cuts on all ten graphs, deg_gamma on graphs 10, 16 and 17, deg_beta on graph 18. prod_gamma, tri_gamma, sum_beta and every cubic version never cut anything.
 
 **Automorphism groups are the floor:** Graphs 15 and 18 leave 2 and 4 points respectively, which is exactly one group each. No function of the graph structure can separate points related by graph symmetry. All 10 graphs reach one automorphism group.
+
+### J. Invariants that ignore parameter position
+
+**Sign Counts are spread out:** If every parameter has the same magnitude but only signs differ, then measures that ignore position would give almost identical values to solutions with the same number of pluses and minuses. However, the most common value only accounts for 23-31% of the shell. Solutions with an equal number of pluses and minuses are 0% of the shell on all eight.
+
+**Splitting makes it work better:** Treating all parameters as one "block", the smallest group is 8 to 64 points depending on the graph. Scoring the cost parameters and mixer parameters as separate helps, most of them are 1-2 but graph 18 is 8. It is a little better, but not as good as ```invariants.py```.
+
+**Only the plain gamma sum does stuff:** ```sum_gamma``` is the only measure that removes any points, on every graph. Standard deviation, e_2, e_3, e_4, positive fraction and every beta-block measure never once change the outcome. 
+
+**Energy symmetry makes standard deviation suboptimal:** Standard deviation gives the same value for x and -x, and so does every even-order elementary symmetric polynomial. Because the shell always contains both a solution and its mirror image, no combination of even measures can get below 2 points. 
