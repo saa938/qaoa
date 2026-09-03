@@ -133,3 +133,11 @@ Scripts can be run from any working directory, e.g. either of:
 **Only the plain gamma sum does stuff:** ```sum_gamma``` is the only measure that removes any points, on every graph. Standard deviation, e_2, e_3, e_4, positive fraction and every beta-block measure never once change the outcome. 
 
 **Energy symmetry makes standard deviation suboptimal:** Standard deviation gives the same value for x and -x, and so does every even-order elementary symmetric polynomial. Because the shell always contains both a solution and its mirror image, no combination of even measures can get below 2 points. 
+
+### K. More layers and weights
+
+**Periodicity changes:** For weighted edges, the energy is not pi periodic in gamma, the period is pi divided by the weight on that edge. The cost unitary is exp(i gamma_e w_e Z_u Z_v), so shifting gamma_e by pi / w_e multiplies every amplitude by -1, a global phase. Beta stays pi periodic.
+
+**Sign flip still exists:** Even with weights and more layers E(x) = E(-x) still holds. A shell can never hold fewer than 2 points, and if it is 2 it is just the point and the mirror.
+
+**Random weights destroy graph symmetries:** If the edges are weighted then they are different from each other, allowing the filter to return one point on all 20 trials.
