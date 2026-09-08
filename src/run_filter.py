@@ -1,20 +1,7 @@
 """
-Does the filter of graph-invariant functionals still pick out one point of the
-minimum-radius shell once the edges are canonically ordered, once they carry
-random weights, and once the circuit has more than one layer?
-
-Self-contained: does not import maqaoa_core or weighted_radius.  The energy is the
-same statevector construction as maqaoa_core.make_energy, extended with per-edge
-weights and p layers.
-
-Edge order is fixed by canonical_edges: lowest node index first inside each edge,
-then the list sorted by first index ascending and by second index ascending within
-it.  Everything downstream (energy, functionals, symmetry) is built on that order.
-
 Usage:  python src/run_filter.py <p> <weighted 0|1> <row> [row ...]
 Example: python src/run_filter.py 1 0 10 11 12
-Results are appended to results/ordered_filter.json after every case, so re-running
-the same command skips whatever already finished.
+Results are appended to results/ordered_filter.json after every case
 """
 
 import ast
@@ -46,8 +33,7 @@ FILTER_TOL = 1e-7
 CANON = 5 # digits a canonical representative is rounded to before hashing
 BUDGET = 400000 # sign patterns we are willing to enumerate per magnitude pattern
 
-# Canonical edge order: lowest node index first inside each edge, then sorted by
-# first index and by second index within it.  Self loops and duplicates dropped.
+# Edge ordering
 def canonical_edges(edges):
     seen = set()
     for (u, v) in edges:
@@ -67,17 +53,13 @@ def shift_vector(m, n, p, w):
 def shift_scale(m, n, p, w):
     return np.concatenate([np.tile(np.asarray(w, float), p), np.ones(p * n)])
 
-# Per-coordinate period of the energy: pi/w_e on gammas, pi on betas.  Shifting
-# gamma_e by pi/w_e multiplies every amplitude by -1, which is a global phase.
-# With w = 1 this is the plain pi periodicity maqaoa_core assumes.
+# Per-coordinate period of the energy: pi/w_e on gammas, pi on betas.
 def periods(m, n, p, w):
     g = np.tile(np.pi / np.asarray(w, float), p)
     b = np.full(p * n, np.pi)
     return np.concatenate([g, b])
 
-# Statevector MA-QAOA energy for p layers on a weighted graph.  Cost unitary is
-# exp(i gamma_e w_e Z_u Z_v) and the objective is
-# 0.5 * sum_e w_e <Z_u Z_v> - 0.5 * sum_e w_e.  w = 1 reduces to maqaoa_core exactly.
+# Statevector MA-QAOA energy for p layers on a weighted graph. 
 def make_energy(n, edges, w=None, p=1):
     edges = canonical_edges(edges)
     m = len(edges)
@@ -151,9 +133,7 @@ def polish(energy, grad, x0):
     return minimize(energy, x0, jac=grad, method="L-BFGS-B",
                     options={"ftol": 1e-15, "gtol": 1e-12, "maxiter": 4000})
 
-# Symmetry group from weight-preserving automorphisms plus the global sign flip.
-# Takes n so isolated vertices survive, and w so that with random weights the
-# automorphisms collapse to the identity as they should.
+# Finds graph symmetries and a function to generate all equivalent parameter settings.
 def symmetry_group(edges, n, w, p=1):
     edges = canonical_edges(edges)
     m = len(edges)
@@ -199,11 +179,8 @@ def groups(shell, images):
         uniq.setdefault(k, []).append(i)
     return list(uniq.values())
 
-# Odd, graph-invariant functionals.  Even functions of x cannot separate a point
-# from its negation, so every entry has odd total degree.  Each base vector is
-# applied to one layer at a time, since layers are not interchangeable.  The
-# weight-based entries only appear when the graph is actually weighted.
-def functionals(edges, n, w, p=1):
+# Odd, graph-invariant functions.
+def functions(edges, n, w, p=1):
     edges = canonical_edges(edges)
     m = len(edges)
     G = nx.Graph()
@@ -240,7 +217,7 @@ def functionals(edges, n, w, p=1):
             out.append((tag + "_cube", (lambda v: (lambda x: float(v @ (x ** 3))))(v)))
     return out
 
-# Apply the functionals in a fixed order, keeping the argmax set at each step.
+# Apply the functions in a fixed order, keeping the argmax set at each step.
 def apply_filter(shell, funcs, tol=FILTER_TOL):
     idx = np.arange(len(shell))
     used = []
@@ -260,10 +237,7 @@ def add_distinct(pool, x, per):
         return True
     return False
 
-# Plain restarts, then restarts on E + lam * r^2 to pull inward.  Every candidate
-# is re-minimised on the untouched energy, so the penalty only acts as a sampler.
-# Points from both passes are kept: dropping the first pass would throw away the
-# points that reached the floor whenever the penalised pass never gets back down.
+# Find local minma of the energy landscape
 def harvest(energy, grad, D, per, restarts, seed):
     rng = np.random.default_rng(seed)
 
@@ -288,8 +262,7 @@ def harvest(energy, grad, D, per, restarts, seed):
             rp = polish(energy, grad, r.x)
             cand.append((float(rp.fun), fold(rp.x, per)))
 
-    # The floor is decided once every candidate is in, otherwise a late improvement
-    # would discard everything collected against the older floor.
+    # The floor is decided once every candidate is seen
     floor = min(f for f, _ in cand)
     pool = []
     for f, x in sorted(cand, key=lambda t: t[0]):
@@ -297,8 +270,7 @@ def harvest(energy, grad, D, per, restarts, seed):
             add_distinct(pool, x, per)
     return floor, pool
 
-# Keep the points at the smallest radius, then close that set under the symmetry
-# group and under negation.
+# Keep the points at the smallest radius and remove ones using symmetry
 def inner_shell(pool, energy, images, per, floor):
     if not pool:
         return [], None
@@ -311,11 +283,7 @@ def inner_shell(pool, energy, images, per, floor):
                 add_distinct(closed, y, per)
     return closed, r_min
 
-# Where the shell sits on the pi/8 grid it can be made exact rather than
-# restart-limited: hold each magnitude pattern fixed and try every sign pattern.
-# Only applies when the period is pi on every coordinate, i.e. the unweighted case.
-# A pattern that was not really on the grid fails the floor test and contributes
-# nothing, so snapping is safe to attempt even for a point a little way off.
+# Do the points lie on the pi/8 grid?  If so, we can enumerate the exact shell.
 def refine_on_grid(energy_batch, shell, floor, per, budget=BUDGET):
     if not shell or not np.allclose(per, np.pi):
         return None
@@ -394,7 +362,7 @@ def run(row, edges, n, w, p, seed, weighted, trial):
         print("row %2d  p %d  no floor points found" % (row, p), flush=True)
         return rec
 
-    idx, used = apply_filter(shell, functionals(edges, n, w, p))
+    idx, used = apply_filter(shell, functions(edges, n, w, p))
     orb = groups([shell[i] for i in idx], images)
     rec.update({"groups": len(orb), "filter": int(len(idx)),
                 "one_group": len(orb) == 1, "used": used,
@@ -408,7 +376,7 @@ def run(row, edges, n, w, p, seed, weighted, trial):
              "-" if r_min is None else "%.5f" % r_min, len(pool), len(shell),
              "exact" if exact else "lower bound", len(autos), len(idx), len(orb),
              rec["secs"]), flush=True)
-    print("        functionals used: %s" % (", ".join(used) or "none"), flush=True)
+    print("        functions used: %s" % (", ".join(used) or "none"), flush=True)
     return rec
 
 def main():
