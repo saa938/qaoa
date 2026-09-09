@@ -36,8 +36,8 @@ def var_scaled(v):
     v = [int(t) for t in v]
     return len(v) * sum(x * x for x in v) - sum(v) ** 2
 
-# The placement-blind functionals, applied to gamma and beta separately 
-def functionals(kmax=KMAX):
+# The placement-blind functions, applied to gamma and beta separately 
+def functions(kmax=KMAX):
     out = []
     for param in ("gamma", "beta"):
         out.append(("sum_" + param, (param, "e1")))
@@ -47,7 +47,7 @@ def functionals(kmax=KMAX):
         out.append(("posfrac_" + param, (param, "pos")))
     return out
 
-# Score every point under one functional
+# Score every point under one function
 def score(points, m, spec):
     param, what = spec
     sub = points[:, :m] if param == "gamma" else points[:, m:]
@@ -58,7 +58,7 @@ def score(points, m, spec):
     k = int(what[1:])
     return [esp(r, k)[k - 1] for r in sub]
 
-# Apply functionals in order, keeping the argmax set at each step.
+# Apply functions in order, keeping the argmax set at each step.
 def filter(shell, m, funcs):
     idx = np.arange(len(shell))
     used = []
@@ -108,7 +108,7 @@ def load_shell(graph):
     return U, float(d["floor"]), np.asarray(d["edges"])
 
 def main():
-    funcs = functionals()
+    funcs = functions()
     res = []
     print("%4s %7s %7s %7s %8s %9s  %s"
           % ("graph", "shell", "whole", "split", "filter", "1 group", "best"))

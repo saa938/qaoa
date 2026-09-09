@@ -1,5 +1,5 @@
 """
-Can a filter of automorphism-invariant functionals pick out one point of the
+Can a filter of automorphism-invariant functions pick out one point of the
 minimum-radius shell?
 
 Reads the shell weighted_radius.py cached in results/shells/, groups it into
@@ -31,9 +31,9 @@ FILTER_TOL = 1e-7
 CANON = 5 # digits a canonical representative is rounded to before hashing
 BUDGET = 600000 # sign patterns we are willing to enumerate per row
 
-# Odd, automorphism-invariant functionals.  Even functions of x cannot separate
+# Odd, automorphism-invariant functions.  Even functions of x cannot separate
 # a point from its negation, so every entry here has odd total degree.
-def functionals(edges, n, m):
+def functions(edges, n, m):
     G = nx.Graph(edges)
     G.add_nodes_from(range(n)) # keep isolated vertices in the degree vector
     eo = list(G.edges())
@@ -60,7 +60,7 @@ def groups(shell, images):
         uniq.setdefault(k, []).append(i)
     return list(uniq.values())
 
-# Apply functionals in order, keeping the argmax set at each step.
+# Apply functions in order, keeping the argmax set at each step.
 def filter(shell, funcs, tol=FILTER_TOL):
     idx = np.arange(len(shell))
     used = []
@@ -122,7 +122,7 @@ def run(df, row, known, flags):
     autos, images = M.symmetry_group(eo, p=1)
     orb = groups(shell, images)
     sizes = sorted({len(o) for o in orb})
-    idx, used = filter(shell, functionals(eo, n, m))
+    idx, used = filter(shell, functions(eo, n, m))
     one_group = len({tuple(np.round(M.canonicalize(shell[i], images), CANON))
                      for i in idx}) == 1
     e_sel = float(energy(shell[idx[0]]))
@@ -132,7 +132,7 @@ def run(df, row, known, flags):
              len(autos), len(orb), sizes), flush=True)
     print("        invariant filter survivors %d, single group %s, E %.10f, %.0f s"
           % (len(idx), one_group, e_sel, time.time() - t0), flush=True)
-    print("        functionals that cut: %s" % (", ".join(used) or "none"), flush=True)
+    print("        functions that cut: %s" % (", ".join(used) or "none"), flush=True)
     return {"row": row, "n": n, "m": m, "D": D, "floor": floor, "r_min": r_min,
             "shell": len(shell), "exact": exact, "source": source,
             "n_auto": len(autos), "groups": len(orb), "group_sizes": sizes,
