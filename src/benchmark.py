@@ -1,13 +1,19 @@
 """
 benchmark.py
 ============
-Global vs local optimisation for MA-QAOA Max-Cut on unweighted graphs.
+Global vs local optimisation for MA-QAOA Max-Cut, weighted or unweighted.
 
 Compares scipy basinhopping against a plain L-BFGS-B restart loop across graph
 size, edge density and layer count. Cost is measured as energy-function
 evaluations spent per true global minimum obtained, so each method is charged
 for its failures. Also sweeps the radius cap and the positive-fraction gate to
 see how both methods degrade as the admissible region shrinks.
+
+Weighted graphs are handled by one change of variable. The phase on edge e is
+exp(i gamma_e w_e Z_u Z_v), so the period in gamma_e is pi / w_e. Optimising in
+theta_e = w_e gamma_e puts every coordinate back on a period of pi, which is what
+radius(), positive_fraction(), wrap_pi() and the basinhopping stepsize all assume.
+Set WEIGHT_MODEL to None to reproduce the unweighted sweep exactly.
 
 Place in src/ next to landscape.py. Stores and tables are written to
 results/ at the repository root, so the working directory does not matter.
@@ -18,15 +24,21 @@ from the stores, so an interrupted run loses nothing.
 import os
 import json
 import time
+import tempfile
+import csv
+import hashlib
+import ast
 import numpy as np
 import networkx as nx
 from scipy.optimize import minimize, basinhopping
 import landscape as L
+import maqaoa_weighted as MW
 
 ROOT         = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 RESULTS      = os.path.join(ROOT, "results")
-STORE        = os.path.join(RESULTS, "bench_store.json")
-GATE_STORE   = os.path.join(RESULTS, "bench_gate.json")
+DATA_CSV     = os.path.join(ROOT, "data", "graphs_extra.csv")
+STORE        = os.path.join(RESULTS, "bench_store_all.json")
+GATE_STORE   = os.path.join(RESULTS, "bench_gate_all.json")
 MAIN_CSV     = os.path.join(RESULTS, "benchmark_main.csv")
 GATE_CSV     = os.path.join(RESULTS, "benchmark_gates.csv")
 
@@ -35,6 +47,8 @@ RUN_GATES    = True        # radius and positive-fraction sweep
 VERIFY       = True        # check the multi-layer engine against Qiskit first
 TIME_BUDGET  = 3600.0      # seconds per invocation; stores are resumable
 SEED         = 20260911
+WEIGHT_MODEL = "u_half"    # None for unweighted, else "u_half", "u01" or "int"
+WEIGHT_DRAWS = 2           # weight vectors per graph when WEIGHT_MODEL is set
 
 OPTS         = {"ftol": 1e-14, "gtol": 1e-10, "maxiter": 2000}
 TOL          = 1e-6        # a point is at the floor if E <= floor + this
@@ -43,77 +57,80 @@ DEDUP_TOL    = 1e-2        # pi-geodesic radius for "same point"
 GATE_NLOC    = 100         # local runs per gate configuration
 GATE_NBH     = 8           # basinhopping runs per gate configuration
 GATE_NITER   = 15
+FLOOR_NITER  = 30          # basinhopping polish on the best restart, off the clock
 
-GRAPHS = {
-  "g6_d47": (6, [(0, 3), (0, 4), (0, 5), (1, 3), (1, 5), (2, 4), (3, 5)]),
-  "g8_d36": (8, [(0, 7), (1, 6), (2, 3), (2, 6), (2, 7), (3, 4), (3, 7), (4, 6), (5, 6),
-                 (5, 7)]),
-  "g8_d50": (8, [(0, 1), (0, 2), (0, 3), (0, 4), (0, 5), (0, 6), (1, 4), (1, 6), (1, 7),
-                 (2, 3), (2, 4), (3, 5), (3, 6), (5, 6)]),
-  "g8_d75": (8, [(0, 1), (0, 2), (0, 4), (0, 5), (1, 2), (1, 3), (1, 4), (1, 5), (1, 7),
-                 (2, 3), (2, 5), (2, 6), (2, 7), (3, 4), (3, 5), (3, 6), (3, 7), (4, 5),
-                 (5, 6), (5, 7), (6, 7)]),
-  "g10_d40": (10, [(0, 7), (1, 4), (1, 6), (1, 9), (2, 3), (2, 4), (2, 7), (2, 9), (3, 5),
-                   (3, 6), (3, 8), (3, 9), (4, 7), (5, 7), (6, 9), (7, 8), (7, 9), (8, 9)]),
-  "g10_d91": (10, [(0, 1), (0, 2), (0, 3), (0, 4), (0, 5), (0, 6), (0, 7), (0, 8), (0, 9),
-                   (1, 2), (1, 3), (1, 4), (1, 5), (1, 6), (1, 7), (1, 8), (1, 9), (2, 5),
-                   (2, 6), (2, 7), (2, 9), (3, 4), (3, 5), (3, 6), (3, 7), (3, 8), (3, 9),
-                   (4, 5), (4, 6), (4, 7), (4, 8), (4, 9), (5, 6), (5, 7), (5, 8), (5, 9),
-                   (6, 7), (6, 9), (7, 8), (7, 9), (8, 9)]),
-}
+GRAPHS = {}
+if os.path.exists(DATA_CSV):
+    with open(DATA_CSV, "r", encoding="utf-8") as fh:
+        reader = csv.reader(fh)
+        header = next(reader)
+        for row in reader:
+            if not row: continue
+            n = int(row[0])
+            gtype = row[1]
+            edges = ast.literal_eval(row[2])
+            GRAPHS[f"{n}_{gtype}"] = (n, edges)
 
-CELLS = [(name, p) for name in GRAPHS for p in (1, 2, 3)
+DRAWS = [0] if WEIGHT_MODEL is None else list(range(WEIGHT_DRAWS))
+CELLS = [(name, p, d) for name in GRAPHS for p in (1, 2, 3) for d in DRAWS
          if not (GRAPHS[name][0] == 10 and p == 3)]
 
 
-def make_energy_p(n, edges, layers):
-  edges = list(nx.Graph(edges).edges())
-  m = len(edges)
-  dim = 1 << n
-  bits = ((np.arange(dim)[:, None] >> np.arange(n)[None, :]) & 1)
-  spin = 1 - 2 * bits
-  zz = np.stack([spin[:, i] * spin[:, j] for (i, j) in edges], 0).astype(float)
-  inv = 1.0 / np.sqrt(dim)
-  zero_idx = [np.where(((np.arange(dim) >> j) & 1) == 0)[0] for j in range(n)]
-  one_idx = [z ^ (1 << j) for j, z in enumerate(zero_idx)]
-  def energy(x):
-    gammas = x[:layers * m].reshape(layers, m)
-    betas = x[layers * m:].reshape(layers, n)
-    psi = np.full(dim, inv, dtype=complex)
-    for i in range(layers):
-      psi *= np.exp(1j * (gammas[i][:, None] * zz).sum(0))
-      for j in range(n):
-        c = np.cos(betas[i, j])
-        sf = 1j * np.sin(betas[i, j])
-        a0 = psi[zero_idx[j]]
-        a1 = psi[one_idx[j]]
-        psi[zero_idx[j]] = c * a0 + sf * a1
-        psi[one_idx[j]] = sf * a0 + c * a1
-    prob = np.abs(psi) ** 2
-    return 0.5 * (zz * prob[None, :]).sum() - m / 2.0
-  return energy
+def draw_weights(name, m, draw):
+  if WEIGHT_MODEL is None:
+    return np.ones(m)
+  seed = int(hashlib.md5(f"{name}|{WEIGHT_MODEL}|{draw}".encode()).hexdigest()[:8], 16)
+  rng = np.random.default_rng(seed)
+  if WEIGHT_MODEL == "u_half":
+    return rng.uniform(0.5, 1.5, m)
+  if WEIGHT_MODEL == "u01":
+    return rng.uniform(0.1, 1.0, m)
+  if WEIGHT_MODEL == "int":
+    return rng.integers(1, 5, m).astype(float)
+  raise ValueError(WEIGHT_MODEL)
 
 
-def verify_engine_p(n, edges, layers, trials=3):
-  G = nx.Graph(edges)
-  m = len(list(G.edges()))
-  HC = L.cost_hamiltonian(n, G)
-  energy = make_energy_p(n, edges, layers)
+def cell_key(name, layers, draw):
+  tag = "unit" if WEIGHT_MODEL is None else WEIGHT_MODEL + str(draw)
+  return "{}_{}_p{}".format(name, tag, layers)
+
+
+def cell_weights(c):
+  if c.get("weights") == WEIGHT_MODEL and "w" in c:
+    return np.array(c["w"], float)
+  if WEIGHT_MODEL is None and c.get("weights") is None and "w" not in c:
+    return np.ones(c["m"])
+  return None
+
+
+def make_energy_p(n, edges, layers, w):
+  energy_theta, energy_theta_batch, D = MW.make_energy_theta(n, edges, w, p=layers)
+  return energy_theta
+
+
+def verify_engine_p(n, edges, layers, w, trials=3):
+  m = len(list(nx.Graph(edges).edges()))
+  energy = make_energy_p(n, edges, layers, w)
   worst = 0.0
+  if WEIGHT_MODEL is None:
+    G = nx.Graph(edges)
+    HC = L.cost_hamiltonian(n, G)
+    for _ in range(trials):
+      x = np.random.uniform(-np.pi, np.pi, layers * (m + n))
+      worst = max(worst, abs(energy(x) - L.expectation_ma(x, n, layers, G, HC)))
+    return worst
   for _ in range(trials):
     x = np.random.uniform(-np.pi, np.pi, layers * (m + n))
-    worst = max(worst, abs(energy(x) - L.expectation_ma(x, n, layers, G, HC)))
+    base = energy(x)
+    for k in range(layers * m):
+      y = x.copy()
+      y[k] += np.pi
+      worst = max(worst, abs(energy(y) - base))
   return worst
 
 
-def max_cut_exact(n, edges):
-  edges = list(nx.Graph(edges).edges())
-  dim = 1 << n
-  bits = ((np.arange(dim)[:, None] >> np.arange(n)[None, :]) & 1)
-  cut = np.zeros(dim, dtype=int)
-  for (i, j) in edges:
-    cut += (bits[:, i] != bits[:, j])
-  return int(cut.max())
+def max_cut_exact(n, edges, w):
+  return -MW.brute_weighted_maxcut(n, edges, w)
 
 
 def counted(energy):
@@ -137,14 +154,15 @@ def positive_fraction(x):
   return float(np.sqrt(float((np.clip(w, 0.0, None) ** 2).sum()) / r2))
 
 
-def gated(energy, rmax, fmin):
-  def f(x):
+def box_start(rng, D, rmax, fmin, tries=20000):
+  for _ in range(tries):
+    x = rng.uniform(0, np.pi, D)
     if rmax is not None and radius(x) > rmax:
-      return BIG
+      continue
     if fmin > 0.0 and positive_fraction(x) < fmin:
-      return BIG
-    return energy(x)
-  return f
+      continue
+    return x
+  return None
 
 
 def ball_start(rng, D, rmax, fmin, tries=20000):
@@ -213,27 +231,44 @@ def load(path):
 
 
 def save(st, path):
-  tmp = path + ".tmp"
-  with open(tmp, "w") as fh:
-    json.dump(st, fh)
-  os.replace(tmp, path)
+  folder = os.path.dirname(path) or "."
+  name = os.path.basename(path)
+  fd, tmp = tempfile.mkstemp(prefix=name + ".", suffix=".tmp", dir=folder)
+  try:
+    with os.fdopen(fd, "w") as fh:
+      json.dump(st, fh)
+      fh.flush()
+      os.fsync(fh.fileno())
+    for attempt in range(5):
+      try:
+        os.replace(tmp, path)
+        return
+      except PermissionError:
+        if attempt == 4:
+          raise
+        time.sleep(0.2)
+  finally:
+    if os.path.exists(tmp):
+      os.remove(tmp)
 
 
-def run_cell(st, name, layers, rng, deadline):
-  key = name + "_p" + str(layers)
+def run_cell(st, name, layers, draw, rng, deadline):
+  key = cell_key(name, layers, draw)
   n, edges = GRAPHS[name]
-  m = len(edges)
+  m = len(list(nx.Graph(edges).edges()))
   D = layers * (m + n)
-  energy = make_energy_p(n, edges, layers)
+  w = draw_weights(name, m, draw)
+  energy = make_energy_p(n, edges, layers, w)
   c = st.get(key)
   if c is None:
     t0 = time.time()
     for _ in range(3):
       local_run(energy, rng.uniform(0, np.pi, D))
     t_run = (time.time() - t0) / 3.0
-    c = dict(graph=name, n=n, m=m, layers=layers, D=D,
-             density=2.0 * m / (n * (n - 1)), max_cut=max_cut_exact(n, edges),
-             t_run=t_run, cfg=tier(t_run), floor_samples=[], floor=None,
+    c = dict(graph=name, key=key, weights=WEIGHT_MODEL, draw=draw,
+             w=[float(v) for v in w], n=n, m=m, layers=layers, D=D,
+             density=2.0 * m / (n * (n - 1)), max_cut=max_cut_exact(n, edges, w),
+             t_run=t_run, cfg=tier(t_run), floor_samples=[], floor_x=None, floor=None,
              certified=False, local=[], bh_default=[], bh_wide=[])
     st[key] = c
     save(st, STORE)
@@ -243,9 +278,16 @@ def run_cell(st, name, layers, rng, deadline):
     if time.time() + t_run > deadline:
       save(st, STORE)
       return False
-    c["floor_samples"].append(float(local_run(energy, rng.uniform(0, np.pi, D)).fun))
+    r = local_run(energy, rng.uniform(0, np.pi, D))
+    if c["floor_x"] is None or r.fun <= min(c["floor_samples"] + [np.inf]):
+      c["floor_x"] = [float(v) for v in r.x]
+    c["floor_samples"].append(float(r.fun))
   if c["floor"] is None:
-    fl = float(min(c["floor_samples"]))
+    r = basinhopping(energy, np.array(c["floor_x"]), niter=FLOOR_NITER, T=0.5,
+                     stepsize=float(np.pi / 2),
+                     minimizer_kwargs={"method": "L-BFGS-B", "options": OPTS},
+                     seed=int(rng.integers(1, 10 ** 8)))
+    fl = min(float(min(c["floor_samples"])), float(r.fun))
     c["certified"] = bool(abs(fl + c["max_cut"]) < TOL)
     c["floor"] = -float(c["max_cut"]) if c["certified"] else fl
     save(st, STORE)
@@ -299,12 +341,15 @@ def gate_configs(shell_r, shell_pf):
 
 def run_gate(st, gt, key, rng, deadline):
   c = st[key]
+  w = cell_weights(c)
+  if w is None:
+    return True
   shell_r, shell_pf = shell_of(c)
   if shell_r is None:
     return True
   n, edges = GRAPHS[c["graph"]]
   D, floor, t_run = c["D"], c["floor"], c["t_run"]
-  energy = make_energy_p(n, edges, c["layers"])
+  energy = make_energy_p(n, edges, c["layers"], w)
   for cf in gate_configs(shell_r, shell_pf):
     for regime in ("box", "ball"):
       if regime == "ball" and cf["rmax"] is None:
@@ -313,15 +358,15 @@ def run_gate(st, gt, key, rng, deadline):
       rec = gt.setdefault(k, dict(cell=key, tag=cf["tag"], regime=regime, rmax=cf["rmax"],
                                   fmin=cf["fmin"], shell_r=shell_r, shell_pf=shell_pf,
                                   loc=[], bh=[]))
-      f, box = counted(gated(energy, cf["rmax"], cf["fmin"]))
+      f, box = counted(energy)
       while len(rec["loc"]) < GATE_NLOC:
         if time.time() + t_run > deadline:
           save(gt, GATE_STORE)
           return False
-        x0 = (rng.uniform(0, np.pi, D) if regime == "box"
+        x0 = (box_start(rng, D, cf["rmax"], cf["fmin"]) if regime == "box"
               else ball_start(rng, D, cf["rmax"], cf["fmin"]))
         if x0 is None:
-          rec["loc"].append(dict(nfev=0, fun=BIG))
+          rec["loc"].append(dict(nfev=0, fun=BIG, skipped=True))
           continue
         b = box["n"]
         r = local_run(f, x0)
@@ -330,10 +375,10 @@ def run_gate(st, gt, key, rng, deadline):
         if time.time() + (GATE_NITER + 1) * t_run > deadline:
           save(gt, GATE_STORE)
           return False
-        x0 = (rng.uniform(0, np.pi, D) if regime == "box"
+        x0 = (box_start(rng, D, cf["rmax"], cf["fmin"]) if regime == "box"
               else ball_start(rng, D, cf["rmax"], cf["fmin"]))
         if x0 is None:
-          rec["bh"].append(dict(hit=False, nfev=0, mins=0, fun=BIG))
+          rec["bh"].append(dict(hit=False, nfev=0, mins=0, fun=BIG, skipped=True))
           continue
         rec["bh"].append(bh_run(f, box, x0, floor, GATE_NITER, 0.5, 1.0,
                                 int(rng.integers(1, 10 ** 8))))
@@ -348,7 +393,8 @@ def summarize(c):
   hit_nf = [r["nfev"] for r in c["local"] if r["fun"] <= floor + TOL]
   miss_nf = [r["nfev"] for r in c["local"] if r["fun"] > floor + TOL]
   runs, hits = len(c["local"]), len(hit_nf)
-  out = dict(graph=c["graph"], n=c["n"], m=c["m"], p=c["layers"], D=c["D"],
+  out = dict(graph=c.get("key", c["graph"]), weights=c.get("weights"), n=c["n"],
+             m=c["m"], p=c["layers"], D=c["D"],
              density=round(c["density"], 3), floor=floor, max_cut=c["max_cut"],
              certified=c.get("certified", False), loc_runs=runs, loc_hits=hits,
              loc_q=(hits / runs if runs else 0.0),
@@ -401,13 +447,13 @@ def report():
     print("set RUN_SWEEP = True and run again")
     return []
   rows.sort(key=lambda r: (r["graph"], r["p"]))
-  print("{:<9}{:>2}{:>5}{:>6}{:>8}{:>5}{:>7}{:>9}{:>9}{:>7}{:>8}{:>9}{:>8}".format(
+  print("{:<20}{:>2}{:>5}{:>6}{:>8}{:>5}{:>7}{:>9}{:>9}{:>7}{:>8}{:>9}{:>8}".format(
     "graph", "p", "D", "dens", "floor", "cert", "locQ", "runs/hit", "locCost",
     "bhQ", "basins", "bhCost", "bh/loc"))
   for r in rows:
     ratio = (r["bh_default_cost"] / r["loc_cost"]
              if (r["bh_default_cost"] and r["loc_cost"]) else float("nan"))
-    print("{:<9}{:>2}{:>5}{:>6.2f}{:>8.2f}{:>5}{:>7.3f}{:>9.1f}{:>9.0f}{:>7.3f}"
+    print("{:<20}{:>2}{:>5}{:>6.2f}{:>8.2f}{:>5}{:>7.3f}{:>9.1f}{:>9.0f}{:>7.3f}"
           "{:>8.2f}{:>9.0f}{:>8.2f}".format(
             r["graph"], r["p"], r["D"], r["density"], r["floor"],
             "Y" if r["certified"] else "n", r["loc_q"],
@@ -424,7 +470,7 @@ def report():
   if len(w):
     print("bh/local cost  wide   : median {:.2f} geomean {:.2f}  local cheaper {}/{}".format(
       np.median(w), np.exp(np.mean(np.log(w))), int((w > 1).sum()), len(w)))
-  write_csv(rows, ["graph", "n", "m", "p", "D", "density", "floor", "max_cut", "certified",
+  write_csv(rows, ["graph", "weights", "n", "m", "p", "D", "density", "floor", "max_cut", "certified",
                    "loc_runs", "loc_hits", "loc_q", "loc_runs_to_hit", "loc_nfev_mean",
                    "loc_cost", "bh_default_runs", "bh_default_hits", "bh_default_q",
                    "bh_default_basins", "bh_default_nfev_mean", "bh_default_cost",
@@ -446,26 +492,29 @@ def gate_report():
   for k in sorted(gt):
     r = gt[k]
     floor = st[r["cell"]]["floor"]
-    lh = [a["nfev"] for a in r["loc"] if a["fun"] <= floor + TOL]
-    lm = [a["nfev"] for a in r["loc"] if a["fun"] > floor + TOL]
-    bh = [a["nfev"] for a in r["bh"] if a["hit"]]
-    bm = [a["nfev"] for a in r["bh"] if not a["hit"]]
+    loc = [a for a in r["loc"] if not a.get("skipped")]
+    bhr = [a for a in r["bh"] if not a.get("skipped")]
+    lh = [a["nfev"] for a in loc if a["fun"] <= floor + TOL]
+    lm = [a["nfev"] for a in loc if a["fun"] > floor + TOL]
+    bh = [a["nfev"] for a in bhr if a["hit"]]
+    bm = [a["nfev"] for a in bhr if not a["hit"]]
     lc = cost_per_success(len(lh), len(r["loc"]), lh, lm)
     bc = cost_per_success(len(bh), len(r["bh"]), bh, bm)
     rows.append(dict(cell=r["cell"], gate=r["tag"], regime=r["regime"], rmax=r["rmax"],
                      fmin=r["fmin"], shell_r=r["shell_r"], shell_pf=r["shell_pf"],
                      rmax_over_shell=(r["rmax"] / r["shell_r"] if r["rmax"] else None),
-                     loc_runs=len(r["loc"]), loc_hits=len(lh),
-                     loc_q=len(lh) / len(r["loc"]) if r["loc"] else 0.0,
-                     loc_nfev_mean=safe_mean([a["nfev"] for a in r["loc"]]),
-                     loc_cost=lc, bh_runs=len(r["bh"]), bh_hits=len(bh),
-                     bh_q=len(bh) / len(r["bh"]) if r["bh"] else 0.0, bh_cost=bc))
+                     loc_runs=len(loc), loc_hits=len(lh),
+                     loc_skipped=len(r["loc"]) - len(loc),
+                     loc_q=len(lh) / len(loc) if loc else 0.0,
+                     loc_nfev_mean=safe_mean([a["nfev"] for a in loc]),
+                     loc_cost=lc, bh_runs=len(bhr), bh_hits=len(bh),
+                     bh_q=len(bh) / len(bhr) if bhr else 0.0, bh_cost=bc))
     print("{:<13}{:<8}{:<6}{:>7.2f}{:>6.2f}{:>7.2f}{:>10.0f}{:>7.2f}{:>11.0f}".format(
       r["cell"], r["tag"], r["regime"], r["rmax"] or 0.0, r["fmin"],
       rows[-1]["loc_q"], lc if lc else float("nan"),
       rows[-1]["bh_q"], bc if bc else float("nan")))
   write_csv(rows, ["cell", "gate", "regime", "rmax", "fmin", "shell_r", "shell_pf",
-                   "rmax_over_shell", "loc_runs", "loc_hits", "loc_q", "loc_nfev_mean",
+                   "rmax_over_shell", "loc_runs", "loc_hits", "loc_skipped", "loc_q", "loc_nfev_mean",
                    "loc_cost", "bh_runs", "bh_hits", "bh_q", "bh_cost"], GATE_CSV)
   print("wrote", GATE_CSV)
 
@@ -473,25 +522,29 @@ def gate_report():
 def main():
   os.makedirs(RESULTS, exist_ok=True)
   rng = np.random.default_rng(SEED)
-  if VERIFY:
-    n, edges = GRAPHS["g6_d47"]
+  if VERIFY and GRAPHS:
+    verify_name = list(GRAPHS.keys())[0]
+    n, edges = GRAPHS[verify_name]
+    m = len(list(nx.Graph(edges).edges()))
+    w = draw_weights(verify_name, m, 0)
+    what = "vs qiskit" if WEIGHT_MODEL is None else "under a pi shift in theta"
     for p in (1, 2, 3):
-      print("engine check p={} max abs diff vs qiskit {:.2e}".format(
-        p, verify_engine_p(n, edges, p)))
+      print("engine check p={} max abs diff {} {:.2e}".format(
+        p, what, verify_engine_p(n, edges, p, w)))
   if RUN_SWEEP:
     st = load(STORE)
     deadline = time.time() + TIME_BUDGET
-    for name, p in CELLS:
-      if not run_cell(st, name, p, rng, deadline):
-        print("budget reached, partial at", name, "p", p)
+    for name, p, d in CELLS:
+      if not run_cell(st, name, p, d, rng, deadline):
+        print("budget reached, partial at", cell_key(name, p, d))
         break
-      print("cell done", name, "p", p, flush=True)
+      print("cell done", cell_key(name, p, d), flush=True)
     save(st, STORE)
   if RUN_GATES:
     st = load(STORE)
     gt = load(GATE_STORE)
     deadline = time.time() + TIME_BUDGET
-    for key in [k for k in st if st[k]["floor"] is not None]:
+    for key in [k for k in st if st[k]["floor"] is not None and cell_weights(st[k]) is not None]:
       if not run_gate(st, gt, key, rng, deadline):
         print("budget reached, partial gate at", key)
         break

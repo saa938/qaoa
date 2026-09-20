@@ -65,6 +65,24 @@ def make_energy_weighted(n, edges, weights, p=1):
 
     return energy, energy_batch, grad, D
 
+# Energy as a function of theta_e = w_e * gamma_e.  The phase on edge e is
+# exp(i gamma_e w_e Z_u Z_v), so gamma_e has period pi / w_e while theta_e has
+# period pi in every coordinate, which is what the geodesic helpers, the radius
+# and the basinhopping stepsize all assume.
+def make_energy_theta(n, edges, weights, p=1):
+    w = np.asarray(weights, float)
+    energy, energy_batch, grad, D = make_energy_weighted(n, edges, weights, p=p)
+    scale = np.concatenate([np.tile(w, p), np.ones(p * (D // p - len(w)))])
+
+    def energy_theta(x):
+        return energy(np.asarray(x, float) / scale)
+
+    def energy_theta_batch(X):
+        return energy_batch(np.atleast_2d(X) / scale)
+
+    return energy_theta, energy_theta_batch, D
+
+
 # Exact weighted MaxCut by enumerating all 2^n bitstrings.
 def brute_weighted_maxcut(n, edges, weights):
     edges = list(nx.Graph(edges).edges())
