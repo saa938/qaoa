@@ -141,3 +141,23 @@ Scripts can be run from any working directory, e.g. either of:
 **Sign flip still exists:** Even with weights and more layers E(x) = E(-x) still holds. A shell can never hold fewer than 2 points, and if it is 2 it is just the point and the mirror.
 
 **Random weights destroy graph symmetries:** If the edges are weighted then they are different from each other, allowing the filter to return one point on all 20 trials.
+
+### L. Global vs local optimization
+
+**minimize beats basinhopping:** Measuring evaluations spent per global minimum found, plain L-BFGS-B restarts are cheaper on 13 of 16 cases. Median ratio 1.24, geometric mean 1.54, worst case 3.96x.On the 3 cases basinhopping was better, the number of basins used before hitting was exactly 1, meaning it found the floor in its first descent and did what a single minimize call does. 
+
+**The default stepsize is too small:** Energy has period pi and scipy's default perturbation is 0.5, so it keeps falling back into the same basin. At stepsize pi/2 the median ratio drops to 0.97 and it ties with restarts. It still never beats them.
+
+**Density alone doesn't predict difficulty:** At p=1 the three graphs that don't reach the max cut have hit rates 0.63, 0.97 and 0.575, all above the three that do (0.505, 0.08, 0.18), regardless of density. Whether the floor equals the max cut matters more than how many edges there are.
+
+**Capping the radius costs monotonically more:** On g8_d50 at p=1, evaluations per success go 5622, 11569, 28998, 81305 as the cap goes 1.4, 1.2, 1.1, 1.0 times the shell radius. That is 14 times worse for a cap only 40% tighter.
+
+**P=1 is only one where minimze performs better:** The ratio of the cost of basinhopping over the cost of minimize for p=1 was 2.97 (cheaper on all). By p=2 the ratio drops to 1.17, and by p=3 the two methods are statistically indistinguishable at 0.97.
+
+**Weighted p=1 is harder to find, not harder to reach:** Median per-attempt success falls from 0.99 unweighted to 0.51 weighted, but the quality of the p=1 answer barely moves: median approximation ratio 0.9296 unweighted against 0.9346 weighted. Weighting changes how hard the optimum is to find, not how good p=1 is.
+
+### M. Characteristics of weighted graphs
+
+**The pi/4 shell quantization still exists:** shell_r^2 / (pi/4)^2 is an integer in 21 of 24 weighted p=1 cells, on values 8, 10, 12 and 16, against 10 of 17 unweighted. It breaks at p >= 2 for both, consistent with the quantization being a p=1 property seen for unweighted graphs.
+
+**Grid also scales with weight:** For period, which was pi and became pi/weight for each edge angle, the grid also scales simiarly. It becomes pi/(constant*weight). 
