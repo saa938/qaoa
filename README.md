@@ -161,3 +161,35 @@ Scripts can be run from any working directory, e.g. either of:
 **The pi/4 shell quantization still exists:** shell_r^2 / (pi/4)^2 is an integer in 21 of 24 weighted p=1 cells, on values 8, 10, 12 and 16, against 10 of 17 unweighted. It breaks at p >= 2 for both, consistent with the quantization being a p=1 property seen for unweighted graphs.
 
 **Grid also scales with weight:** For period, which was pi and became pi/weight for each edge angle, the grid also scales simiarly. It becomes pi/(constant*weight). 
+
+### N. Half-period symmetries
+
+**Shifting a gamma by half a period is a symmetry:** Add pi/(2w_e) to gamma_e in layer l and flip the signs of beta_u and beta_v in layer l and every later layer, and the energy stays exactly the same. Checked at p=1, 2 and 3, weighted and unweighted, to 1.8 * 10^-15, while the shift alone changes the energy by order 1.
+
+**Shifting a beta by half a period is also a symmetry:** Add pi/2 to beta_j in layer l and flip the signs of the gammas on j's edges in layer l and every earlier layer. Checked to 1.8 * 10^-15 in the same cases.
+
+**Old shells were mostly copies:** Unweighted p=1 shells of 64 to 552 points shrink to 1 to 12 points. On weighted p=1, 14 of 16 cases have one point before any function is applied, and the other 2 only need sum_gamma. The 98 points on graph 16 (weight draw 1) were mostly copies.
+
+**A shell can now be one point:** Section K says a shell never has fewer than 2 points because of the mirror image. After reducing, the mirror of a point can reduce back to itself. This happens on unweighted graphs 11, 12 and 13 and on most weighted cases.
+
+### O. Flat valleys and reproducibility
+
+**Points in troughs weren't reproducible:** On a trough every restart lands at a different spot, so the pick depended on sampling. On graph 16 (weight draw 1) at p=1 two seeds picked points 4.9 * 10^-3 apart. At p=2 on graph 16 (weight draw 0) the two picks were 2.94 apart with different radii.
+
+**Traverse each point to the closest spot on its valley:** Step toward the origin along the directions where the curvature is zero, polish, reduce, and repeat. With this, two seeds on graph 16 (weight draw 1) agree to 7 * 10^-8.
+
+**Curved valleys need a penalty:** When the valley bends, those steps overshoot and the walk stops short. Instead, pull the point toward the origin with a penalty on the energy   keeps it on the floor, making the penalty stronger in steps (10 up to 10^7), then do one more straight step to tighten. This doesn't need to know which way the valley bends. 
+
+**Sign flips that stay on the floor aren't always symmetries:** Some points at the same radius differ only in the signs of some coordinates. If the flipped coordinates sit on the edge, it is one of the symmetries in N. On graph 16 most pairs flip coordinates in the middle of their range, and the same flips change the energy by order 1 at random points, so they are different minima. Test a flip on random points before counting two points as one.
+
+### P. Efficiency and number of restarts
+
+**Parameter shift was the bottleneck:** It costs 2 energy evaluations per parameter. The adjoint gradient runs the circuit forward once and backward once and reads every derivative off on the way back, the same idea as backpropagation. It matches parameter shift to 9.4 * 10^-15, and polishing is 4.9x faster at p=1, 9.2x at p=2 and 15.6x at p=3.
+
+**Restarts vs basinhopping:** Measuring evaluations until the chosen solution is found on 16 weighted p=1 cases, the restart mix is cheaper on 8, basinhopping with stepsize pi/2 is cheaper on 4, and 4 are within 25%. No hit rate cutoff separates them: graph 17 (weight draw 1) has a 3.7% hit rate and restarts are still 3.7x cheaper.
+
+**One penalty still doesn't fit all:** Lambda 0.35 lands on the answer in 93 of 100 restarts on graph 10 (weight draw 0) against 7 with no penalty, but 0 of 100 on graphs 11, 14 and 16 (weight draw 0). Cycling through 0, 0.1 and 0.35 covers both.
+
+**Where restarts start doesn't matter:** Seeding in [0, pi) and seeding over each coordinate's full period hit the answer 110 times each.
+
+**How many restarts:** If one restart finds the answer with probability q, the chance that N restarts all miss it is (1-q)^N. Setting that to 1% gives N = ln(100)/q, about 4.6/q. 
