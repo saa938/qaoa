@@ -26,7 +26,8 @@ from scipy.linalg import eigh
 ROOT = Path(__file__).resolve().parent.parent
 CSV = ROOT / "data" / "MaxCutMAQAOAData.csv"
 RESULTS_DIR = ROOT / "results"
-OUT = RESULTS_DIR / "ordered_filter_v2.json"
+SEARCH = "restarts" # "restarts" = random restarts over the whole space, "radius" = restarts inside a shrinking maximum radius
+OUT = RESULTS_DIR / ("ordered_filter_v2.json" if SEARCH == "restarts" else "ordered_filter_v2_radius.json")
 
 ROWS = [10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
 DEFAULT_P = 2
@@ -37,6 +38,11 @@ RESTARTS = {1: 100, 2: 25} # restarts per batch; the pick is re-checked after ev
 STALL = {1: 400, 2: 200} # stop once the pick has not changed for this many restarts
 MIN_HITS = 3 # and at least this many restarts have landed on the pick
 MAX_RESTARTS = {1: 3000, 2: 1000}
+LOOP_RESTARTS = {1: 100} # radius search: restarts per iteration
+LOOP_ITERS = 12 # radius search: most iterations
+PATIENCE = 2 # radius search: stop once more than this many iterations in a row find nothing closer
+BIG = 1e6 # radius search: energy returned outside the maximum radius
+CAP_EPS = 1e-3 # radius search: the smallish factor added to the maximum radius
 N_TRIALS = 2
 TOL_E = 1e-6 # energy tolerance for sitting on the floor
 TOL_D = 1e-3 # period-aware distance below which two minima are the same point
@@ -309,6 +315,40 @@ def descend(energy, grad, per, x0, lam):
     rp = polish(energy, grad, r.x)
     return float(rp.fun), rp.x, int(r.nfev + rp.nfev)
 
+# Radius of the closest copy of x to the origin (each coordinate folded onto its half period).
+def reduced_radius(x, hper):
+    v = x - hper * np.round(x / hper)
+    return float(np.sqrt(v @ v))
+
+# Uniform random point with radius below R inside the reduced box.
+def ball_start(rng, D, R, hper):
+    X = (rng.random((20000, D)) - 0.5) * hper
+    ok = np.where((X * X).sum(1) <= R * R)[0]
+    if len(ok):
+        return X[ok[0]]
+    while True:
+        U = rng.normal(size=(20000, D))
+        U /= np.linalg.norm(U, axis=1)[:, None]
+        X = R * rng.random(20000)[:, None] ** (1.0 / D) * U
+        ok = np.where((np.abs(X) <= hper / 2).all(1))[0]
+        if len(ok):
+            return X[ok[0]]
+
+# One restart of the radius search: L-BFGS-B on the energy with BIG and zero gradient outside
+# radius R, then a polish on the true energy.
+def descend_capped(energy, grad, hper, x0, R):
+    lim = R * (1 + CAP_EPS)
+
+    def obj(x):
+        if reduced_radius(x, hper) > lim:
+            return BIG, np.zeros(len(x))
+        return grad(x, True)
+
+    r = minimize(obj, x0, jac=True, method="L-BFGS-B",
+                 options={"ftol": 1e-15, "gtol": 1e-12, "maxiter": 4000})
+    rp = polish(energy, grad, r.x)
+    return float(rp.fun), rp.x, int(r.nfev + rp.nfev)
+
 # Compute the symmetry group of the graph and a function that returns all images of a point under the group.
 def symmetry_group(edges, n, w, p=1):
     edges = canonical_edges(edges)
@@ -463,6 +503,67 @@ def harvest(energy, grad, D, per, p, seed, settle_fn, pick_fn, images):
     return floor, pool, {"hits": int(hits), "restarts": int(total), "nfev": int(nfev),
                          "stalled": int(since), "converged": bool(since >= stall and hits >= MIN_HITS)}
 
+# Run a batch of restarts, keeping track of the best energy and the pick.  The pick is the point
+# with the smallest radius, and the radius is shrunk whenever a smaller one is found.
+def harvest_radius(energy, grad, D, per, p, seed, settle_fn, pick_fn, images):
+    rng = np.random.default_rng(seed)
+    batch = LOOP_RESTARTS[p]
+    hper = per / 2
+    full = float(np.sqrt(((hper / 2) ** 2).sum()))
+    R, best, floor = full, np.inf, np.inf
+    pool, counts, seen = [], [], []
+    total, nfev, stalls, stop = 0, 0, 0, "hit LOOP_ITERS"
+    for _ in range(LOOP_ITERS):
+        radii = []
+        for _ in range(batch):
+            f, x, nf = descend_capped(energy, grad, hper, ball_start(rng, D, R, hper), R)
+            total += 1
+            nfev += nf
+            if f < floor - TOL_E:
+                pool, counts, seen, radii = [], [], [], []
+                R, best, stalls = full, np.inf, 0
+            floor = min(floor, f)
+            if f > floor + TOL_E:
+                continue
+            xf = fold(x, per)
+            j = next((k for k, (q, _) in enumerate(seen) if geodesic_dist(xf, q, per) <= TOL_D), None)
+            if j is None:
+                y = settle_fn(xf)
+                if energy(y) > floor + TOL_E:
+                    continue
+                k = next((i for i, q in enumerate(pool) if geodesic_dist(y, q, per) <= TOL_D), None)
+                if k is None:
+                    pool.append(y)
+                    counts.append(0)
+                    k = len(pool) - 1
+                seen.append((xf, k))
+                j = len(seen) - 1
+            ry = norm_origin(pool[seen[j][1]], per)
+            if ry > R + RAD_TOL:
+                continue
+            radii.append(ry)
+            counts[seen[j][1]] += 1
+        if not radii:
+            stop = "no hits"
+            break
+        best = min(best, min(radii))
+        if min(radii) >= R - RAD_TOL:
+            stalls += 1
+            if stalls > PATIENCE:
+                stop = "converged"
+                break
+        else:
+            stalls = 0
+        R = min(R, best)
+
+    pick, hits = pick_fn(floor, pool), 0
+    if pick is not None:
+        imgs = images(pick)
+        hits = sum(c for q, c in zip(pool, counts)
+                   if min(geodesic_dist(y, q, per) for y in imgs) <= TOL_D)
+    return floor, pool, {"hits": int(hits), "restarts": int(total), "nfev": int(nfev),
+                         "stalled": int(stalls * batch), "converged": stop == "converged", "stop": stop}
+
 # Keep the points at the smallest radius and remove ones using symmetry
 def inner_shell(pool, energy, images, per, floor):
     if not pool:
@@ -542,7 +643,8 @@ def run(row, edges, n, w, p, seed, weighted, trial):
         idx, _ = apply_filter(shell, funcs)
         return shell[idx[0]]
 
-    floor, pool, info = harvest(energy, grad, D, per, p, seed, settle_fn, pick_fn, images)
+    search = harvest_radius if SEARCH == "radius" else harvest
+    floor, pool, info = search(energy, grad, D, per, p, seed, settle_fn, pick_fn, images)
     shell, r_min = inner_shell(pool, energy, images, per, floor)
 
     exact = False
@@ -560,6 +662,7 @@ def run(row, edges, n, w, p, seed, weighted, trial):
            "pool": len(pool), "shell": len(shell), "exact": exact,
            "n_auto": len(autos), "restarts": info["restarts"], "nfev": info["nfev"],
            "hits": info["hits"], "stalled": info["stalled"], "converged": info["converged"],
+           "search": SEARCH, "stop": info.get("stop"),
            "w": None if not weighted else [float(a) for a in w]}
 
     if not shell:
@@ -586,7 +689,7 @@ def run(row, edges, n, w, p, seed, weighted, trial):
              rec["secs"]), flush=True)
     print("        functions used: %s   restarts %d  hits on pick %d  %s"
           % (", ".join(used) or "none", info["restarts"], info["hits"],
-             "converged" if info["converged"] else "hit MAX_RESTARTS"), flush=True)
+             "converged" if info["converged"] else info.get("stop", "hit MAX_RESTARTS")), flush=True)
     return rec
 
 def main():
@@ -596,8 +699,9 @@ def main():
         rows = [int(a) for a in sys.argv[3:]] or ROWS
     else:
         p, weighted, rows = DEFAULT_P, bool(DEFAULT_WEIGHTED), ROWS
-    if p not in RESTARTS:
-        raise SystemExit("p must be one of %s" % sorted(RESTARTS))
+    allowed = LOOP_RESTARTS if SEARCH == "radius" else RESTARTS
+    if p not in allowed:
+        raise SystemExit("p must be one of %s" % sorted(allowed))
     if not CSV.exists():
         raise SystemExit("cannot find %s" % CSV)
 
