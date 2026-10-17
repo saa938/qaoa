@@ -1,0 +1,3190 @@
+[
+ {
+  "problem": "maxcut",
+  "row": 10,
+  "seed": 10011,
+  "n": 8,
+  "T": 15,
+  "D": 23,
+  "best": -14.574300000000001,
+  "n_opt": 2,
+  "floor": -13.809750000000003,
+  "filter_floor": -13.80975,
+  "n_auto": 1,
+  "multistart": {
+   "hits": 166,
+   "starts": 500,
+   "nfev": 33938,
+   "nfev_per_hit": 204.44578313253012,
+   "first_hit": 3,
+   "levels": 30
+  },
+  "filter_search": {
+   "hits": 310,
+   "starts": 500,
+   "nfev": 49794,
+   "nfev_per_hit": 160.6258064516129,
+   "first_hit": 5
+  },
+  "distinct": {
+   "raw": 166,
+   "folded": 2,
+   "settled": 2
+  },
+  "found_pick": {
+   "raw": true,
+   "settled": true
+  },
+  "pick": {
+   "radius": 2.412519698580074,
+   "flat": 0,
+   "min_eig": 0.8787828095625964,
+   "grid": true,
+   "p_opt": 3.64700832415267e-19
+  },
+  "settled_points": [
+   {
+    "radius": 2.4125197034491515,
+    "flat": 0,
+    "min_eig": 0.8787828095630482,
+    "grid": true,
+    "p_opt": 8.913701318166462e-17,
+    "is_pick": true
+   },
+   {
+    "radius": 2.494757036317384,
+    "flat": 0,
+    "min_eig": 1.4673464616452923,
+    "grid": true,
+    "p_opt": 2.2316852526744464e-32,
+    "is_pick": false
+   }
+  ],
+  "raw_radius": {
+   "min": 2.4125197034491515,
+   "median": 2.412519703449152,
+   "max": 2.4947570363173845
+  },
+  "raw_flat": {
+   "checked": 40,
+   "with_flat_dirs": 0,
+   "max_flat": 0
+  },
+  "filter": {
+   "pool": 2,
+   "shell": 1,
+   "filter": 1,
+   "used": [],
+   "hits": 297,
+   "restarts": 500,
+   "nfev": 49794,
+   "r_min": 2.41252
+  },
+  "secs": 33.8
+ },
+ {
+  "problem": "maxcut",
+  "row": 10,
+  "seed": 10511,
+  "n": 8,
+  "T": 15,
+  "D": 23,
+  "best": -14.574300000000001,
+  "n_opt": 2,
+  "floor": -13.809750000000003,
+  "filter_floor": -13.80975,
+  "n_auto": 1,
+  "multistart": {
+   "hits": 139,
+   "starts": 500,
+   "nfev": 35261,
+   "nfev_per_hit": 253.67625899280574,
+   "first_hit": 6,
+   "levels": 24
+  },
+  "filter_search": {
+   "hits": 308,
+   "starts": 500,
+   "nfev": 51321,
+   "nfev_per_hit": 166.62662337662337,
+   "first_hit": 3
+  },
+  "distinct": {
+   "raw": 139,
+   "folded": 2,
+   "settled": 2
+  },
+  "found_pick": {
+   "raw": true,
+   "settled": true
+  },
+  "pick": {
+   "radius": 2.412519698580074,
+   "flat": 0,
+   "min_eig": 0.8787828095625964,
+   "grid": true,
+   "p_opt": 3.64700832415267e-19
+  },
+  "settled_points": [
+   {
+    "radius": 2.412519703449153,
+    "flat": 0,
+    "min_eig": 0.8787828095566792,
+    "grid": true,
+    "p_opt": 9.21489564331842e-15,
+    "is_pick": true
+   },
+   {
+    "radius": 2.4947570363173837,
+    "flat": 0,
+    "min_eig": 1.4673464616433367,
+    "grid": true,
+    "p_opt": 1.6275449114705485e-33,
+    "is_pick": false
+   }
+  ],
+  "raw_radius": {
+   "min": 2.4125197034491515,
+   "median": 2.412519703449152,
+   "max": 2.494757036317385
+  },
+  "raw_flat": {
+   "checked": 40,
+   "with_flat_dirs": 0,
+   "max_flat": 0
+  },
+  "filter": {
+   "pool": 2,
+   "shell": 1,
+   "filter": 1,
+   "used": [],
+   "hits": 297,
+   "restarts": 500,
+   "nfev": 49794,
+   "r_min": 2.41252
+  },
+  "secs": 38.7
+ },
+ {
+  "problem": "maxcut",
+  "row": 11,
+  "seed": 11011,
+  "n": 8,
+  "T": 21,
+  "D": 29,
+  "best": -15.491600000000002,
+  "n_opt": 2,
+  "floor": -15.4916,
+  "filter_floor": -15.4916,
+  "n_auto": 1,
+  "multistart": {
+   "hits": 2,
+   "starts": 500,
+   "nfev": 32964,
+   "nfev_per_hit": 16482.0,
+   "first_hit": 313,
+   "levels": 31
+  },
+  "filter_search": {
+   "hits": 5,
+   "starts": 500,
+   "nfev": 43137,
+   "nfev_per_hit": 8627.4,
+   "first_hit": 17
+  },
+  "distinct": {
+   "raw": 2,
+   "folded": 1,
+   "settled": 1
+  },
+  "found_pick": {
+   "raw": true,
+   "settled": true
+  },
+  "pick": {
+   "radius": 3.0827193484658224,
+   "flat": 0,
+   "min_eig": 1.2744296199572702,
+   "grid": true,
+   "p_opt": 0.9999999999999982
+  },
+  "settled_points": [
+   {
+    "radius": 3.0827193940094415,
+    "flat": 0,
+    "min_eig": 1.2744296199313927,
+    "grid": true,
+    "p_opt": 0.9999999999999977,
+    "is_pick": true
+   }
+  ],
+  "raw_radius": {
+   "min": 3.0827193940094415,
+   "median": 3.0827193940094415,
+   "max": 3.0827193940094415
+  },
+  "raw_flat": {
+   "checked": 2,
+   "with_flat_dirs": 0,
+   "max_flat": 0
+  },
+  "filter": {
+   "pool": 1,
+   "shell": 1,
+   "filter": 1,
+   "used": [],
+   "hits": 5,
+   "restarts": 500,
+   "nfev": 43137,
+   "r_min": 3.082719
+  },
+  "secs": 33.2
+ },
+ {
+  "problem": "maxcut",
+  "row": 11,
+  "seed": 11511,
+  "n": 8,
+  "T": 21,
+  "D": 29,
+  "best": -15.491600000000002,
+  "n_opt": 2,
+  "floor": -15.4916,
+  "filter_floor": -15.4916,
+  "n_auto": 1,
+  "multistart": {
+   "hits": 5,
+   "starts": 500,
+   "nfev": 33262,
+   "nfev_per_hit": 6652.4,
+   "first_hit": 44,
+   "levels": 37
+  },
+  "filter_search": {
+   "hits": 3,
+   "starts": 500,
+   "nfev": 43128,
+   "nfev_per_hit": 14376.0,
+   "first_hit": 26
+  },
+  "distinct": {
+   "raw": 5,
+   "folded": 1,
+   "settled": 1
+  },
+  "found_pick": {
+   "raw": true,
+   "settled": true
+  },
+  "pick": {
+   "radius": 3.0827193484658224,
+   "flat": 0,
+   "min_eig": 1.2744296199572702,
+   "grid": true,
+   "p_opt": 0.9999999999999982
+  },
+  "settled_points": [
+   {
+    "radius": 3.082719394009441,
+    "flat": 0,
+    "min_eig": 1.274429619929044,
+    "grid": true,
+    "p_opt": 1.0000000000000002,
+    "is_pick": true
+   }
+  ],
+  "raw_radius": {
+   "min": 3.082719394009441,
+   "median": 3.0827193940094415,
+   "max": 3.0827193940094415
+  },
+  "raw_flat": {
+   "checked": 5,
+   "with_flat_dirs": 0,
+   "max_flat": 0
+  },
+  "filter": {
+   "pool": 1,
+   "shell": 1,
+   "filter": 1,
+   "used": [],
+   "hits": 5,
+   "restarts": 500,
+   "nfev": 43137,
+   "r_min": 3.082719
+  },
+  "secs": 34.0
+ },
+ {
+  "problem": "maxcut",
+  "row": 12,
+  "seed": 12011,
+  "n": 8,
+  "T": 17,
+  "D": 25,
+  "best": -16.9604,
+  "n_opt": 2,
+  "floor": -15.738200000000003,
+  "filter_floor": -15.7382,
+  "n_auto": 1,
+  "multistart": {
+   "hits": 143,
+   "starts": 500,
+   "nfev": 31864,
+   "nfev_per_hit": 222.82517482517483,
+   "first_hit": 5,
+   "levels": 41
+  },
+  "filter_search": {
+   "hits": 167,
+   "starts": 500,
+   "nfev": 43993,
+   "nfev_per_hit": 263.4311377245509,
+   "first_hit": 5
+  },
+  "distinct": {
+   "raw": 143,
+   "folded": 99,
+   "settled": 2
+  },
+  "found_pick": {
+   "raw": true,
+   "settled": true
+  },
+  "pick": {
+   "radius": 2.4026365746715417,
+   "flat": 0,
+   "min_eig": 2.2948858548436206,
+   "grid": true,
+   "p_opt": 0.49999999999999933
+  },
+  "settled_points": [
+   {
+    "radius": 2.423423132325785,
+    "flat": 1,
+    "min_eig": 3.2543411732379728e-15,
+    "grid": true,
+    "p_opt": 0.5000000000000002,
+    "is_pick": false
+   },
+   {
+    "radius": 2.4026365622111823,
+    "flat": 0,
+    "min_eig": 2.294885854847504,
+    "grid": true,
+    "p_opt": 0.5000000000000002,
+    "is_pick": true
+   }
+  ],
+  "raw_radius": {
+   "min": 2.4026365622111823,
+   "median": 2.4247791114239616,
+   "max": 2.554432654605821
+  },
+  "raw_flat": {
+   "checked": 40,
+   "with_flat_dirs": 32,
+   "max_flat": 1
+  },
+  "filter": {
+   "pool": 2,
+   "shell": 1,
+   "filter": 1,
+   "used": [],
+   "hits": 33,
+   "restarts": 500,
+   "nfev": 43993,
+   "r_min": 2.402637
+  },
+  "secs": 56.4
+ },
+ {
+  "problem": "maxcut",
+  "row": 12,
+  "seed": 12511,
+  "n": 8,
+  "T": 17,
+  "D": 25,
+  "best": -16.9604,
+  "n_opt": 2,
+  "floor": -15.738200000000003,
+  "filter_floor": -15.7382,
+  "n_auto": 1,
+  "multistart": {
+   "hits": 141,
+   "starts": 500,
+   "nfev": 31287,
+   "nfev_per_hit": 221.89361702127658,
+   "first_hit": 1,
+   "levels": 36
+  },
+  "filter_search": {
+   "hits": 157,
+   "starts": 500,
+   "nfev": 45146,
+   "nfev_per_hit": 287.5541401273885,
+   "first_hit": 1
+  },
+  "distinct": {
+   "raw": 141,
+   "folded": 81,
+   "settled": 2
+  },
+  "found_pick": {
+   "raw": true,
+   "settled": true
+  },
+  "pick": {
+   "radius": 2.4026365746715417,
+   "flat": 0,
+   "min_eig": 2.2948858548436206,
+   "grid": true,
+   "p_opt": 0.49999999999999933
+  },
+  "settled_points": [
+   {
+    "radius": 2.4026365622111823,
+    "flat": 0,
+    "min_eig": 2.2948858548450835,
+    "grid": true,
+    "p_opt": 0.5000000000000002,
+    "is_pick": true
+   },
+   {
+    "radius": 2.423423132325785,
+    "flat": 1,
+    "min_eig": 5.429520155414799e-15,
+    "grid": true,
+    "p_opt": 0.49999999999999967,
+    "is_pick": false
+   }
+  ],
+  "raw_radius": {
+   "min": 2.4026365622111823,
+   "median": 2.4244144830359935,
+   "max": 2.548360160545068
+  },
+  "raw_flat": {
+   "checked": 40,
+   "with_flat_dirs": 28,
+   "max_flat": 1
+  },
+  "filter": {
+   "pool": 2,
+   "shell": 1,
+   "filter": 1,
+   "used": [],
+   "hits": 33,
+   "restarts": 500,
+   "nfev": 43993,
+   "r_min": 2.402637
+  },
+  "secs": 51.6
+ },
+ {
+  "problem": "maxcut",
+  "row": 13,
+  "seed": 13011,
+  "n": 8,
+  "T": 13,
+  "D": 21,
+  "best": -13.6296,
+  "n_opt": 2,
+  "floor": -12.226053,
+  "filter_floor": -12.226053,
+  "n_auto": 1,
+  "multistart": {
+   "hits": 54,
+   "starts": 500,
+   "nfev": 31567,
+   "nfev_per_hit": 584.574074074074,
+   "first_hit": 9,
+   "levels": 27
+  },
+  "filter_search": {
+   "hits": 78,
+   "starts": 500,
+   "nfev": 48689,
+   "nfev_per_hit": 624.2179487179487,
+   "first_hit": 5
+  },
+  "distinct": {
+   "raw": 54,
+   "folded": 1,
+   "settled": 1
+  },
+  "found_pick": {
+   "raw": true,
+   "settled": true
+  },
+  "pick": {
+   "radius": 2.0690450978267583,
+   "flat": 0,
+   "min_eig": 0.389868505891123,
+   "grid": false,
+   "p_opt": 0.2478058494361674
+  },
+  "settled_points": [
+   {
+    "radius": 2.0690451006927257,
+    "flat": 0,
+    "min_eig": 0.3898685058527328,
+    "grid": false,
+    "p_opt": 0.24780585070993755,
+    "is_pick": true
+   }
+  ],
+  "raw_radius": {
+   "min": 2.069045091960745,
+   "median": 2.0690451049677296,
+   "max": 2.0690451133377223
+  },
+  "raw_flat": {
+   "checked": 40,
+   "with_flat_dirs": 0,
+   "max_flat": 0
+  },
+  "filter": {
+   "pool": 2,
+   "shell": 2,
+   "filter": 1,
+   "used": [
+    "sum_gamma"
+   ],
+   "hits": 78,
+   "restarts": 500,
+   "nfev": 48689,
+   "r_min": 2.069045
+  },
+  "secs": 34.5
+ },
+ {
+  "problem": "maxcut",
+  "row": 13,
+  "seed": 13511,
+  "n": 8,
+  "T": 13,
+  "D": 21,
+  "best": -13.6296,
+  "n_opt": 2,
+  "floor": -12.226053,
+  "filter_floor": -12.226053,
+  "n_auto": 1,
+  "multistart": {
+   "hits": 66,
+   "starts": 500,
+   "nfev": 31915,
+   "nfev_per_hit": 483.56060606060606,
+   "first_hit": 4,
+   "levels": 30
+  },
+  "filter_search": {
+   "hits": 82,
+   "starts": 500,
+   "nfev": 48909,
+   "nfev_per_hit": 596.4512195121952,
+   "first_hit": 4
+  },
+  "distinct": {
+   "raw": 66,
+   "folded": 1,
+   "settled": 1
+  },
+  "found_pick": {
+   "raw": true,
+   "settled": true
+  },
+  "pick": {
+   "radius": 2.0690450978267583,
+   "flat": 0,
+   "min_eig": 0.389868505891123,
+   "grid": false,
+   "p_opt": 0.2478058494361674
+  },
+  "settled_points": [
+   {
+    "radius": 2.069045099756972,
+    "flat": 0,
+    "min_eig": 0.3898685058579217,
+    "grid": false,
+    "p_opt": 0.24780585025792815,
+    "is_pick": true
+   }
+  ],
+  "raw_radius": {
+   "min": 2.0690450955599156,
+   "median": 2.0690451057956682,
+   "max": 2.069045120634396
+  },
+  "raw_flat": {
+   "checked": 40,
+   "with_flat_dirs": 0,
+   "max_flat": 0
+  },
+  "filter": {
+   "pool": 2,
+   "shell": 2,
+   "filter": 1,
+   "used": [
+    "sum_gamma"
+   ],
+   "hits": 78,
+   "restarts": 500,
+   "nfev": 48689,
+   "r_min": 2.069045
+  },
+  "secs": 35.9
+ },
+ {
+  "problem": "maxcut",
+  "row": 14,
+  "seed": 14011,
+  "n": 8,
+  "T": 17,
+  "D": 25,
+  "best": -17.0961,
+  "n_opt": 2,
+  "floor": -17.0961,
+  "filter_floor": -17.0961,
+  "n_auto": 1,
+  "multistart": {
+   "hits": 15,
+   "starts": 500,
+   "nfev": 46837,
+   "nfev_per_hit": 3122.4666666666667,
+   "first_hit": 20,
+   "levels": 27
+  },
+  "filter_search": {
+   "hits": 28,
+   "starts": 500,
+   "nfev": 61502,
+   "nfev_per_hit": 2196.5,
+   "first_hit": 64
+  },
+  "distinct": {
+   "raw": 15,
+   "folded": 1,
+   "settled": 1
+  },
+  "found_pick": {
+   "raw": true,
+   "settled": true
+  },
+  "pick": {
+   "radius": 3.050035526246021,
+   "flat": 0,
+   "min_eig": 0.8731999999417839,
+   "grid": true,
+   "p_opt": 0.9999999999999982
+  },
+  "settled_points": [
+   {
+    "radius": 3.050035577158353,
+    "flat": 0,
+    "min_eig": 0.8731999999417691,
+    "grid": true,
+    "p_opt": 0.9999999999999939,
+    "is_pick": true
+   }
+  ],
+  "raw_radius": {
+   "min": 3.050035577158352,
+   "median": 3.050035577158352,
+   "max": 3.0500355771583614
+  },
+  "raw_flat": {
+   "checked": 15,
+   "with_flat_dirs": 0,
+   "max_flat": 0
+  },
+  "filter": {
+   "pool": 1,
+   "shell": 1,
+   "filter": 1,
+   "used": [],
+   "hits": 28,
+   "restarts": 500,
+   "nfev": 61502,
+   "r_min": 3.050036
+  },
+  "secs": 45.4
+ },
+ {
+  "problem": "maxcut",
+  "row": 14,
+  "seed": 14511,
+  "n": 8,
+  "T": 17,
+  "D": 25,
+  "best": -17.0961,
+  "n_opt": 2,
+  "floor": -17.0961,
+  "filter_floor": -17.0961,
+  "n_auto": 1,
+  "multistart": {
+   "hits": 26,
+   "starts": 500,
+   "nfev": 44927,
+   "nfev_per_hit": 1727.9615384615386,
+   "first_hit": 1,
+   "levels": 23
+  },
+  "filter_search": {
+   "hits": 28,
+   "starts": 500,
+   "nfev": 59059,
+   "nfev_per_hit": 2109.25,
+   "first_hit": 1
+  },
+  "distinct": {
+   "raw": 26,
+   "folded": 1,
+   "settled": 1
+  },
+  "found_pick": {
+   "raw": true,
+   "settled": true
+  },
+  "pick": {
+   "radius": 3.050035526246021,
+   "flat": 0,
+   "min_eig": 0.8731999999417839,
+   "grid": true,
+   "p_opt": 0.9999999999999982
+  },
+  "settled_points": [
+   {
+    "radius": 3.050035577158352,
+    "flat": 0,
+    "min_eig": 0.8731999999417859,
+    "grid": true,
+    "p_opt": 1.0000000000000004,
+    "is_pick": true
+   }
+  ],
+  "raw_radius": {
+   "min": 3.050035577158352,
+   "median": 3.0500355771583525,
+   "max": 3.0500355771583547
+  },
+  "raw_flat": {
+   "checked": 26,
+   "with_flat_dirs": 0,
+   "max_flat": 0
+  },
+  "filter": {
+   "pool": 1,
+   "shell": 1,
+   "filter": 1,
+   "used": [],
+   "hits": 28,
+   "restarts": 500,
+   "nfev": 61502,
+   "r_min": 3.050036
+  },
+  "secs": 43.2
+ },
+ {
+  "problem": "maxcut",
+  "row": 15,
+  "seed": 15011,
+  "n": 8,
+  "T": 16,
+  "D": 24,
+  "best": -14.7103,
+  "n_opt": 2,
+  "floor": -14.710300000000002,
+  "filter_floor": -14.7103,
+  "n_auto": 1,
+  "multistart": {
+   "hits": 201,
+   "starts": 500,
+   "nfev": 39159,
+   "nfev_per_hit": 194.82089552238807,
+   "first_hit": 1,
+   "levels": 16
+  },
+  "filter_search": {
+   "hits": 279,
+   "starts": 500,
+   "nfev": 59303,
+   "nfev_per_hit": 212.55555555555554,
+   "first_hit": 1
+  },
+  "distinct": {
+   "raw": 201,
+   "folded": 1,
+   "settled": 1
+  },
+  "found_pick": {
+   "raw": true,
+   "settled": true
+  },
+  "pick": {
+   "radius": 3.114778967246104,
+   "flat": 0,
+   "min_eig": 0.06939999999513126,
+   "grid": true,
+   "p_opt": 0.9999999999999097
+  },
+  "settled_points": [
+   {
+    "radius": 3.1147790315717634,
+    "flat": 0,
+    "min_eig": 0.06939999999513405,
+    "grid": true,
+    "p_opt": 1.0000000000000004,
+    "is_pick": true
+   }
+  ],
+  "raw_radius": {
+   "min": 3.114779031571763,
+   "median": 3.114779031571764,
+   "max": 3.114779031571769
+  },
+  "raw_flat": {
+   "checked": 40,
+   "with_flat_dirs": 0,
+   "max_flat": 0
+  },
+  "filter": {
+   "pool": 2,
+   "shell": 2,
+   "filter": 1,
+   "used": [
+    "sum_gamma"
+   ],
+   "hits": 273,
+   "restarts": 500,
+   "nfev": 59303,
+   "r_min": 3.114779
+  },
+  "secs": 41.8
+ },
+ {
+  "problem": "maxcut",
+  "row": 15,
+  "seed": 15511,
+  "n": 8,
+  "T": 16,
+  "D": 24,
+  "best": -14.7103,
+  "n_opt": 2,
+  "floor": -14.7103,
+  "filter_floor": -14.7103,
+  "n_auto": 1,
+  "multistart": {
+   "hits": 188,
+   "starts": 500,
+   "nfev": 38246,
+   "nfev_per_hit": 203.43617021276594,
+   "first_hit": 1,
+   "levels": 15
+  },
+  "filter_search": {
+   "hits": 271,
+   "starts": 500,
+   "nfev": 59752,
+   "nfev_per_hit": 220.48708487084872,
+   "first_hit": 1
+  },
+  "distinct": {
+   "raw": 188,
+   "folded": 1,
+   "settled": 1
+  },
+  "found_pick": {
+   "raw": true,
+   "settled": true
+  },
+  "pick": {
+   "radius": 3.114778967246104,
+   "flat": 0,
+   "min_eig": 0.06939999999513126,
+   "grid": true,
+   "p_opt": 0.9999999999999097
+  },
+  "settled_points": [
+   {
+    "radius": 3.114779031571764,
+    "flat": 0,
+    "min_eig": 0.0693999999951573,
+    "grid": true,
+    "p_opt": 0.9999999999999982,
+    "is_pick": true
+   }
+  ],
+  "raw_radius": {
+   "min": 3.114779031571763,
+   "median": 3.1147790315717634,
+   "max": 3.114779031571772
+  },
+  "raw_flat": {
+   "checked": 40,
+   "with_flat_dirs": 0,
+   "max_flat": 0
+  },
+  "filter": {
+   "pool": 2,
+   "shell": 2,
+   "filter": 1,
+   "used": [
+    "sum_gamma"
+   ],
+   "hits": 273,
+   "restarts": 500,
+   "nfev": 59303,
+   "r_min": 3.114779
+  },
+  "secs": 43.7
+ },
+ {
+  "problem": "maxcut",
+  "row": 16,
+  "seed": 16011,
+  "n": 8,
+  "T": 14,
+  "D": 22,
+  "best": -12.751800000000001,
+  "n_opt": 2,
+  "floor": -12.24195,
+  "filter_floor": -12.24195,
+  "n_auto": 1,
+  "multistart": {
+   "hits": 50,
+   "starts": 500,
+   "nfev": 53657,
+   "nfev_per_hit": 1073.14,
+   "first_hit": 34,
+   "levels": 19
+  },
+  "filter_search": {
+   "hits": 21,
+   "starts": 500,
+   "nfev": 65102,
+   "nfev_per_hit": 3100.095238095238,
+   "first_hit": 34
+  },
+  "distinct": {
+   "raw": 50,
+   "folded": 44,
+   "settled": 1
+  },
+  "found_pick": {
+   "raw": false,
+   "settled": true
+  },
+  "pick": {
+   "radius": 2.878284232567109,
+   "flat": 1,
+   "min_eig": 8.669322943170247e-12,
+   "grid": true,
+   "p_opt": 0.49999999999996925
+  },
+  "settled_points": [
+   {
+    "radius": 2.8782844763361095,
+    "flat": 1,
+    "min_eig": 4.707345624410663e-13,
+    "grid": true,
+    "p_opt": 0.5000000000000002,
+    "is_pick": true
+   }
+  ],
+  "raw_radius": {
+   "min": 2.8786079137680356,
+   "median": 2.9067590558676053,
+   "max": 2.93100921552004
+  },
+  "raw_flat": {
+   "checked": 40,
+   "with_flat_dirs": 40,
+   "max_flat": 1
+  },
+  "filter": {
+   "pool": 1,
+   "shell": 1,
+   "filter": 1,
+   "used": [],
+   "hits": 21,
+   "restarts": 500,
+   "nfev": 65102,
+   "r_min": 2.878284
+  },
+  "secs": 70.9
+ },
+ {
+  "problem": "maxcut",
+  "row": 16,
+  "seed": 16511,
+  "n": 8,
+  "T": 14,
+  "D": 22,
+  "best": -12.751800000000001,
+  "n_opt": 2,
+  "floor": -12.241950000000001,
+  "filter_floor": -12.24195,
+  "n_auto": 1,
+  "multistart": {
+   "hits": 25,
+   "starts": 500,
+   "nfev": 56532,
+   "nfev_per_hit": 2261.28,
+   "first_hit": 32,
+   "levels": 21
+  },
+  "filter_search": {
+   "hits": 20,
+   "starts": 500,
+   "nfev": 65310,
+   "nfev_per_hit": 3265.5,
+   "first_hit": 32
+  },
+  "distinct": {
+   "raw": 25,
+   "folded": 25,
+   "settled": 1
+  },
+  "found_pick": {
+   "raw": false,
+   "settled": true
+  },
+  "pick": {
+   "radius": 2.878284232567109,
+   "flat": 1,
+   "min_eig": 8.669322943170247e-12,
+   "grid": true,
+   "p_opt": 0.49999999999996925
+  },
+  "settled_points": [
+   {
+    "radius": 2.8782844761288398,
+    "flat": 1,
+    "min_eig": 6.1386975147223466e-12,
+    "grid": true,
+    "p_opt": 0.5000000000000002,
+    "is_pick": true
+   }
+  ],
+  "raw_radius": {
+   "min": 2.8783034101645315,
+   "median": 2.898696365571975,
+   "max": 2.9287106032466554
+  },
+  "raw_flat": {
+   "checked": 25,
+   "with_flat_dirs": 25,
+   "max_flat": 1
+  },
+  "filter": {
+   "pool": 1,
+   "shell": 1,
+   "filter": 1,
+   "used": [],
+   "hits": 21,
+   "restarts": 500,
+   "nfev": 65102,
+   "r_min": 2.878284
+  },
+  "secs": 62.6
+ },
+ {
+  "problem": "maxcut",
+  "row": 17,
+  "seed": 17011,
+  "n": 8,
+  "T": 14,
+  "D": 22,
+  "best": -13.550899999999999,
+  "n_opt": 2,
+  "floor": -12.430691325885993,
+  "filter_floor": -12.430691,
+  "n_auto": 1,
+  "multistart": {
+   "hits": 64,
+   "starts": 500,
+   "nfev": 27942,
+   "nfev_per_hit": 436.59375,
+   "first_hit": 6,
+   "levels": 29
+  },
+  "filter_search": {
+   "hits": 37,
+   "starts": 500,
+   "nfev": 40823,
+   "nfev_per_hit": 1103.3243243243244,
+   "first_hit": 7
+  },
+  "distinct": {
+   "raw": 64,
+   "folded": 51,
+   "settled": 1
+  },
+  "found_pick": {
+   "raw": false,
+   "settled": true
+  },
+  "pick": {
+   "radius": 2.079642846655522,
+   "flat": 1,
+   "min_eig": -1.9139332873278458e-11,
+   "grid": false,
+   "p_opt": 0.01590983775771117
+  },
+  "settled_points": [
+   {
+    "radius": 2.0796428468136203,
+    "flat": 1,
+    "min_eig": -5.342304155925273e-12,
+    "grid": false,
+    "p_opt": 0.015909842335244707,
+    "is_pick": true
+   }
+  ],
+  "raw_radius": {
+   "min": 2.07964450596272,
+   "median": 2.084575903639258,
+   "max": 2.14203181556959
+  },
+  "raw_flat": {
+   "checked": 40,
+   "with_flat_dirs": 40,
+   "max_flat": 1
+  },
+  "filter": {
+   "pool": 2,
+   "shell": 2,
+   "filter": 1,
+   "used": [
+    "sum_gamma"
+   ],
+   "hits": 37,
+   "restarts": 500,
+   "nfev": 40823,
+   "r_min": 2.079643
+  },
+  "secs": 43.2
+ },
+ {
+  "problem": "maxcut",
+  "row": 17,
+  "seed": 17511,
+  "n": 8,
+  "T": 14,
+  "D": 22,
+  "best": -13.550899999999999,
+  "n_opt": 2,
+  "floor": -12.430691325885995,
+  "filter_floor": -12.430691,
+  "n_auto": 1,
+  "multistart": {
+   "hits": 71,
+   "starts": 500,
+   "nfev": 26883,
+   "nfev_per_hit": 378.63380281690144,
+   "first_hit": 2,
+   "levels": 27
+  },
+  "filter_search": {
+   "hits": 42,
+   "starts": 500,
+   "nfev": 40618,
+   "nfev_per_hit": 967.0952380952381,
+   "first_hit": 14
+  },
+  "distinct": {
+   "raw": 71,
+   "folded": 62,
+   "settled": 1
+  },
+  "found_pick": {
+   "raw": false,
+   "settled": true
+  },
+  "pick": {
+   "radius": 2.079642846655522,
+   "flat": 1,
+   "min_eig": -1.9139332873278458e-11,
+   "grid": false,
+   "p_opt": 0.01590983775771117
+  },
+  "settled_points": [
+   {
+    "radius": 2.079642881620784,
+    "flat": 1,
+    "min_eig": -1.1724117656295822e-11,
+    "grid": false,
+    "p_opt": 0.015909741997484354,
+    "is_pick": true
+   }
+  ],
+  "raw_radius": {
+   "min": 2.079643234165534,
+   "median": 2.087431617567149,
+   "max": 2.1427490205083735
+  },
+  "raw_flat": {
+   "checked": 40,
+   "with_flat_dirs": 40,
+   "max_flat": 1
+  },
+  "filter": {
+   "pool": 2,
+   "shell": 2,
+   "filter": 1,
+   "used": [
+    "sum_gamma"
+   ],
+   "hits": 37,
+   "restarts": 500,
+   "nfev": 40823,
+   "r_min": 2.079643
+  },
+  "secs": 48.2
+ },
+ {
+  "problem": "maxcut",
+  "row": 18,
+  "seed": 18011,
+  "n": 8,
+  "T": 18,
+  "D": 26,
+  "best": -14.9025,
+  "n_opt": 2,
+  "floor": -14.646200000000002,
+  "filter_floor": -14.6462,
+  "n_auto": 1,
+  "multistart": {
+   "hits": 89,
+   "starts": 500,
+   "nfev": 34367,
+   "nfev_per_hit": 386.14606741573033,
+   "first_hit": 6,
+   "levels": 58
+  },
+  "filter_search": {
+   "hits": 146,
+   "starts": 500,
+   "nfev": 47783,
+   "nfev_per_hit": 327.2808219178082,
+   "first_hit": 7
+  },
+  "distinct": {
+   "raw": 89,
+   "folded": 83,
+   "settled": 2
+  },
+  "found_pick": {
+   "raw": false,
+   "settled": true
+  },
+  "pick": {
+   "radius": 2.4427167276221984,
+   "flat": 1,
+   "min_eig": 5.5843767108163104e-12,
+   "grid": true,
+   "p_opt": 3.31379282900851e-21
+  },
+  "settled_points": [
+   {
+    "radius": 2.7393159566873515,
+    "flat": 1,
+    "min_eig": 6.938551298710813e-12,
+    "grid": true,
+    "p_opt": 9.93167166087531e-34,
+    "is_pick": false
+   },
+   {
+    "radius": 2.44271675054622,
+    "flat": 1,
+    "min_eig": 1.712775109458456e-11,
+    "grid": true,
+    "p_opt": 2.3746115055610755e-21,
+    "is_pick": true
+   }
+  ],
+  "raw_radius": {
+   "min": 2.443440758258305,
+   "median": 2.7393918830585813,
+   "max": 2.79477438958676
+  },
+  "raw_flat": {
+   "checked": 40,
+   "with_flat_dirs": 40,
+   "max_flat": 1
+  },
+  "filter": {
+   "pool": 2,
+   "shell": 1,
+   "filter": 1,
+   "used": [],
+   "hits": 117,
+   "restarts": 500,
+   "nfev": 47783,
+   "r_min": 2.442717
+  },
+  "secs": 60.9
+ },
+ {
+  "problem": "maxcut",
+  "row": 18,
+  "seed": 18511,
+  "n": 8,
+  "T": 18,
+  "D": 26,
+  "best": -14.9025,
+  "n_opt": 2,
+  "floor": -14.646200000000002,
+  "filter_floor": -14.6462,
+  "n_auto": 1,
+  "multistart": {
+   "hits": 102,
+   "starts": 500,
+   "nfev": 34449,
+   "nfev_per_hit": 337.7352941176471,
+   "first_hit": 5,
+   "levels": 52
+  },
+  "filter_search": {
+   "hits": 173,
+   "starts": 500,
+   "nfev": 47600,
+   "nfev_per_hit": 275.1445086705202,
+   "first_hit": 6
+  },
+  "distinct": {
+   "raw": 102,
+   "folded": 89,
+   "settled": 2
+  },
+  "found_pick": {
+   "raw": false,
+   "settled": true
+  },
+  "pick": {
+   "radius": 2.4427167276221984,
+   "flat": 1,
+   "min_eig": 5.5843767108163104e-12,
+   "grid": true,
+   "p_opt": 3.31379282900851e-21
+  },
+  "settled_points": [
+   {
+    "radius": 2.739315956790116,
+    "flat": 1,
+    "min_eig": -3.2974771409599165e-12,
+    "grid": true,
+    "p_opt": 2.5387509718127226e-34,
+    "is_pick": false
+   },
+   {
+    "radius": 2.4427167505993777,
+    "flat": 1,
+    "min_eig": 1.1500767435037545e-11,
+    "grid": true,
+    "p_opt": 4.3115379420902433e-16,
+    "is_pick": true
+   }
+  ],
+  "raw_radius": {
+   "min": 2.4447402854360503,
+   "median": 2.5026614348634286,
+   "max": 2.794743159835925
+  },
+  "raw_flat": {
+   "checked": 40,
+   "with_flat_dirs": 40,
+   "max_flat": 1
+  },
+  "filter": {
+   "pool": 2,
+   "shell": 1,
+   "filter": 1,
+   "used": [],
+   "hits": 117,
+   "restarts": 500,
+   "nfev": 47783,
+   "r_min": 2.442717
+  },
+  "secs": 64.0
+ },
+ {
+  "problem": "maxcut",
+  "row": 19,
+  "seed": 19011,
+  "n": 8,
+  "T": 21,
+  "D": 29,
+  "best": -20.2447,
+  "n_opt": 2,
+  "floor": -19.91575,
+  "filter_floor": -19.91575,
+  "n_auto": 1,
+  "multistart": {
+   "hits": 86,
+   "starts": 500,
+   "nfev": 39491,
+   "nfev_per_hit": 459.19767441860466,
+   "first_hit": 12,
+   "levels": 68
+  },
+  "filter_search": {
+   "hits": 89,
+   "starts": 500,
+   "nfev": 53594,
+   "nfev_per_hit": 602.1797752808989,
+   "first_hit": 22
+  },
+  "distinct": {
+   "raw": 86,
+   "folded": 80,
+   "settled": 3
+  },
+  "found_pick": {
+   "raw": false,
+   "settled": true
+  },
+  "pick": {
+   "radius": 2.419309287359807,
+   "flat": 1,
+   "min_eig": -3.5342013412798533e-15,
+   "grid": true,
+   "p_opt": 0.49999999999999845
+  },
+  "settled_points": [
+   {
+    "radius": 2.427378896661147,
+    "flat": 1,
+    "min_eig": -1.3995969868021876e-14,
+    "grid": true,
+    "p_opt": 0.4999999999999998,
+    "is_pick": false
+   },
+   {
+    "radius": 2.4730418323825334,
+    "flat": 1,
+    "min_eig": -1.745819607652808e-14,
+    "grid": true,
+    "p_opt": 0.5000000000000002,
+    "is_pick": false
+   },
+   {
+    "radius": 2.4193093083605937,
+    "flat": 1,
+    "min_eig": 2.023702170058396e-14,
+    "grid": true,
+    "p_opt": 0.5000000000000002,
+    "is_pick": true
+   }
+  ],
+  "raw_radius": {
+   "min": 2.4196231388337726,
+   "median": 2.484128774331313,
+   "max": 2.5830952833167986
+  },
+  "raw_flat": {
+   "checked": 40,
+   "with_flat_dirs": 40,
+   "max_flat": 1
+  },
+  "filter": {
+   "pool": 3,
+   "shell": 1,
+   "filter": 1,
+   "used": [],
+   "hits": 17,
+   "restarts": 500,
+   "nfev": 53594,
+   "r_min": 2.419309
+  },
+  "secs": 65.1
+ },
+ {
+  "problem": "maxcut",
+  "row": 19,
+  "seed": 19511,
+  "n": 8,
+  "T": 21,
+  "D": 29,
+  "best": -20.2447,
+  "n_opt": 2,
+  "floor": -19.91575,
+  "filter_floor": -19.91575,
+  "n_auto": 1,
+  "multistart": {
+   "hits": 100,
+   "starts": 500,
+   "nfev": 39954,
+   "nfev_per_hit": 399.54,
+   "first_hit": 5,
+   "levels": 59
+  },
+  "filter_search": {
+   "hits": 101,
+   "starts": 500,
+   "nfev": 54315,
+   "nfev_per_hit": 537.7722772277227,
+   "first_hit": 5
+  },
+  "distinct": {
+   "raw": 100,
+   "folded": 92,
+   "settled": 3
+  },
+  "found_pick": {
+   "raw": false,
+   "settled": true
+  },
+  "pick": {
+   "radius": 2.419309287359807,
+   "flat": 1,
+   "min_eig": -3.5342013412798533e-15,
+   "grid": true,
+   "p_opt": 0.49999999999999845
+  },
+  "settled_points": [
+   {
+    "radius": 2.4730418323825334,
+    "flat": 1,
+    "min_eig": 3.13027052826642e-15,
+    "grid": true,
+    "p_opt": 0.5000000000000002,
+    "is_pick": false
+   },
+   {
+    "radius": 2.419309308360594,
+    "flat": 1,
+    "min_eig": -2.2269709500109855e-15,
+    "grid": true,
+    "p_opt": 0.49999999999999956,
+    "is_pick": true
+   },
+   {
+    "radius": 2.4273788966611516,
+    "flat": 1,
+    "min_eig": -7.806764677938412e-15,
+    "grid": true,
+    "p_opt": 0.4999999999999897,
+    "is_pick": false
+   }
+  ],
+  "raw_radius": {
+   "min": 2.4193711376953924,
+   "median": 2.491117409525712,
+   "max": 2.590161551203202
+  },
+  "raw_flat": {
+   "checked": 40,
+   "with_flat_dirs": 40,
+   "max_flat": 1
+  },
+  "filter": {
+   "pool": 3,
+   "shell": 1,
+   "filter": 1,
+   "used": [],
+   "hits": 17,
+   "restarts": 500,
+   "nfev": 53594,
+   "r_min": 2.419309
+  },
+  "secs": 65.0
+ },
+ {
+  "problem": "spinglass_nofield",
+  "row": 10,
+  "seed": 10011,
+  "n": 8,
+  "T": 15,
+  "D": 23,
+  "best": -13.537000000000003,
+  "n_opt": 2,
+  "floor": -12.276900000000012,
+  "filter_floor": -12.2769,
+  "n_auto": 1,
+  "multistart": {
+   "hits": 139,
+   "starts": 500,
+   "nfev": 49364,
+   "nfev_per_hit": 355.136690647482,
+   "first_hit": 1,
+   "levels": 24
+  },
+  "filter_search": {
+   "hits": 173,
+   "starts": 500,
+   "nfev": 73937,
+   "nfev_per_hit": 427.3815028901734,
+   "first_hit": 1
+  },
+  "distinct": {
+   "raw": 139,
+   "folded": 109,
+   "settled": 1
+  },
+  "found_pick": {
+   "raw": false,
+   "settled": true
+  },
+  "pick": {
+   "radius": 2.237721703867042,
+   "flat": 1,
+   "min_eig": 1.1912555379599608e-14,
+   "grid": true,
+   "p_opt": 0.5000000000000002
+  },
+  "settled_points": [
+   {
+    "radius": 2.237721703857843,
+    "flat": 1,
+    "min_eig": -2.7078142624528547e-14,
+    "grid": true,
+    "p_opt": 0.5000000000000002,
+    "is_pick": true
+   }
+  ],
+  "raw_radius": {
+   "min": 2.2377272298075974,
+   "median": 2.295039249340696,
+   "max": 2.3711089647807557
+  },
+  "raw_flat": {
+   "checked": 40,
+   "with_flat_dirs": 40,
+   "max_flat": 1
+  },
+  "filter": {
+   "pool": 1,
+   "shell": 1,
+   "filter": 1,
+   "used": [],
+   "hits": 344,
+   "restarts": 1000,
+   "nfev": 148560,
+   "r_min": 2.237722
+  },
+  "secs": 97.7
+ },
+ {
+  "problem": "spinglass_nofield",
+  "row": 10,
+  "seed": 10511,
+  "n": 8,
+  "T": 15,
+  "D": 23,
+  "best": -13.537000000000003,
+  "n_opt": 2,
+  "floor": -12.276900000000007,
+  "filter_floor": -12.2769,
+  "n_auto": 1,
+  "multistart": {
+   "hits": 129,
+   "starts": 500,
+   "nfev": 50404,
+   "nfev_per_hit": 390.72868217054264,
+   "first_hit": 1,
+   "levels": 28
+  },
+  "filter_search": {
+   "hits": 171,
+   "starts": 500,
+   "nfev": 74623,
+   "nfev_per_hit": 436.39181286549706,
+   "first_hit": 1
+  },
+  "distinct": {
+   "raw": 129,
+   "folded": 104,
+   "settled": 1
+  },
+  "found_pick": {
+   "raw": false,
+   "settled": true
+  },
+  "pick": {
+   "radius": 2.237721703867042,
+   "flat": 1,
+   "min_eig": 1.1912555379599608e-14,
+   "grid": true,
+   "p_opt": 0.5000000000000002
+  },
+  "settled_points": [
+   {
+    "radius": 2.237721703857843,
+    "flat": 1,
+    "min_eig": -2.200102510992242e-14,
+    "grid": true,
+    "p_opt": 0.5000000000000002,
+    "is_pick": true
+   }
+  ],
+  "raw_radius": {
+   "min": 2.237726333877419,
+   "median": 2.300203249079466,
+   "max": 2.3713399496460603
+  },
+  "raw_flat": {
+   "checked": 40,
+   "with_flat_dirs": 40,
+   "max_flat": 1
+  },
+  "filter": {
+   "pool": 1,
+   "shell": 1,
+   "filter": 1,
+   "used": [],
+   "hits": 344,
+   "restarts": 1000,
+   "nfev": 148560,
+   "r_min": 2.237722
+  },
+  "secs": 111.2
+ },
+ {
+  "problem": "spinglass_nofield",
+  "row": 11,
+  "seed": 11011,
+  "n": 8,
+  "T": 21,
+  "D": 29,
+  "best": -18.359099999999998,
+  "n_opt": 2,
+  "floor": -18.359100000000005,
+  "filter_floor": -18.3591,
+  "n_auto": 1,
+  "multistart": {
+   "hits": 163,
+   "starts": 500,
+   "nfev": 47828,
+   "nfev_per_hit": 293.4233128834356,
+   "first_hit": 4,
+   "levels": 30
+  },
+  "filter_search": {
+   "hits": 168,
+   "starts": 500,
+   "nfev": 67619,
+   "nfev_per_hit": 402.4940476190476,
+   "first_hit": 4
+  },
+  "distinct": {
+   "raw": 163,
+   "folded": 1,
+   "settled": 1
+  },
+  "found_pick": {
+   "raw": true,
+   "settled": true
+  },
+  "pick": {
+   "radius": 2.322368577126966,
+   "flat": 0,
+   "min_eig": 13.331199999050764,
+   "grid": true,
+   "p_opt": 1.0000000000000004
+  },
+  "settled_points": [
+   {
+    "radius": 2.322368577137902,
+    "flat": 0,
+    "min_eig": 13.331199999106284,
+    "grid": true,
+    "p_opt": 1.0000000000000004,
+    "is_pick": true
+   }
+  ],
+  "raw_radius": {
+   "min": 2.322368577137902,
+   "median": 2.322368577137902,
+   "max": 2.322368577137902
+  },
+  "raw_flat": {
+   "checked": 40,
+   "with_flat_dirs": 0,
+   "max_flat": 0
+  },
+  "filter": {
+   "pool": 1,
+   "shell": 1,
+   "filter": 1,
+   "used": [],
+   "hits": 338,
+   "restarts": 1000,
+   "nfev": 135719,
+   "r_min": 2.322369
+  },
+  "secs": 71.6
+ },
+ {
+  "problem": "spinglass_nofield",
+  "row": 11,
+  "seed": 11511,
+  "n": 8,
+  "T": 21,
+  "D": 29,
+  "best": -18.359099999999998,
+  "n_opt": 2,
+  "floor": -18.359100000000005,
+  "filter_floor": -18.3591,
+  "n_auto": 1,
+  "multistart": {
+   "hits": 165,
+   "starts": 500,
+   "nfev": 47288,
+   "nfev_per_hit": 286.5939393939394,
+   "first_hit": 3,
+   "levels": 33
+  },
+  "filter_search": {
+   "hits": 170,
+   "starts": 500,
+   "nfev": 68100,
+   "nfev_per_hit": 400.5882352941176,
+   "first_hit": 6
+  },
+  "distinct": {
+   "raw": 165,
+   "folded": 1,
+   "settled": 1
+  },
+  "found_pick": {
+   "raw": true,
+   "settled": true
+  },
+  "pick": {
+   "radius": 2.322368577126966,
+   "flat": 0,
+   "min_eig": 13.331199999050764,
+   "grid": true,
+   "p_opt": 1.0000000000000004
+  },
+  "settled_points": [
+   {
+    "radius": 2.322368577137902,
+    "flat": 0,
+    "min_eig": 13.331199999124763,
+    "grid": true,
+    "p_opt": 1.0000000000000002,
+    "is_pick": true
+   }
+  ],
+  "raw_radius": {
+   "min": 2.322368577137902,
+   "median": 2.322368577137902,
+   "max": 2.322368577137902
+  },
+  "raw_flat": {
+   "checked": 40,
+   "with_flat_dirs": 0,
+   "max_flat": 0
+  },
+  "filter": {
+   "pool": 1,
+   "shell": 1,
+   "filter": 1,
+   "used": [],
+   "hits": 338,
+   "restarts": 1000,
+   "nfev": 135719,
+   "r_min": 2.322369
+  },
+  "secs": 71.4
+ },
+ {
+  "problem": "spinglass_nofield",
+  "row": 12,
+  "seed": 12011,
+  "n": 8,
+  "T": 17,
+  "D": 25,
+  "best": -14.073899999999998,
+  "n_opt": 2,
+  "floor": -13.250600000000006,
+  "filter_floor": -13.2506,
+  "n_auto": 1,
+  "multistart": {
+   "hits": 102,
+   "starts": 500,
+   "nfev": 40138,
+   "nfev_per_hit": 393.5098039215686,
+   "first_hit": 1,
+   "levels": 26
+  },
+  "filter_search": {
+   "hits": 109,
+   "starts": 500,
+   "nfev": 59776,
+   "nfev_per_hit": 548.4036697247707,
+   "first_hit": 1
+  },
+  "distinct": {
+   "raw": 102,
+   "folded": 94,
+   "settled": 1
+  },
+  "found_pick": {
+   "raw": false,
+   "settled": true
+  },
+  "pick": {
+   "radius": 1.9657265699117847,
+   "flat": 1,
+   "min_eig": 5.962002615096108e-11,
+   "grid": true,
+   "p_opt": 0.5000000000000002
+  },
+  "settled_points": [
+   {
+    "radius": 1.9657265698980282,
+    "flat": 1,
+    "min_eig": 2.658352250296727e-14,
+    "grid": true,
+    "p_opt": 0.5000000000000002,
+    "is_pick": true
+   }
+  ],
+  "raw_radius": {
+   "min": 1.965827211126273,
+   "median": 1.9932730805084202,
+   "max": 2.0418962986238216
+  },
+  "raw_flat": {
+   "checked": 40,
+   "with_flat_dirs": 40,
+   "max_flat": 1
+  },
+  "filter": {
+   "pool": 1,
+   "shell": 1,
+   "filter": 1,
+   "used": [],
+   "hits": 213,
+   "restarts": 1000,
+   "nfev": 120492,
+   "r_min": 1.965727
+  },
+  "secs": 123.7
+ },
+ {
+  "problem": "spinglass_nofield",
+  "row": 12,
+  "seed": 12511,
+  "n": 8,
+  "T": 17,
+  "D": 25,
+  "best": -14.073899999999998,
+  "n_opt": 2,
+  "floor": -13.250600000000004,
+  "filter_floor": -13.2506,
+  "n_auto": 1,
+  "multistart": {
+   "hits": 93,
+   "starts": 500,
+   "nfev": 40822,
+   "nfev_per_hit": 438.9462365591398,
+   "first_hit": 1,
+   "levels": 26
+  },
+  "filter_search": {
+   "hits": 104,
+   "starts": 500,
+   "nfev": 60716,
+   "nfev_per_hit": 583.8076923076923,
+   "first_hit": 1
+  },
+  "distinct": {
+   "raw": 93,
+   "folded": 82,
+   "settled": 1
+  },
+  "found_pick": {
+   "raw": true,
+   "settled": true
+  },
+  "pick": {
+   "radius": 1.9657265699117847,
+   "flat": 1,
+   "min_eig": 5.962002615096108e-11,
+   "grid": true,
+   "p_opt": 0.5000000000000002
+  },
+  "settled_points": [
+   {
+    "radius": 1.9657265698409248,
+    "flat": 1,
+    "min_eig": 9.954509956316243e-11,
+    "grid": true,
+    "p_opt": 0.5000000000000002,
+    "is_pick": true
+   }
+  ],
+  "raw_radius": {
+   "min": 1.9657266601164651,
+   "median": 1.9927358787406666,
+   "max": 2.041244967522619
+  },
+  "raw_flat": {
+   "checked": 40,
+   "with_flat_dirs": 40,
+   "max_flat": 1
+  },
+  "filter": {
+   "pool": 1,
+   "shell": 1,
+   "filter": 1,
+   "used": [],
+   "hits": 213,
+   "restarts": 1000,
+   "nfev": 120492,
+   "r_min": 1.965727
+  },
+  "secs": 121.6
+ },
+ {
+  "problem": "spinglass_nofield",
+  "row": 13,
+  "seed": 13011,
+  "n": 8,
+  "T": 13,
+  "D": 21,
+  "best": -11.592300000000002,
+  "n_opt": 2,
+  "floor": -10.159200000000004,
+  "filter_floor": -10.1592,
+  "n_auto": 1,
+  "multistart": {
+   "hits": 353,
+   "starts": 500,
+   "nfev": 42906,
+   "nfev_per_hit": 121.54674220963173,
+   "first_hit": 1,
+   "levels": 19
+  },
+  "filter_search": {
+   "hits": 402,
+   "starts": 500,
+   "nfev": 53261,
+   "nfev_per_hit": 132.4900497512438,
+   "first_hit": 1
+  },
+  "distinct": {
+   "raw": 353,
+   "folded": 2,
+   "settled": 2
+  },
+  "found_pick": {
+   "raw": true,
+   "settled": true
+  },
+  "pick": {
+   "radius": 2.1691245414680767,
+   "flat": 0,
+   "min_eig": 7.448799999480474,
+   "grid": true,
+   "p_opt": 5.412119373506901e-21
+  },
+  "settled_points": [
+   {
+    "radius": 2.169124541468402,
+    "flat": 0,
+    "min_eig": 7.4487999994804674,
+    "grid": true,
+    "p_opt": 1.0775164942881415e-33,
+    "is_pick": true
+   },
+   {
+    "radius": 2.1874603953586194,
+    "flat": 0,
+    "min_eig": 7.448799999480483,
+    "grid": true,
+    "p_opt": 7.894090461591272e-34,
+    "is_pick": false
+   }
+  ],
+  "raw_radius": {
+   "min": 2.169124541468402,
+   "median": 2.169124541468402,
+   "max": 2.18746039535862
+  },
+  "raw_flat": {
+   "checked": 40,
+   "with_flat_dirs": 0,
+   "max_flat": 0
+  },
+  "filter": {
+   "pool": 2,
+   "shell": 1,
+   "filter": 1,
+   "used": [],
+   "hits": 518,
+   "restarts": 1000,
+   "nfev": 107507,
+   "r_min": 2.169125
+  },
+  "secs": 57.7
+ },
+ {
+  "problem": "spinglass_nofield",
+  "row": 13,
+  "seed": 13511,
+  "n": 8,
+  "T": 13,
+  "D": 21,
+  "best": -11.592300000000002,
+  "n_opt": 2,
+  "floor": -10.159200000000004,
+  "filter_floor": -10.1592,
+  "n_auto": 1,
+  "multistart": {
+   "hits": 338,
+   "starts": 500,
+   "nfev": 42674,
+   "nfev_per_hit": 126.25443786982248,
+   "first_hit": 1,
+   "levels": 18
+  },
+  "filter_search": {
+   "hits": 391,
+   "starts": 500,
+   "nfev": 54246,
+   "nfev_per_hit": 138.73657289002557,
+   "first_hit": 1
+  },
+  "distinct": {
+   "raw": 334,
+   "folded": 2,
+   "settled": 2
+  },
+  "found_pick": {
+   "raw": true,
+   "settled": true
+  },
+  "pick": {
+   "radius": 2.1691245414680767,
+   "flat": 0,
+   "min_eig": 7.448799999480474,
+   "grid": true,
+   "p_opt": 5.412119373506901e-21
+  },
+  "settled_points": [
+   {
+    "radius": 2.169124541468402,
+    "flat": 0,
+    "min_eig": 7.448799999480487,
+    "grid": true,
+    "p_opt": 4.445895866492245e-34,
+    "is_pick": true
+   },
+   {
+    "radius": 2.1874603953586194,
+    "flat": 0,
+    "min_eig": 7.448799999480468,
+    "grid": true,
+    "p_opt": 5.903590150178699e-34,
+    "is_pick": false
+   }
+  ],
+  "raw_radius": {
+   "min": 2.169124541468402,
+   "median": 2.169124541468402,
+   "max": 2.18746039535862
+  },
+  "raw_flat": {
+   "checked": 40,
+   "with_flat_dirs": 0,
+   "max_flat": 0
+  },
+  "filter": {
+   "pool": 2,
+   "shell": 1,
+   "filter": 1,
+   "used": [],
+   "hits": 518,
+   "restarts": 1000,
+   "nfev": 107507,
+   "r_min": 2.169125
+  },
+  "secs": 60.2
+ },
+ {
+  "problem": "spinglass_nofield",
+  "row": 14,
+  "seed": 14011,
+  "n": 8,
+  "T": 17,
+  "D": 25,
+  "best": -13.3819,
+  "n_opt": 2,
+  "floor": -13.3819,
+  "filter_floor": -13.3819,
+  "n_auto": 1,
+  "multistart": {
+   "hits": 82,
+   "starts": 500,
+   "nfev": 57265,
+   "nfev_per_hit": 698.3536585365854,
+   "first_hit": 1,
+   "levels": 17
+  },
+  "filter_search": {
+   "hits": 83,
+   "starts": 500,
+   "nfev": 88252,
+   "nfev_per_hit": 1063.2771084337348,
+   "first_hit": 1
+  },
+  "distinct": {
+   "raw": 82,
+   "folded": 1,
+   "settled": 1
+  },
+  "found_pick": {
+   "raw": true,
+   "settled": true
+  },
+  "pick": {
+   "radius": 2.390098615997697,
+   "flat": 0,
+   "min_eig": 0.6635999999538305,
+   "grid": true,
+   "p_opt": 1.0000000000000007
+  },
+  "settled_points": [
+   {
+    "radius": 2.3900986159875943,
+    "flat": 0,
+    "min_eig": 0.6635999999536701,
+    "grid": true,
+    "p_opt": 1.0000000000000007,
+    "is_pick": true
+   }
+  ],
+  "raw_radius": {
+   "min": 2.3900986159875943,
+   "median": 2.3900986159875943,
+   "max": 2.3900986159875948
+  },
+  "raw_flat": {
+   "checked": 40,
+   "with_flat_dirs": 0,
+   "max_flat": 0
+  },
+  "filter": {
+   "pool": 1,
+   "shell": 1,
+   "filter": 1,
+   "used": [],
+   "hits": 161,
+   "restarts": 1000,
+   "nfev": 175973,
+   "r_min": 2.390099
+  },
+  "secs": 90.1
+ },
+ {
+  "problem": "spinglass_nofield",
+  "row": 14,
+  "seed": 14511,
+  "n": 8,
+  "T": 17,
+  "D": 25,
+  "best": -13.3819,
+  "n_opt": 2,
+  "floor": -13.3819,
+  "filter_floor": -13.3819,
+  "n_auto": 1,
+  "multistart": {
+   "hits": 70,
+   "starts": 500,
+   "nfev": 56594,
+   "nfev_per_hit": 808.4857142857143,
+   "first_hit": 6,
+   "levels": 18
+  },
+  "filter_search": {
+   "hits": 78,
+   "starts": 500,
+   "nfev": 87721,
+   "nfev_per_hit": 1124.628205128205,
+   "first_hit": 6
+  },
+  "distinct": {
+   "raw": 70,
+   "folded": 1,
+   "settled": 1
+  },
+  "found_pick": {
+   "raw": true,
+   "settled": true
+  },
+  "pick": {
+   "radius": 2.390098615997697,
+   "flat": 0,
+   "min_eig": 0.6635999999538305,
+   "grid": true,
+   "p_opt": 1.0000000000000007
+  },
+  "settled_points": [
+   {
+    "radius": 2.3900986159875943,
+    "flat": 0,
+    "min_eig": 0.6635999999533785,
+    "grid": true,
+    "p_opt": 1.0000000000000007,
+    "is_pick": true
+   }
+  ],
+  "raw_radius": {
+   "min": 2.3900986159875943,
+   "median": 2.3900986159875943,
+   "max": 2.3900986159875948
+  },
+  "raw_flat": {
+   "checked": 40,
+   "with_flat_dirs": 0,
+   "max_flat": 0
+  },
+  "filter": {
+   "pool": 1,
+   "shell": 1,
+   "filter": 1,
+   "used": [],
+   "hits": 161,
+   "restarts": 1000,
+   "nfev": 175973,
+   "r_min": 2.390099
+  },
+  "secs": 89.1
+ },
+ {
+  "problem": "spinglass_nofield",
+  "row": 15,
+  "seed": 15011,
+  "n": 8,
+  "T": 16,
+  "D": 24,
+  "best": -13.3661,
+  "n_opt": 2,
+  "floor": -13.366100000000007,
+  "filter_floor": -13.3661,
+  "n_auto": 1,
+  "multistart": {
+   "hits": 191,
+   "starts": 500,
+   "nfev": 54721,
+   "nfev_per_hit": 286.4973821989529,
+   "first_hit": 2,
+   "levels": 16
+  },
+  "filter_search": {
+   "hits": 223,
+   "starts": 500,
+   "nfev": 86787,
+   "nfev_per_hit": 389.1793721973094,
+   "first_hit": 5
+  },
+  "distinct": {
+   "raw": 191,
+   "folded": 1,
+   "settled": 1
+  },
+  "found_pick": {
+   "raw": true,
+   "settled": true
+  },
+  "pick": {
+   "radius": 2.341859391144761,
+   "flat": 0,
+   "min_eig": 4.959599999669363,
+   "grid": true,
+   "p_opt": 0.9999999999999989
+  },
+  "settled_points": [
+   {
+    "radius": 2.3418593911374437,
+    "flat": 0,
+    "min_eig": 4.959599999669366,
+    "grid": true,
+    "p_opt": 1.0000000000000002,
+    "is_pick": true
+   }
+  ],
+  "raw_radius": {
+   "min": 2.3418593911374437,
+   "median": 2.341859391137444,
+   "max": 2.341859391137448
+  },
+  "raw_flat": {
+   "checked": 40,
+   "with_flat_dirs": 0,
+   "max_flat": 0
+  },
+  "filter": {
+   "pool": 1,
+   "shell": 1,
+   "filter": 1,
+   "used": [],
+   "hits": 456,
+   "restarts": 1000,
+   "nfev": 171829,
+   "r_min": 2.341859
+  },
+  "secs": 88.7
+ },
+ {
+  "problem": "spinglass_nofield",
+  "row": 15,
+  "seed": 15511,
+  "n": 8,
+  "T": 16,
+  "D": 24,
+  "best": -13.3661,
+  "n_opt": 2,
+  "floor": -13.3661,
+  "filter_floor": -13.3661,
+  "n_auto": 1,
+  "multistart": {
+   "hits": 213,
+   "starts": 500,
+   "nfev": 55671,
+   "nfev_per_hit": 261.36619718309856,
+   "first_hit": 1,
+   "levels": 16
+  },
+  "filter_search": {
+   "hits": 233,
+   "starts": 500,
+   "nfev": 85042,
+   "nfev_per_hit": 364.9871244635193,
+   "first_hit": 1
+  },
+  "distinct": {
+   "raw": 213,
+   "folded": 1,
+   "settled": 1
+  },
+  "found_pick": {
+   "raw": true,
+   "settled": true
+  },
+  "pick": {
+   "radius": 2.341859391144761,
+   "flat": 0,
+   "min_eig": 4.959599999669363,
+   "grid": true,
+   "p_opt": 0.9999999999999989
+  },
+  "settled_points": [
+   {
+    "radius": 2.3418593911374437,
+    "flat": 0,
+    "min_eig": 4.959599999669371,
+    "grid": true,
+    "p_opt": 1.0000000000000002,
+    "is_pick": true
+   }
+  ],
+  "raw_radius": {
+   "min": 2.3418593911374437,
+   "median": 2.341859391137444,
+   "max": 2.341859391137449
+  },
+  "raw_flat": {
+   "checked": 40,
+   "with_flat_dirs": 0,
+   "max_flat": 0
+  },
+  "filter": {
+   "pool": 1,
+   "shell": 1,
+   "filter": 1,
+   "used": [],
+   "hits": 456,
+   "restarts": 1000,
+   "nfev": 171829,
+   "r_min": 2.341859
+  },
+  "secs": 92.3
+ },
+ {
+  "problem": "spinglass_nofield",
+  "row": 16,
+  "seed": 16011,
+  "n": 8,
+  "T": 14,
+  "D": 22,
+  "best": -10.6967,
+  "n_opt": 2,
+  "floor": -10.131800000000009,
+  "filter_floor": -10.1318,
+  "n_auto": 1,
+  "multistart": {
+   "hits": 246,
+   "starts": 500,
+   "nfev": 60296,
+   "nfev_per_hit": 245.10569105691056,
+   "first_hit": 1,
+   "levels": 13
+  },
+  "filter_search": {
+   "hits": 312,
+   "starts": 500,
+   "nfev": 84944,
+   "nfev_per_hit": 272.2564102564103,
+   "first_hit": 1
+  },
+  "distinct": {
+   "raw": 246,
+   "folded": 91,
+   "settled": 2
+  },
+  "found_pick": {
+   "raw": true,
+   "settled": true
+  },
+  "pick": {
+   "radius": 2.1506841340764633,
+   "flat": 0,
+   "min_eig": 2.0744279785660877,
+   "grid": true,
+   "p_opt": 0.49999999999999956
+  },
+  "settled_points": [
+   {
+    "radius": 2.1506841340690497,
+    "flat": 0,
+    "min_eig": 2.074427978556019,
+    "grid": true,
+    "p_opt": 0.49999999999999967,
+    "is_pick": true
+   },
+   {
+    "radius": 2.173472692873471,
+    "flat": 1,
+    "min_eig": 1.509797227528716e-14,
+    "grid": true,
+    "p_opt": 0.5000000000000002,
+    "is_pick": false
+   }
+  ],
+  "raw_radius": {
+   "min": 2.1506841340690497,
+   "median": 2.150684134069052,
+   "max": 2.2503097876143427
+  },
+  "raw_flat": {
+   "checked": 40,
+   "with_flat_dirs": 22,
+   "max_flat": 1
+  },
+  "filter": {
+   "pool": 2,
+   "shell": 1,
+   "filter": 1,
+   "used": [],
+   "hits": 345,
+   "restarts": 1000,
+   "nfev": 168959,
+   "r_min": 2.150684
+  },
+  "secs": 125.4
+ },
+ {
+  "problem": "spinglass_nofield",
+  "row": 16,
+  "seed": 16511,
+  "n": 8,
+  "T": 14,
+  "D": 22,
+  "best": -10.6967,
+  "n_opt": 2,
+  "floor": -10.131800000000002,
+  "filter_floor": -10.1318,
+  "n_auto": 1,
+  "multistart": {
+   "hits": 265,
+   "starts": 500,
+   "nfev": 60286,
+   "nfev_per_hit": 227.49433962264152,
+   "first_hit": 3,
+   "levels": 12
+  },
+  "filter_search": {
+   "hits": 323,
+   "starts": 500,
+   "nfev": 84015,
+   "nfev_per_hit": 260.10835913312695,
+   "first_hit": 3
+  },
+  "distinct": {
+   "raw": 265,
+   "folded": 92,
+   "settled": 2
+  },
+  "found_pick": {
+   "raw": true,
+   "settled": true
+  },
+  "pick": {
+   "radius": 2.1506841340764633,
+   "flat": 0,
+   "min_eig": 2.0744279785660877,
+   "grid": true,
+   "p_opt": 0.49999999999999956
+  },
+  "settled_points": [
+   {
+    "radius": 2.1506841340690497,
+    "flat": 0,
+    "min_eig": 2.0744279785542448,
+    "grid": true,
+    "p_opt": 0.49999999999999956,
+    "is_pick": true
+   },
+   {
+    "radius": 2.173472692873471,
+    "flat": 1,
+    "min_eig": -1.5609919940137938e-14,
+    "grid": true,
+    "p_opt": 0.5000000000000002,
+    "is_pick": false
+   }
+  ],
+  "raw_radius": {
+   "min": 2.1506841340690497,
+   "median": 2.150684134069051,
+   "max": 2.2477978396135794
+  },
+  "raw_flat": {
+   "checked": 40,
+   "with_flat_dirs": 16,
+   "max_flat": 1
+  },
+  "filter": {
+   "pool": 2,
+   "shell": 1,
+   "filter": 1,
+   "used": [],
+   "hits": 345,
+   "restarts": 1000,
+   "nfev": 168959,
+   "r_min": 2.150684
+  },
+  "secs": 123.4
+ },
+ {
+  "problem": "spinglass_nofield",
+  "row": 17,
+  "seed": 17011,
+  "n": 8,
+  "T": 14,
+  "D": 22,
+  "best": -11.201300000000002,
+  "n_opt": 2,
+  "floor": -9.054100000000004,
+  "filter_floor": -9.0541,
+  "n_auto": 1,
+  "multistart": {
+   "hits": 174,
+   "starts": 500,
+   "nfev": 42878,
+   "nfev_per_hit": 246.42528735632183,
+   "first_hit": 14,
+   "levels": 19
+  },
+  "filter_search": {
+   "hits": 253,
+   "starts": 500,
+   "nfev": 64061,
+   "nfev_per_hit": 253.20553359683794,
+   "first_hit": 3
+  },
+  "distinct": {
+   "raw": 174,
+   "folded": 1,
+   "settled": 1
+  },
+  "found_pick": {
+   "raw": true,
+   "settled": true
+  },
+  "pick": {
+   "radius": 2.1877429338915944,
+   "flat": 0,
+   "min_eig": 2.7823999998071662,
+   "grid": true,
+   "p_opt": 0.5000000000000002
+  },
+  "settled_points": [
+   {
+    "radius": 2.187742933869757,
+    "flat": 0,
+    "min_eig": 2.78239999980132,
+    "grid": true,
+    "p_opt": 0.5,
+    "is_pick": true
+   }
+  ],
+  "raw_radius": {
+   "min": 2.187742933869757,
+   "median": 2.187742933869757,
+   "max": 2.187742933869757
+  },
+  "raw_flat": {
+   "checked": 40,
+   "with_flat_dirs": 0,
+   "max_flat": 0
+  },
+  "filter": {
+   "pool": 1,
+   "shell": 1,
+   "filter": 1,
+   "used": [],
+   "hits": 508,
+   "restarts": 1000,
+   "nfev": 127053,
+   "r_min": 2.187743
+  },
+  "secs": 68.0
+ },
+ {
+  "problem": "spinglass_nofield",
+  "row": 17,
+  "seed": 17511,
+  "n": 8,
+  "T": 14,
+  "D": 22,
+  "best": -11.201300000000002,
+  "n_opt": 2,
+  "floor": -9.054100000000002,
+  "filter_floor": -9.0541,
+  "n_auto": 1,
+  "multistart": {
+   "hits": 166,
+   "starts": 500,
+   "nfev": 42206,
+   "nfev_per_hit": 254.25301204819277,
+   "first_hit": 2,
+   "levels": 19
+  },
+  "filter_search": {
+   "hits": 255,
+   "starts": 500,
+   "nfev": 62992,
+   "nfev_per_hit": 247.02745098039216,
+   "first_hit": 2
+  },
+  "distinct": {
+   "raw": 166,
+   "folded": 1,
+   "settled": 1
+  },
+  "found_pick": {
+   "raw": true,
+   "settled": true
+  },
+  "pick": {
+   "radius": 2.1877429338915944,
+   "flat": 0,
+   "min_eig": 2.7823999998071662,
+   "grid": true,
+   "p_opt": 0.5000000000000002
+  },
+  "settled_points": [
+   {
+    "radius": 2.187742933869757,
+    "flat": 0,
+    "min_eig": 2.7823999997951248,
+    "grid": true,
+    "p_opt": 0.5000000000000002,
+    "is_pick": true
+   }
+  ],
+  "raw_radius": {
+   "min": 2.187742933869757,
+   "median": 2.187742933869757,
+   "max": 2.1877429338697576
+  },
+  "raw_flat": {
+   "checked": 40,
+   "with_flat_dirs": 0,
+   "max_flat": 0
+  },
+  "filter": {
+   "pool": 1,
+   "shell": 1,
+   "filter": 1,
+   "used": [],
+   "hits": 508,
+   "restarts": 1000,
+   "nfev": 127053,
+   "r_min": 2.187743
+  },
+  "secs": 65.2
+ },
+ {
+  "problem": "spinglass_nofield",
+  "row": 18,
+  "seed": 18011,
+  "n": 8,
+  "T": 18,
+  "D": 26,
+  "best": -13.350800000000001,
+  "n_opt": 2,
+  "floor": -10.995900000000002,
+  "filter_floor": -10.9959,
+  "n_auto": 1,
+  "multistart": {
+   "hits": 81,
+   "starts": 500,
+   "nfev": 47768,
+   "nfev_per_hit": 589.7283950617284,
+   "first_hit": 10,
+   "levels": 28
+  },
+  "filter_search": {
+   "hits": 50,
+   "starts": 500,
+   "nfev": 70123,
+   "nfev_per_hit": 1402.46,
+   "first_hit": 8
+  },
+  "distinct": {
+   "raw": 81,
+   "folded": 3,
+   "settled": 3
+  },
+  "found_pick": {
+   "raw": true,
+   "settled": true
+  },
+  "pick": {
+   "radius": 2.15245201821907,
+   "flat": 0,
+   "min_eig": 2.665599999810141,
+   "grid": true,
+   "p_opt": 0.5000000000000002
+  },
+  "settled_points": [
+   {
+    "radius": 2.1524520182161897,
+    "flat": 0,
+    "min_eig": 2.665599999810692,
+    "grid": true,
+    "p_opt": 0.4999999999999998,
+    "is_pick": true
+   },
+   {
+    "radius": 2.2199740862232784,
+    "flat": 0,
+    "min_eig": 0.19840082049231647,
+    "grid": true,
+    "p_opt": 0.4999999999999286,
+    "is_pick": false
+   },
+   {
+    "radius": 2.2447369737572758,
+    "flat": 0,
+    "min_eig": 0.1997982222044387,
+    "grid": true,
+    "p_opt": 0.49999999999996503,
+    "is_pick": false
+   }
+  ],
+  "raw_radius": {
+   "min": 2.1524520182161897,
+   "median": 2.219974086223294,
+   "max": 2.244736973757309
+  },
+  "raw_flat": {
+   "checked": 40,
+   "with_flat_dirs": 0,
+   "max_flat": 0
+  },
+  "filter": {
+   "pool": 3,
+   "shell": 1,
+   "filter": 1,
+   "used": [],
+   "hits": 78,
+   "restarts": 1000,
+   "nfev": 140109,
+   "r_min": 2.152452
+  },
+  "secs": 77.4
+ },
+ {
+  "problem": "spinglass_nofield",
+  "row": 18,
+  "seed": 18511,
+  "n": 8,
+  "T": 18,
+  "D": 26,
+  "best": -13.350800000000001,
+  "n_opt": 2,
+  "floor": -10.9959,
+  "filter_floor": -10.9959,
+  "n_auto": 1,
+  "multistart": {
+   "hits": 84,
+   "starts": 500,
+   "nfev": 47773,
+   "nfev_per_hit": 568.7261904761905,
+   "first_hit": 1,
+   "levels": 31
+  },
+  "filter_search": {
+   "hits": 60,
+   "starts": 500,
+   "nfev": 69986,
+   "nfev_per_hit": 1166.4333333333334,
+   "first_hit": 1
+  },
+  "distinct": {
+   "raw": 84,
+   "folded": 3,
+   "settled": 3
+  },
+  "found_pick": {
+   "raw": true,
+   "settled": true
+  },
+  "pick": {
+   "radius": 2.15245201821907,
+   "flat": 0,
+   "min_eig": 2.665599999810141,
+   "grid": true,
+   "p_opt": 0.5000000000000002
+  },
+  "settled_points": [
+   {
+    "radius": 2.244736973757275,
+    "flat": 0,
+    "min_eig": 0.19979822220453852,
+    "grid": true,
+    "p_opt": 0.4999999999999989,
+    "is_pick": false
+   },
+   {
+    "radius": 2.1524520182161897,
+    "flat": 0,
+    "min_eig": 2.665599999804666,
+    "grid": true,
+    "p_opt": 0.5000000000000002,
+    "is_pick": true
+   },
+   {
+    "radius": 2.219974086223311,
+    "flat": 0,
+    "min_eig": 0.1984008204919978,
+    "grid": true,
+    "p_opt": 0.4999999999991305,
+    "is_pick": false
+   }
+  ],
+  "raw_radius": {
+   "min": 2.1524520182161897,
+   "median": 2.219974086223276,
+   "max": 2.244736973757282
+  },
+  "raw_flat": {
+   "checked": 40,
+   "with_flat_dirs": 0,
+   "max_flat": 0
+  },
+  "filter": {
+   "pool": 3,
+   "shell": 1,
+   "filter": 1,
+   "used": [],
+   "hits": 78,
+   "restarts": 1000,
+   "nfev": 140109,
+   "r_min": 2.152452
+  },
+  "secs": 74.6
+ },
+ {
+  "problem": "spinglass_nofield",
+  "row": 19,
+  "seed": 19011,
+  "n": 8,
+  "T": 21,
+  "D": 29,
+  "best": -13.423699999999997,
+  "n_opt": 2,
+  "floor": -12.561100000000001,
+  "filter_floor": -12.5611,
+  "n_auto": 1,
+  "multistart": {
+   "hits": 134,
+   "starts": 500,
+   "nfev": 47588,
+   "nfev_per_hit": 355.13432835820896,
+   "first_hit": 6,
+   "levels": 38
+  },
+  "filter_search": {
+   "hits": 137,
+   "starts": 500,
+   "nfev": 73428,
+   "nfev_per_hit": 535.970802919708,
+   "first_hit": 14
+  },
+  "distinct": {
+   "raw": 134,
+   "folded": 127,
+   "settled": 3
+  },
+  "found_pick": {
+   "raw": false,
+   "settled": true
+  },
+  "pick": {
+   "radius": 2.077063778306121,
+   "flat": 2,
+   "min_eig": -8.337700012967765e-15,
+   "grid": true,
+   "p_opt": 0.5000000000000002
+  },
+  "settled_points": [
+   {
+    "radius": 2.0770637783137404,
+    "flat": 2,
+    "min_eig": -4.564129278328805e-13,
+    "grid": true,
+    "p_opt": 0.5000000000000002,
+    "is_pick": true
+   },
+   {
+    "radius": 2.1266868418853293,
+    "flat": 2,
+    "min_eig": -2.1780516605918803e-14,
+    "grid": true,
+    "p_opt": 0.5000000000000002,
+    "is_pick": false
+   },
+   {
+    "radius": 2.1378966898259737,
+    "flat": 1,
+    "min_eig": 9.654279091930121e-15,
+    "grid": true,
+    "p_opt": 0.5000000000000002,
+    "is_pick": false
+   }
+  ],
+  "raw_radius": {
+   "min": 2.077108560558867,
+   "median": 2.1399918504144138,
+   "max": 2.288528010575674
+  },
+  "raw_flat": {
+   "checked": 40,
+   "with_flat_dirs": 40,
+   "max_flat": 1
+  },
+  "filter": {
+   "pool": 3,
+   "shell": 1,
+   "filter": 1,
+   "used": [],
+   "hits": 131,
+   "restarts": 1000,
+   "nfev": 146947,
+   "r_min": 2.077064
+  },
+  "secs": 128.0
+ },
+ {
+  "problem": "spinglass_nofield",
+  "row": 19,
+  "seed": 19511,
+  "n": 8,
+  "T": 21,
+  "D": 29,
+  "best": -13.423699999999997,
+  "n_opt": 2,
+  "floor": -12.5611,
+  "filter_floor": -12.5611,
+  "n_auto": 1,
+  "multistart": {
+   "hits": 131,
+   "starts": 500,
+   "nfev": 47661,
+   "nfev_per_hit": 363.82442748091603,
+   "first_hit": 1,
+   "levels": 35
+  },
+  "filter_search": {
+   "hits": 156,
+   "starts": 500,
+   "nfev": 73519,
+   "nfev_per_hit": 471.27564102564105,
+   "first_hit": 1
+  },
+  "distinct": {
+   "raw": 131,
+   "folded": 127,
+   "settled": 3
+  },
+  "found_pick": {
+   "raw": false,
+   "settled": true
+  },
+  "pick": {
+   "radius": 2.077063778306121,
+   "flat": 2,
+   "min_eig": -8.337700012967765e-15,
+   "grid": true,
+   "p_opt": 0.5000000000000002
+  },
+  "settled_points": [
+   {
+    "radius": 2.0770637783137404,
+    "flat": 2,
+    "min_eig": 8.865815465487043e-14,
+    "grid": true,
+    "p_opt": 0.5,
+    "is_pick": true
+   },
+   {
+    "radius": 2.1378966898259737,
+    "flat": 1,
+    "min_eig": -3.8104938807214705e-14,
+    "grid": true,
+    "p_opt": 0.5000000000000002,
+    "is_pick": false
+   },
+   {
+    "radius": 2.1266868418853293,
+    "flat": 2,
+    "min_eig": -5.589395175852423e-13,
+    "grid": true,
+    "p_opt": 0.5000000000000002,
+    "is_pick": false
+   }
+  ],
+  "raw_radius": {
+   "min": 2.077274786659673,
+   "median": 2.142173165695537,
+   "max": 2.288368906407765
+  },
+  "raw_flat": {
+   "checked": 40,
+   "with_flat_dirs": 40,
+   "max_flat": 1
+  },
+  "filter": {
+   "pool": 3,
+   "shell": 1,
+   "filter": 1,
+   "used": [],
+   "hits": 131,
+   "restarts": 1000,
+   "nfev": 146947,
+   "r_min": 2.077064
+  },
+  "secs": 125.4
+ }
+]

@@ -44,6 +44,8 @@ PATIENCE = 2 # radius search: stop once more than this many iterations in a row 
 BIG = 1e6 # radius search: energy returned outside the maximum radius
 CAP_EPS = 1e-3 # radius search: the smallish factor added to the maximum radius
 N_TRIALS = 2
+GUARD = True # repeat the search on more seeds until two of them confirm the floor and the pick (see guarded)
+GUARD_OFFSETS = [0, 500, 250, 750, 125, 875] # seeds tried in this order are seed + offset; the first is the old seed
 TOL_E = 1e-6 # energy tolerance for sitting on the floor
 TOL_D = 1e-3 # period-aware distance below which two minima are the same point
 RAD_TOL = 1e-4 # radius window that defines the inner shell
@@ -564,6 +566,37 @@ def harvest_radius(energy, grad, D, per, p, seed, settle_fn, pick_fn, images):
     return floor, pool, {"hits": int(hits), "restarts": int(total), "nfev": int(nfev),
                          "stalled": int(stalls * batch), "converged": stop == "converged", "stop": stop}
 
+# Two-seed guard.  search_one(seed) runs one search and returns (floor, pool, info).  Seeds are tried in the
+# order of GUARD_OFFSETS.  After each one, the pools of the seeds that reached the lowest floor so far are
+# merged and the pick is taken from the merged pool.  It stops once two seeds reached that floor and each has
+# the pick in its own pool, so a seed that missed the floor or missed the point closest to the origin never
+# decides the pick.  If no two seeds agree, info["confirmed"] is False and the pick should not be used.
+def guarded(search_one, seed, pick_fn, images, per):
+    runs, agree = [], []
+    for off in GUARD_OFFSETS:
+        f, pool, info = search_one(seed + off)
+        runs.append((f, pool, info, seed + off))
+        floor = min(r[0] for r in runs)
+        low = [r for r in runs if r[0] <= floor + TOL_E]
+        merged = []
+        for r in low:
+            for x in r[1]:
+                add_distinct(merged, x, per)
+        pick = pick_fn(floor, merged)
+        agree = []
+        if pick is None:
+            continue
+        imgs = images(pick)
+        agree = [r for r in low if any(min(geodesic_dist(y, q, per) for y in imgs) <= TOL_D for q in r[1])]
+        if len(agree) >= 2:
+            break
+    out = {"restarts": sum(r[2]["restarts"] for r in runs), "nfev": sum(r[2]["nfev"] for r in runs),
+           "hits": sum(r[2]["hits"] for r in agree), "stalled": min(r[2]["stalled"] for r in runs),
+           "converged": all(r[2]["converged"] for r in runs), "seeds": [r[3] for r in runs],
+           "seed_floors": [round(float(r[0]), 10) for r in runs], "agree": len(agree),
+           "confirmed": len(agree) >= 2}
+    return floor, merged, out
+
 # Keep the points at the smallest radius and remove ones using symmetry
 def inner_shell(pool, energy, images, per, floor):
     if not pool:
@@ -644,7 +677,8 @@ def run(row, edges, n, w, p, seed, weighted, trial):
         return shell[idx[0]]
 
     search = harvest_radius if SEARCH == "radius" else harvest
-    floor, pool, info = search(energy, grad, D, per, p, seed, settle_fn, pick_fn, images)
+    one = lambda s: search(energy, grad, D, per, p, s, settle_fn, pick_fn, images)
+    floor, pool, info = guarded(one, seed, pick_fn, images, per) if GUARD else one(seed)
     shell, r_min = inner_shell(pool, energy, images, per, floor)
 
     exact = False
@@ -663,6 +697,8 @@ def run(row, edges, n, w, p, seed, weighted, trial):
            "n_auto": len(autos), "restarts": info["restarts"], "nfev": info["nfev"],
            "hits": info["hits"], "stalled": info["stalled"], "converged": info["converged"],
            "search": SEARCH, "stop": info.get("stop"),
+           "seeds": info.get("seeds", [seed]), "seed_floors": info.get("seed_floors"),
+           "confirmed": info.get("confirmed"),
            "w": None if not weighted else [float(a) for a in w]}
 
     if not shell:
@@ -690,6 +726,10 @@ def run(row, edges, n, w, p, seed, weighted, trial):
     print("        functions used: %s   restarts %d  hits on pick %d  %s"
           % (", ".join(used) or "none", info["restarts"], info["hits"],
              "converged" if info["converged"] else info.get("stop", "hit MAX_RESTARTS")), flush=True)
+    if GUARD:
+        print("        guard: seeds %s  floors %s  %s"
+              % (info["seeds"], ["%.6f" % f for f in info["seed_floors"]],
+                 "confirmed by %d seeds" % info["agree"] if info["confirmed"] else "NOT CONFIRMED, do not use"), flush=True)
     return rec
 
 def main():
