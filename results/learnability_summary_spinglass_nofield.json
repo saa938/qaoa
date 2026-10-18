@@ -1,0 +1,615 @@
+{
+ "problem": "spinglass_nofield",
+ "instances": 69,
+ "confirmed": 69,
+ "seeds": [
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2,
+  2
+ ],
+ "on_grid": 65,
+ "stars": {
+  "pi/4 edges": 390,
+  "center-leaf pi/4 edges": 371,
+  "picks only stars": 50,
+  "picks with one main center": 35,
+  "main center is largest weighted degree": 14
+ },
+ "table": {
+  "new weights | size | own": {
+   "edge": [
+    0.5562987736900781,
+    0.0
+   ],
+   "edge majority": [
+    0.5529542920847269,
+    0.0
+   ],
+   "edge position": [
+    0.5997770345596433,
+    0.0
+   ],
+   "node": [
+    0.6358695652173914,
+    0.014492753623188406
+   ],
+   "node majority": [
+    0.6793478260869565,
+    0.0
+   ],
+   "node position": [
+    0.6757246376811594,
+    0.057971014492753624
+   ],
+   "instance": 0.0
+  },
+  "new weights | size | 1-hop": {
+   "edge": [
+    0.6164994425863991,
+    0.0
+   ],
+   "edge majority": [
+    0.5529542920847269,
+    0.0
+   ],
+   "edge position": [
+    0.5997770345596433,
+    0.0
+   ],
+   "node": [
+    0.6539855072463768,
+    0.07246376811594203
+   ],
+   "node majority": [
+    0.6793478260869565,
+    0.0
+   ],
+   "node position": [
+    0.6757246376811594,
+    0.057971014492753624
+   ],
+   "instance": 0.0
+  },
+  "new weights | size | 2-hop": {
+   "edge": [
+    0.6421404682274248,
+    0.0
+   ],
+   "edge majority": [
+    0.5529542920847269,
+    0.0
+   ],
+   "edge position": [
+    0.5997770345596433,
+    0.0
+   ],
+   "node": [
+    0.6829710144927537,
+    0.028985507246376812
+   ],
+   "node majority": [
+    0.6793478260869565,
+    0.0
+   ],
+   "node position": [
+    0.6757246376811594,
+    0.057971014492753624
+   ],
+   "instance": 0.0
+  },
+  "new weights | size | oracle": {
+   "edge": [
+    0.6599777034559643,
+    0.0
+   ],
+   "edge majority": [
+    0.5529542920847269,
+    0.0
+   ],
+   "edge position": [
+    0.5997770345596433,
+    0.0
+   ],
+   "node": [
+    0.6594202898550725,
+    0.014492753623188406
+   ],
+   "node majority": [
+    0.6793478260869565,
+    0.0
+   ],
+   "node position": [
+    0.6757246376811594,
+    0.057971014492753624
+   ],
+   "instance": 0.0
+  },
+  "new weights | signed | own": {
+   "edge": [
+    0.5574136008918618,
+    0.0
+   ],
+   "edge majority": [
+    0.5529542920847269,
+    0.0
+   ],
+   "edge position": [
+    0.5997770345596433,
+    0.0
+   ],
+   "node": [
+    0.5905797101449275,
+    0.0
+   ],
+   "node majority": [
+    0.6413043478260869,
+    0.0
+   ],
+   "node position": [
+    0.6485507246376812,
+    0.043478260869565216
+   ],
+   "instance": 0.0
+  },
+  "new weights | signed | 1-hop": {
+   "edge": [
+    0.6131549609810479,
+    0.0
+   ],
+   "edge majority": [
+    0.5529542920847269,
+    0.0
+   ],
+   "edge position": [
+    0.5997770345596433,
+    0.0
+   ],
+   "node": [
+    0.6431159420289855,
+    0.07246376811594203
+   ],
+   "node majority": [
+    0.6413043478260869,
+    0.0
+   ],
+   "node position": [
+    0.6485507246376812,
+    0.043478260869565216
+   ],
+   "instance": 0.0
+  },
+  "new weights | signed | 2-hop": {
+   "edge": [
+    0.6577480490523969,
+    0.0
+   ],
+   "edge majority": [
+    0.5529542920847269,
+    0.0
+   ],
+   "edge position": [
+    0.5997770345596433,
+    0.0
+   ],
+   "node": [
+    0.6485507246376812,
+    0.028985507246376812
+   ],
+   "node majority": [
+    0.6413043478260869,
+    0.0
+   ],
+   "node position": [
+    0.6485507246376812,
+    0.043478260869565216
+   ],
+   "instance": 0.0
+  },
+  "new weights | signed | oracle": {
+   "edge": [
+    0.6577480490523969,
+    0.014492753623188406
+   ],
+   "edge majority": [
+    0.5529542920847269,
+    0.0
+   ],
+   "edge position": [
+    0.5997770345596433,
+    0.0
+   ],
+   "node": [
+    0.6431159420289855,
+    0.028985507246376812
+   ],
+   "node majority": [
+    0.6413043478260869,
+    0.0
+   ],
+   "node position": [
+    0.6485507246376812,
+    0.043478260869565216
+   ],
+   "instance": 0.0
+  },
+  "new shape | size | own": {
+   "edge": [
+    0.5663322185061316,
+    0.0
+   ],
+   "edge majority": [
+    0.5529542920847269,
+    0.0
+   ],
+   "edge position": [
+    null,
+    null
+   ],
+   "node": [
+    0.6358695652173914,
+    0.028985507246376812
+   ],
+   "node majority": [
+    0.6793478260869565,
+    0.0
+   ],
+   "node position": [
+    null,
+    null
+   ],
+   "instance": 0.0
+  },
+  "new shape | size | 1-hop": {
+   "edge": [
+    0.6098104793756968,
+    0.0
+   ],
+   "edge majority": [
+    0.5529542920847269,
+    0.0
+   ],
+   "edge position": [
+    null,
+    null
+   ],
+   "node": [
+    0.6793478260869565,
+    0.07246376811594203
+   ],
+   "node majority": [
+    0.6793478260869565,
+    0.0
+   ],
+   "node position": [
+    null,
+    null
+   ],
+   "instance": 0.0
+  },
+  "new shape | size | 2-hop": {
+   "edge": [
+    0.6254180602006689,
+    0.0
+   ],
+   "edge majority": [
+    0.5529542920847269,
+    0.0
+   ],
+   "edge position": [
+    null,
+    null
+   ],
+   "node": [
+    0.6340579710144928,
+    0.028985507246376812
+   ],
+   "node majority": [
+    0.6793478260869565,
+    0.0
+   ],
+   "node position": [
+    null,
+    null
+   ],
+   "instance": 0.0
+  },
+  "new shape | size | oracle": {
+   "edge": [
+    0.6298773690078038,
+    0.0
+   ],
+   "edge majority": [
+    0.5529542920847269,
+    0.0
+   ],
+   "edge position": [
+    null,
+    null
+   ],
+   "node": [
+    0.6340579710144928,
+    0.0
+   ],
+   "node majority": [
+    0.6793478260869565,
+    0.0
+   ],
+   "node position": [
+    null,
+    null
+   ],
+   "instance": 0.0
+  },
+  "new shape | signed | own": {
+   "edge": [
+    0.5696767001114827,
+    0.0
+   ],
+   "edge majority": [
+    0.5529542920847269,
+    0.0
+   ],
+   "edge position": [
+    null,
+    null
+   ],
+   "node": [
+    0.5905797101449275,
+    0.014492753623188406
+   ],
+   "node majority": [
+    0.6413043478260869,
+    0.0
+   ],
+   "node position": [
+    null,
+    null
+   ],
+   "instance": 0.0
+  },
+  "new shape | signed | 1-hop": {
+   "edge": [
+    0.5953177257525084,
+    0.0
+   ],
+   "edge majority": [
+    0.5529542920847269,
+    0.0
+   ],
+   "edge position": [
+    null,
+    null
+   ],
+   "node": [
+    0.6358695652173914,
+    0.057971014492753624
+   ],
+   "node majority": [
+    0.6413043478260869,
+    0.0
+   ],
+   "node position": [
+    null,
+    null
+   ],
+   "instance": 0.0
+  },
+  "new shape | signed | 2-hop": {
+   "edge": [
+    0.6321070234113713,
+    0.0
+   ],
+   "edge majority": [
+    0.5529542920847269,
+    0.0
+   ],
+   "edge position": [
+    null,
+    null
+   ],
+   "node": [
+    0.5978260869565217,
+    0.014492753623188406
+   ],
+   "node majority": [
+    0.6413043478260869,
+    0.0
+   ],
+   "node position": [
+    null,
+    null
+   ],
+   "instance": 0.0
+  },
+  "new shape | signed | oracle": {
+   "edge": [
+    0.6309921962095875,
+    0.0
+   ],
+   "edge majority": [
+    0.5529542920847269,
+    0.0
+   ],
+   "edge position": [
+    null,
+    null
+   ],
+   "node": [
+    0.5996376811594203,
+    0.0
+   ],
+   "node majority": [
+    0.6413043478260869,
+    0.0
+   ],
+   "node position": [
+    null,
+    null
+   ],
+   "instance": 0.0
+  }
+ },
+ "checks": {
+  "random forest | size": {
+   "edge": 0.6454849498327759,
+   "node": 0.7228260869565217,
+   "instance": 0.0
+  },
+  "random forest | signed": {
+   "edge": 0.6443701226309922,
+   "node": 0.6902173913043478,
+   "instance": 0.0
+  },
+  "boosted, 25% of training | size": {
+   "edge": 0.6031215161649944,
+   "node": 0.6159420289855072,
+   "instance": 0.0
+  },
+  "boosted, 25% of training | signed": {
+   "edge": 0.6109253065774805,
+   "node": 0.5797101449275363,
+   "instance": 0.0
+  },
+  "boosted, 50% of training | size": {
+   "edge": 0.653288740245262,
+   "node": 0.6594202898550725,
+   "instance": 0.0
+  },
+  "boosted, 50% of training | signed": {
+   "edge": 0.6488294314381271,
+   "node": 0.625,
+   "instance": 0.0
+  },
+  "boosted, all training | size": {
+   "edge": 0.6421404682274248,
+   "node": 0.6829710144927537,
+   "instance": 0.0
+  },
+  "boosted, all training | signed": {
+   "edge": 0.6577480490523969,
+   "node": 0.6485507246376812,
+   "instance": 0.0
+  }
+ },
+ "energy": {
+  "true | labels": {
+   "predicted at floor": 0.9420289855072463,
+   "polished at floor": 1.0,
+   "size+signs at floor": 0.9420289855072463,
+   "size+signs polished at floor": 1.0,
+   "median predicted / floor": 1.0000000000000004,
+   "median size+signs / floor": 1.0000000000000004,
+   "median gradient calls of a successful polish": 1.0
+  },
+  "new weights | position": {
+   "predicted at floor": 0.0,
+   "polished at floor": 0.13043478260869565,
+   "size+signs at floor": 0.0,
+   "size+signs polished at floor": 0.17391304347826086,
+   "median predicted / floor": 0.16646101225267354,
+   "median size+signs / floor": 0.29912758868337724,
+   "median gradient calls of a successful polish": 26.0
+  },
+  "new weights | 2-hop": {
+   "predicted at floor": 0.0,
+   "polished at floor": 0.2608695652173913,
+   "size+signs at floor": 0.0,
+   "size+signs polished at floor": 0.2318840579710145,
+   "median predicted / floor": 0.32256382423990904,
+   "median size+signs / floor": 0.3147415900013909,
+   "median gradient calls of a successful polish": 35.5
+  },
+  "new shape | 2-hop": {
+   "predicted at floor": 0.0,
+   "polished at floor": 0.2318840579710145,
+   "size+signs at floor": 0.0,
+   "size+signs polished at floor": 0.17391304347826086,
+   "median predicted / floor": 0.13953466077403157,
+   "median size+signs / floor": 0.14208294359882495,
+   "median gradient calls of a successful polish": 27.5
+  },
+  "new weights | oracle": {
+   "predicted at floor": 0.0,
+   "polished at floor": 0.2463768115942029,
+   "size+signs at floor": 0.0,
+   "size+signs polished at floor": 0.2608695652173913,
+   "median predicted / floor": 0.2825690981878033,
+   "median size+signs / floor": 0.31974301199683347,
+   "median gradient calls of a successful polish": 32.0
+  }
+ },
+ "random": {
+  "random start at floor": 0.30289855072463767,
+  "mean gradient calls per start": 90.25217391304348,
+  "gradient calls per floor hit": 297.9617224880383,
+  "random start, <= POLISH_ITERS steps, at floor": 0.2072463768115942,
+  "gradient calls per floor hit, <= POLISH_ITERS steps": 274.27972027972027
+ },
+ "secs": 182.8
+}
