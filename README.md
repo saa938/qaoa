@@ -193,3 +193,29 @@ Scripts can be run from any working directory, e.g. either of:
 **Where restarts start doesn't matter:** Seeding in [0, pi) and seeding over each coordinate's full period hit the answer 110 times each.
 
 **How many restarts:** If one restart finds the answer with probability q, the chance that N restarts all miss it is (1-q)^N. Setting that to 1% gives N = ln(100)/q, about 4.6/q. 
+
+### Q. Second problem: problems with single-qubit terms
+ 
+**Every Z term gets its own angle:** run_problems.py writes the cost as a sum of Z and ZZ terms with one gamma per term and one beta per node. With only ZZ terms it reproduces run_filter.py exactly (energies, gradients, folding, picks), and energies match Qiskit to 4 * 10^-14.
+ 
+**The half-period symmetries carry over:** Adding pi/(4|c|) to a node gamma and flipping that node's beta keeps the energy the same, like the edge version in N. Checked to 5 * 10^-15 on MWIS, MAX-2-SAT and spin glasses, while the same shifts without the flips change the energy.
+ 
+**One layer solves MWIS exactly:** On all 10 graphs the floor is exactly minus the MWIS weight and the optimal set has probability 1. Every node has its own angle, so one layer can set each qubit by itself: every edge gamma is 0, every node gamma is a quarter of its period and every beta is +-pi/4. The same happens for MAX-2-SAT and the spin glass with fields, so these are only useful as checks.
+ 
+**The spin glass without fields behaves like Max-Cut:** With random-sign couplings and no single-qubit terms, the p=1 floor is 0.81 to 1 of the ground state energy (exact on 3 of 10 graphs). This is the main second problem. Minimum vertex cover is the same landscape as MWIS shifted by the total weight.
+ 
+**Two fixes for ties:** With several optimal answers (MAX-2-SAT graph 12) two seeds picked different copies of the same point. A boundary tolerance fixed in angle units is too tight for terms with long periods, so it is now set in phase units, and floor points are pushed all the way to the closest point of their flat valley. After that the seeds agree to 2 * 10^-10.
+ 
+**At p=1 on weighted graphs it is one point:** Every run ended with exactly one point, and two seeds gave the same point on all 30 graphs and on 174 new instances. Renumbering the nodes gave the same point on 19 of 20 graphs, and the 20th is the missed floor above. Scaling every weight by up to 2% kept the same point on 16 of 20 graphs, and up to 10% on 12 of 20.
+ 
+**Two-seed guard:** One renumbered graph had a seed that never found the floor (-15.208 instead of -15.492), which would have made a wrong label. Every run now goes through seeds until two of them reach the lowest floor any seed found and both have the pick (GUARD in run_filter.py). With it that graph gives the right point. With the guard, each seed can stop after 100 unchanged restarts instead of 400: that gave the same answer on all 20 saved graphs at 400 restarts in total instead of 500.
+ 
+### R. Learnability of GNN
+ 
+**The picks are stars:** On 3 graphs with 35 random weight draws each (23 for the spin glass), almost every edge angle is 0 or pi/4 in phase units and most betas are 0 or +-pi/4. About 90% of the pi/4 edges join a node with beta = 0 (the center) to one with beta = +-pi/4 (a leaf). The leaf signs matter: flipping all of them raises the energy.
+ 
+**The pattern changes a lot between weight draws:** Each graph gave 15 to 23 different patterns over its 35 draws, so the label is a discrete choice that flips as the weights change.
+ 
+**Local features predict it only a little:** Boosted trees on what a 2-layer GNN would see got 69% of edge labels right against 60% for the most common label at that edge, nodes were no better than that, and no whole point was ever right. Adding the exact classical answer didn't help, and going from a quarter of the data to all of it only went from 65% to 69%. A random forest and a second set of folds gave the same picture.
+ 
+**Predicted angles don't save tuning:** Starting from the predicted angles, 26% of runs reach the floor within 50 steps, against 24% from random starts. The true labels reach the floor directly on 92% of instances and after a short polish on 99%, so the labels themselves are good targets if they could be predicted. This was not an actual GNN, so it is a lower bound.
