@@ -1,2 +1,17 @@
 __pycache__/
 *.pyc
+
+# Local environments and generated experiment artifacts; deliver data separately.
+.venv/
+full_100k/
+analysis/
+graphify-out/
+results/dataset*/
+results/preflight/
+results/worker_proofs/
+results/reference_stage/
+results/ian_floors/
+results/gnn/
+results/delivery/
+results/development_fixture_never_launch/
+results/cost_ledger.md

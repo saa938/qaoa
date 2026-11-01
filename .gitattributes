@@ -1,0 +1,18 @@
+# Preserve the approved scientific input bytes used by the Modal hash gates.
+.gitattributes text eol=lf
+src/make_dataset.py -text
+src/check_rows.py -text
+src/run_filter.py -text
+src/modal_app.py -text
+src/gnn.py -text
+src/graph_sweep.py -text
+src/complete_full100k.py -text
+src/paper_model.py -text
+src/paper_comparison.py -text
+src/research_verification.py -text
+src/audit_polish_energies.py -text
+src/audit_evaluation_numerics.py -text
+src/report_comparison_additions.py -text
+src/report_floor_review.py -text
+data/reference_picks.json -text
+data/MaxCutMAQAOAData.csv -text
