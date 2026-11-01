@@ -1,5 +1,47 @@
 ## Usage
 
+The weighted dataset and model experiment uses `src/make_dataset.py`,
+`src/modal_app.py` and `src/gnn.py`. `src/complete_full100k.py` resumes the
+100,000-graph experiment in an isolated, generated `full_100k/` directory.
+`src/paper_comparison.py` adds a documented paper-based GINE reproduction and
+a graph-conditioned diffusion adaptation using the same weighted labels and
+split IDs. Run its `prepare` or `selfcheck` mode without launching paid compute;
+`run` waits for the core experiment, checks cumulative billing, then submits the
+approved comparison to Modal profile `tejas-16842` only, with a $280 cumulative
+stop. The existing filter, builder and independent checker retain their pinned
+bytes. `src/research_verification.py` performs local classical verification.
+The `.gitattributes` rules preserve these approved scientific files byte for
+byte, including their existing line endings, so a fresh checkout passes the
+same SHA-256 gates. Include their exact current copies when staging the rules.
+The generated Modal runner uses explicit CRLF line endings to reproduce its
+recorded upload bytes on every platform. Preparation evidence records both its
+actual byte hash and its normalized UTF-8/LF text hash.
+The paper reproduction records the verified PDF's SHA-256 without requiring a
+personal Downloads path. Set `QAOA_PAPER_PDF` to a local copy if you also want
+`prepare` to verify its bytes; the PDF is not needed for inference or training.
+
+The approved `python src/complete_full100k.py expanded-bakeoff` mode repeats the
+seven-model selection on the completed population and fixed validation subset.
+It preserves the earlier selection and completed D fits. A subsequent normal
+run reuses those fits only if the new winner, configuration and policy match.
+The cumulative stop remains $280.
+
+Generated datasets, checkpoints and raw optimization traces belong in the
+separate checked delivery archive, not Git. The comparison's `technical_report.txt`,
+`email_draft.txt`, `protocol.json`, metrics CSVs and `github_files.txt` are written
+under `full_100k/results/paper_comparison/`. Reports distinguish reference-label
+agreement, variational energy, exact classical bounds and measured runtime.
+
+After downloading a checkpoint, predict parameters locally with:
+```
+python src/paper_model.py predict checkpoint.pt weighted_graph.json --device cpu
+```
+The graph JSON contains `n`, an `edges` list of zero-based vertex pairs, and a
+matching `weights` list. The command sorts edges and weights together and returns
+gamma, beta and edge-phase candidates. It supports the core GNN checkpoints and
+the comparison GNN/diffusion checkpoints; it does not submit compute or optimize
+the returned parameters.
+
 Layout
 ```
   src/      all scripts (run these; they resolve data/results/figures relative to their own file location)
@@ -206,7 +248,7 @@ Scripts can be run from any working directory, e.g. either of:
  
 **Two fixes for ties:** With several optimal answers (MAX-2-SAT graph 12) two seeds picked different copies of the same point. A boundary tolerance fixed in angle units is too tight for terms with long periods, so it is now set in phase units, and floor points are pushed all the way to the closest point of their flat valley. After that the seeds agree to 2 * 10^-10.
  
-**At p=1 on weighted graphs it is one point:** Every run ended with exactly one point, and two seeds gave the same point on all 30 graphs and on 174 new instances. Renumbering the nodes gave the same point on 19 of 20 graphs, and the 20th is the missed floor above. Scaling every weight by up to 2% kept the same point on 16 of 20 graphs, and up to 10% on 12 of 20.
+**At p=1 on weighted graphs it is one point:** In that earlier study, every run ended with exactly one selected point, and two seeds agreed on all 30 graphs and on 174 new instances: 105 weighted Max-Cut and 69 spin glass. The relabeling result (19/20) and 2% weight perturbation result (16/20) each pool 10 Max-Cut and 10 spin-glass graphs; they are not Max-Cut-only rates. The 20th relabeling case is the missed floor above. Perturbations up to 10% preserved the selected point on 12/20. These are empirical reproducibility results, not proofs of a unique global minimum. The expanded weighted-only study keeps its independent audits and classical certificates separately.
  
 **Two-seed guard:** One renumbered graph had a seed that never found the floor (-15.208 instead of -15.492), which would have made a wrong label. Every run now goes through seeds until two of them reach the lowest floor any seed found and both have the pick (GUARD in run_filter.py). With it that graph gives the right point. With the guard, each seed can stop after 100 unchanged restarts instead of 400: that gave the same answer on all 20 saved graphs at 400 restarts in total instead of 500.
  
